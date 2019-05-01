@@ -1,0 +1,4 @@
+include 'discovery-service',
+        'account-service',
+        'atm-service',
+        'mobile-banking-service'

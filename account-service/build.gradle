@@ -1,0 +1,18 @@
+bootJar {
+    baseName = 'trade-pricer'
+    version = '0.0.1'
+}
+
+dependencies {
+    compile libs.springBootStarterWeb,
+            libs.eurekaClient,
+            libs.springBootThymeLeafStarter,
+            libs.swagger,
+            libs.swaggerUI
+
+    runtime libs.jacksonDatatypeJsr310
+
+    testCompile libs.test.pactJvmConsumer
+
+    runtime project(':discovery-service')
+}

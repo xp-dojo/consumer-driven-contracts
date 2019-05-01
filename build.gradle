@@ -1,0 +1,49 @@
+buildscript {
+        ext {
+            springBootVersion = '2.1.4.RELEASE'
+            pactVersion = '3.5.25'
+        }
+        repositories {
+            jcenter()
+            mavenCentral()
+        }
+        dependencies {
+            classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+                    "au.com.dius:pact-jvm-provider-gradle_2.12:${pactVersion}"
+        }
+    }
+
+allprojects {
+    defaultTasks 'clean', 'build' 
+}
+
+subprojects {
+
+    apply from: "$rootDir/dependencies.gradle"
+
+    group = 'org.xpdojo.bank.cdc'
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'au.com.dius.pact'
+
+    dependencies {
+
+        testImplementation libs.test.junit,
+                libs.test.assertj
+    }
+
+    ext {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    test {
+        systemProperties['pact.rootDir'] = "$buildDir/pacts"
+    }
+}

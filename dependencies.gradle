@@ -1,0 +1,29 @@
+ext {
+
+    springBootVersion = '2.1.4.RELEASE'
+
+    libs = [
+            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.1.RELEASE',
+            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.1.RELEASE',
+            springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+            springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
+            jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6',
+
+            swagger                   : 'io.springfox:springfox-swagger2:2.9.2',
+            swaggerUI                 : 'io.springfox:springfox-swagger-ui:2.9.2',
+
+            gson                      : 'com.google.code.gson:gson:2.8.2', // this is to avoid a NoSuchMethodException
+            guava                     : 'com.google.guava:guava:25.1-jre',
+
+            test                      : [
+                    junit                      : 'junit:junit:4.12',
+                    assertj                    : 'org.assertj:assertj-core:3.11.1',
+
+                    springBootStarterTest      : "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+
+                    pactJvmConsumer            : 'au.com.dius:pact-jvm-consumer-junit_2.12:3.5.23',
+                    pactJvmProvider            : 'au.com.dius:pact-jvm-provider-junit_2.12:3.5.23',
+                    pactSpring                 : 'au.com.dius:pact-jvm-provider-spring_2.12:3.5.23'
+            ]
+    ]
+}
