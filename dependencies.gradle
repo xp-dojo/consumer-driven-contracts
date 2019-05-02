@@ -1,6 +1,6 @@
 ext {
 
-    springBootVersion = '2.1.4.RELEASE'
+    springBootVersion = '2.0.5.RELEASE'
 
     libs = [
             eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.1.RELEASE',
@@ -14,16 +14,18 @@ ext {
 
             gson                      : 'com.google.code.gson:gson:2.8.2', // this is to avoid a NoSuchMethodException
             guava                     : 'com.google.guava:guava:25.1-jre',
+            jaxb                      : 'javax.xml.bind:jaxb-api:2.3.1',
+            jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
 
             test                      : [
-                    junit                      : 'junit:junit:4.12',
-                    assertj                    : 'org.assertj:assertj-core:3.11.1',
+                    junit                : 'junit:junit:4.12',
+                    assertj              : 'org.assertj:assertj-core:3.11.1',
 
-                    springBootStarterTest      : "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+                    springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer            : 'au.com.dius:pact-jvm-consumer-junit_2.12:3.5.23',
-                    pactJvmProvider            : 'au.com.dius:pact-jvm-provider-junit_2.12:3.5.23',
-                    pactSpring                 : 'au.com.dius:pact-jvm-provider-spring_2.12:3.5.23'
+                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit_2.12:3.5.23',
+                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit_2.12:3.5.23',
+                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.5.23'
             ]
     ]
 }
