@@ -7,3 +7,8 @@ To start this service run it from inside the IDE (right click on the main method
 Once it is running you can find it at [http://localhost:8761](http://localhost:8761).
 
 You can look at the client to see which services are registered.
+
+## Links
+## Links
+ - [Discovery Service](http://localhost:8761)
+ - [Swagger UI](http://localhost:8761/swagger-ui.html)

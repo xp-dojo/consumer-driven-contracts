@@ -1,10 +1,10 @@
 ext {
 
-    springBootVersion = '2.0.5.RELEASE'
+    springBootVersion = '2.1.4.RELEASE'
 
     libs = [
-            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.1.RELEASE',
-            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.1.RELEASE',
+            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.1.1.RELEASE',
+            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.1.1.RELEASE',
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
             jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6',
@@ -18,16 +18,16 @@ ext {
             jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
 
             test                      : [
-                    junitApi   : 'org.junit.jupiter:junit-jupiter-api:5.3.2',
-                    junitEngine: 'org.junit.jupiter:junit-jupiter-engine:5.3.2',
-                    mockito    : 'org.mockito:mockito-core:2.24.0',
-                    assertj    : 'org.assertj:assertj-core:3.11.1',
+                    junitApi   : 'org.junit.jupiter:junit-jupiter-api:5.4.2',
+                    junitEngine: 'org.junit.jupiter:junit-jupiter-engine:5.4.2',
+                    mockito    : 'org.mockito:mockito-core:2.27.0',
+                    assertj    : 'org.assertj:assertj-core:3.12.2',
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit_2.12:3.5.23',
-                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit_2.12:3.5.23',
-                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.5.23'
+                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit_2.12:3.6.6',
+                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit_2.12:3.6.6',
+                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.6'
             ]
     ]
 }
