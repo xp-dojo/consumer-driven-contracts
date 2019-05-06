@@ -1,5 +1,5 @@
 bootJar {
-    baseName = 'trade-pricer'
+    archiveBaseName = 'account-service'
     version = '0.0.1'
 }
 
