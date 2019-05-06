@@ -18,8 +18,10 @@ ext {
             jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
 
             test                      : [
-                    junit                : 'junit:junit:4.12',
-                    assertj              : 'org.assertj:assertj-core:3.11.1',
+                    junitApi   : 'org.junit.jupiter:junit-jupiter-api:5.3.2',
+                    junitEngine: 'org.junit.jupiter:junit-jupiter-engine:5.3.2',
+                    mockito    : 'org.mockito:mockito-core:2.24.0',
+                    assertj    : 'org.assertj:assertj-core:3.11.1',
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 

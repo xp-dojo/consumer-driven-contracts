@@ -1,20 +1,20 @@
 buildscript {
-        ext {
-            springBootVersion = '2.1.4.RELEASE'
-            pactVersion = '3.5.25'
-        }
-        repositories {
-            jcenter()
-            mavenCentral()
-        }
-        dependencies {
-            classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
-                    "au.com.dius:pact-jvm-provider-gradle_2.12:${pactVersion}"
-        }
+    ext {
+        springBootVersion = '2.1.4.RELEASE'
+        pactVersion = '3.5.25'
     }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+                "au.com.dius:pact-jvm-provider-gradle_2.12:${pactVersion}"
+    }
+}
 
 allprojects {
-    defaultTasks 'clean', 'build' 
+    defaultTasks 'clean', 'build'
 }
 
 subprojects {
@@ -34,13 +34,16 @@ subprojects {
 
     dependencies {
 
-        testImplementation libs.test.junit,
-                libs.test.assertj
+        testImplementation libs.test.junitApi,
+                libs.test.assertj,
+                libs.test.mockito
+
+        testRuntimeOnly libs.test.junitEngine
     }
 
     ext {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 1.11
+        targetCompatibility = 1.11
     }
 
     test {
