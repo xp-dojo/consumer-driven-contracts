@@ -34,7 +34,6 @@ class BankAccountEndpointTest {
     public void createsAccounts() {
         Account account = given()
                 .header("Content-Type", "application/json")
-                .body(new AccountData(0.0d))
                 .when().log().all()
                 .post("/accounts")
                 .then().log().all()
@@ -94,13 +93,12 @@ class BankAccountEndpointTest {
     public void createAndUpdateAccountEndToEndTest() {
         Account account = given()
                 .header("Content-Type", "application/json")
-                .body(new AccountData(20.0d))
                 .when().log().all()
                 .post("/accounts")
                 .then().log().all()
                 .extract().body().as(Account.class);
         assertThat(account.getAccountNumber()).isGreaterThan(0l);
-        assertThat(account.getTransactions().size()).isEqualTo(1);
+        assertThat(account.getTransactions().size()).isEqualTo(0);
 
         Account updatedAccount = given()
                 .header("Content-Type", "application/json")
@@ -109,8 +107,8 @@ class BankAccountEndpointTest {
                 .post("/accounts/" + account.getAccountNumber() + "/transactions")
                 .then().log().all()
                 .extract().body().as(Account.class);
-        assertThat(updatedAccount.getTransactions().size()).isEqualTo(2);
-        assertThat(updatedAccount.balance()).isEqualTo(anAmountOf(50.0d));
+        assertThat(updatedAccount.getTransactions().size()).isEqualTo(1);
+        assertThat(updatedAccount.balance()).isEqualTo(anAmountOf(30.0d));
     }
 
 }

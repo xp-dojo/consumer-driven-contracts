@@ -26,13 +26,9 @@ public class AccountRepository {
         accounts.put(otherAccount.getAccountNumber(), otherAccount);
     }
 
-    public Account insert(AccountData data) {
-        Long accountNumber = createRandomBankAccountNumber();
-        Account account = anEmptyAccount(accountNumber);
-        if (data.getOpeningBalance() > 0.0d) {
-            account.deposit(anAmountOf(data.getOpeningBalance()));
-        }
-        accounts.put(accountNumber, account);
+    public Account create() {
+        Account account = anEmptyAccount(createRandomBankAccountNumber());
+        accounts.put(account.getAccountNumber(), account);
         return account;
     }
 

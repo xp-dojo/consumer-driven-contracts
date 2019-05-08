@@ -17,8 +17,8 @@ public class BankAccountEndpoint {
     }
 
     @PostMapping("/accounts")
-    public Account newAccount(@RequestBody AccountData accountData) {
-        return repository.insert(accountData);
+    public Account newAccount() {
+        return repository.create();
     }
 
     @GetMapping("accounts/{accountId}")
