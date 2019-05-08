@@ -1,11 +1,12 @@
 package org.xpdojo.bank.cdc.account.domain;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.xpdojo.bank.cdc.account.domain.Money.anAmountOf;
 
 public class WithMoneyWeCan {
+
     @Test
     public void addTwoAmountsOfMoneyTogether() {
         assertThat(anAmountOf(7.0d).add(anAmountOf(4.0d))).isEqualTo(anAmountOf(11.0d));

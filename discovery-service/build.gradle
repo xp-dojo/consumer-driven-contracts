@@ -4,11 +4,8 @@ bootJar {
 }
 
 dependencies {
-    compile libs.springBootStarterWeb,
-            libs.eurekaServer,
+    compile libs.eurekaServer,
             libs.gson,
             libs.jaxb,
-            libs.jaxbruntime,
-            libs.swagger,
-            libs.swaggerUI
+            libs.jaxbruntime
 }

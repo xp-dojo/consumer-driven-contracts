@@ -1,14 +1,20 @@
 package org.xpdojo.bank.cdc.account.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static java.util.Objects.hash;
 
+@JsonAutoDetect(fieldVisibility = ANY)
 public class Money implements Comparable<Money> {
-    private final double amount;
 
-    private Money(final double anAmount) {
-        this.amount = anAmount;
+    private final double value;
+
+    private Money(@JsonProperty("value") final double anAmount) {
+        this.value = anAmount;
     }
 
     public static Money anAmountOf(final double anAmount) {
@@ -16,24 +22,24 @@ public class Money implements Comparable<Money> {
     }
 
     public Money add(final Money anAmount) {
-        return anAmountOf(this.amount + anAmount.amount);
+        return anAmountOf(this.value + anAmount.value);
     }
 
     public Money less(final Money anAmount) {
-        return anAmountOf(this.amount - anAmount.amount);
+        return anAmountOf(this.value - anAmount.value);
     }
 
     public boolean isLessThan(Money anAmount) {
-        return amount < anAmount.amount;
+        return value < anAmount.value;
     }
 
     public Money negative() {
-        return anAmountOf(amount * -1);
+        return anAmountOf(value * -1);
     }
 
     @Override
     public int compareTo(Money otherAmount) {
-        return Double.valueOf(amount).compareTo(Double.valueOf(otherAmount.amount));
+        return Double.valueOf(value).compareTo(Double.valueOf(otherAmount.value));
     }
 
     @Override
@@ -41,18 +47,18 @@ public class Money implements Comparable<Money> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money = (Money) o;
-        return Double.compare(money.amount, amount) == 0;
+        return Double.compare(money.value, value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return hash(amount);
+        return hash(value);
     }
 
     @Override
     public String toString() {
         return "Money{" +
-                "amount=" + amount +
+                "value=" + value +
                 '}';
     }
 }

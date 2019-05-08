@@ -34,9 +34,15 @@ subprojects {
 
     dependencies {
 
+        compile libs.springBootStarterWeb,
+                libs.lombok,
+                libs.swagger,
+                libs.swaggerUI
+
         testImplementation libs.test.junitApi,
                 libs.test.assertj,
-                libs.test.mockito
+                libs.test.mockito,
+                libs.test.springBootStarterTest
 
         testRuntimeOnly libs.test.junitEngine
     }
@@ -47,6 +53,7 @@ subprojects {
     }
 
     test {
+        useJUnitPlatform()
         systemProperties['pact.rootDir'] = "$buildDir/pacts"
     }
 }

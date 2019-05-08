@@ -4,16 +4,14 @@ bootJar {
 }
 
 dependencies {
-    compile libs.springBootStarterWeb,
-            libs.eurekaClient,
-            libs.gson,
-            libs.swagger,
-            libs.swaggerUI
+    compile libs.eurekaClient,
+            libs.gson
 
     runtime libs.jacksonDatatypeJsr310
 
     testCompile libs.test.pactJvmProvider,
-            libs.test.pactSpring
+            libs.test.pactSpring,
+            libs.test.restAssured
 
     runtime project(':discovery-service')
 }
