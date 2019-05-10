@@ -17,6 +17,8 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.*;
 public class Account {
 
     private final Long accountNumber;
+    private String accountDescription = "";
+    private Money overdraftFacility = anAmountOf(0.0d);
     private final List<Transaction> transactions = new ArrayList<>();
 
     public static Account anEmptyAccount(final Long accountNumber) {
@@ -34,6 +36,22 @@ public class Account {
     private Account(final Long accountNumber, final Money anAmount) {
         this(accountNumber);
         transactions.add(anOpeningBalanceOf(anAmount, LocalDateTime.now()));
+    }
+
+    public String getAccountDescription() {
+        return accountDescription;
+    }
+
+    public void setAccountDescription(String accountDescription) {
+        this.accountDescription = accountDescription;
+    }
+
+    public Money getOverdraftFacility() {
+        return overdraftFacility;
+    }
+
+    public void setOverdraftFacility(Money overdraftFacility) {
+        this.overdraftFacility = overdraftFacility;
     }
 
     public Long getAccountNumber() {
@@ -60,8 +78,8 @@ public class Account {
     }
 
     public void withdraw(final Money anAmount) {
-        if (balance().isLessThan(anAmount)) {
-            throw new IllegalStateException("You cannot withdraw more than the balance");
+        if (balance().add(overdraftFacility).isLessThan(anAmount)) {
+            throw new IllegalStateException("You cannot withdraw more than your overdraft will allow");
         }
         transactions.add(aWithDrawlOf(anAmount, LocalDateTime.now()));
     }

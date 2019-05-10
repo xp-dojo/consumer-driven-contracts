@@ -55,9 +55,24 @@ public class WithAnAccountWeCan {
     }
 
     @Test
-    public void throwsExceptionIfYouTryToWithdrawMoreThanTheBalance() {
+    public void throwsExceptionIfYouTryToWithdrawMoreThanTheBalanceIfNoOverDraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
         assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(30.0d)));
+    }
+
+    @Test
+    public void withdrawAnAmountMoreThanBalanceIfWithinOverdraft(){
+        Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(10.0d));
+        account.setOverdraftFacility(anAmountOf(100.0d));
+        account.withdraw(anAmountOf(60.0d));
+        assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(-50.0d)));
+    }
+
+    @Test
+    public void throwsExceptionIfYouTryToWithdrawMoreThanYourOverdraft(){
+        Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
+        account.setOverdraftFacility(anAmountOf(100.0d));
+        assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(130.0d)));
     }
 
     @Test
