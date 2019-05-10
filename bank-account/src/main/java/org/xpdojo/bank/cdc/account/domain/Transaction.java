@@ -34,14 +34,6 @@ public class Transaction {
         this.date = date;
     }
 
-    public Money getAmount() {
-        return amount;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
     public LocalDateTime getDate() {
         return date;
     }

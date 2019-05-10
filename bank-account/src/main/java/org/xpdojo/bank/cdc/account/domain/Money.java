@@ -3,9 +3,8 @@ package org.xpdojo.bank.cdc.account.domain;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static java.lang.Double.valueOf;
 import static java.util.Objects.hash;
 
 @JsonAutoDetect(fieldVisibility = ANY)
@@ -33,13 +32,13 @@ public class Money implements Comparable<Money> {
         return value < anAmount.value;
     }
 
-    public Money negative() {
+    Money negative() {
         return anAmountOf(value * -1);
     }
 
     @Override
     public int compareTo(Money otherAmount) {
-        return Double.valueOf(value).compareTo(Double.valueOf(otherAmount.value));
+        return valueOf(value).compareTo(valueOf(otherAmount.value));
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class AccountBalanceComparator implements Comparator<Account> {
 
-    public static AccountBalanceComparator ofBalances() {
+    static AccountBalanceComparator ofBalances() {
         return new AccountBalanceComparator();
     }
 

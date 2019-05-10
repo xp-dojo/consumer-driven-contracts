@@ -15,53 +15,53 @@ import static org.xpdojo.bank.cdc.account.domain.Account.anEmptyAccount;
 import static org.xpdojo.bank.cdc.account.domain.AccountBalanceComparator.ofBalances;
 import static org.xpdojo.bank.cdc.account.domain.Money.anAmountOf;
 
-public class WithAnAccountWeCan {
+class WithAnAccountWeCan {
 
-    private static final Long ACCOUNT_NUMBER = 2468l;
-    private static final Long ANOTHER_ACCOUNT_NUMBER = 13579l;
+    private static final Long ACCOUNT_NUMBER = 2468L;
+    private static final Long ANOTHER_ACCOUNT_NUMBER = 13579L;
 
     @Mock
     StatementWriter statementWriter;
 
     @BeforeEach
-    public void setUpMocks() {
+    void setUpMocks() {
         initMocks(this);
     }
 
     @Test
-    public void compareTwoEmptyAccounts(){
+    void compareTwoEmptyAccounts() {
         Account account = anEmptyAccount(ACCOUNT_NUMBER);
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anEmptyAccount(ANOTHER_ACCOUNT_NUMBER));
     }
 
     @Test
-    public void compareTwoAccountsHaveTheSameBalance() {
+    void compareTwoAccountsHaveTheSameBalance() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(10.0d));
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(10.0d)));
     }
 
     @Test
-    public void depositAnAmountToIncreaseTheBalance() {
+    void depositAnAmountToIncreaseTheBalance() {
         Account account = anEmptyAccount(ACCOUNT_NUMBER);
         account.deposit(anAmountOf(10.0d));
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(10.0d)));
     }
 
     @Test
-    public void withdrawAnAmountToDecreaseTheBalance() {
+    void withdrawAnAmountToDecreaseTheBalance() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
         account.withdraw(anAmountOf(10.0d));
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(10.0d)));
     }
 
     @Test
-    public void throwsExceptionIfYouTryToWithdrawMoreThanTheBalanceIfNoOverDraft() {
+    void throwsExceptionIfYouTryToWithdrawMoreThanTheBalanceIfNoOverDraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
         assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(30.0d)));
     }
 
     @Test
-    public void withdrawAnAmountMoreThanBalanceIfWithinOverdraft(){
+    void withdrawAnAmountMoreThanBalanceIfWithinOverdraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(10.0d));
         account.setOverdraftFacility(anAmountOf(100.0d));
         account.withdraw(anAmountOf(60.0d));
@@ -69,14 +69,14 @@ public class WithAnAccountWeCan {
     }
 
     @Test
-    public void throwsExceptionIfYouTryToWithdrawMoreThanYourOverdraft(){
+    void throwsExceptionIfYouTryToWithdrawMoreThanYourOverdraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
         account.setOverdraftFacility(anAmountOf(100.0d));
         assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(130.0d)));
     }
 
     @Test
-    public void transferMoneyFromOneAccountToAnother() {
+    void transferMoneyFromOneAccountToAnother() {
         Account destinationAccount = anEmptyAccount(ACCOUNT_NUMBER);
         Account sourceAccount = anAccountWith(ACCOUNT_NUMBER, anAmountOf(50.0d));
 
@@ -87,13 +87,13 @@ public class WithAnAccountWeCan {
     }
 
     @Test
-    public void throwsExceptionIfYouTryToTransferMoreThantheBalance() {
+    void throwsExceptionIfYouTryToTransferMoreThantheBalance() {
         Account sourceAccount = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
         assertThrows(IllegalStateException.class, () -> sourceAccount.transferTo(anEmptyAccount(ANOTHER_ACCOUNT_NUMBER), anAmountOf(30.0d)));
     }
 
     @Test
-    public void hasTheRightBalanceAfterANumberOfTransactions() {
+    void hasTheRightBalanceAfterANumberOfTransactions() {
         Account account = anEmptyAccount(ACCOUNT_NUMBER);
         account.deposit(anAmountOf(10.0d));
         account.deposit(anAmountOf(80.0d));
@@ -104,14 +104,14 @@ public class WithAnAccountWeCan {
     }
 
     @Test
-    public void printOutAnAccountBalance() {
+    void printOutAnAccountBalance() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(30.0d));
         account.printBalanceStatementWith(statementWriter);
         verify(statementWriter).printBalanceOf(any(Money.class));
     }
 
     @Test
-    public void printOutAFullStatement() {
+    void printOutAFullStatement() {
         Account account = anEmptyAccount(ACCOUNT_NUMBER);
         account.printFullStatementWith(statementWriter);
         verify(statementWriter).printFullStatementWith(anyList());

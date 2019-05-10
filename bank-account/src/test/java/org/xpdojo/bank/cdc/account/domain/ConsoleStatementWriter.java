@@ -8,7 +8,11 @@ import static org.xpdojo.bank.cdc.account.domain.Money.anAmountOf;
 
 public class ConsoleStatementWriter implements StatementWriter {
 
-    PrintStream printStream;
+    private final PrintStream printStream;
+
+    public ConsoleStatementWriter(final PrintStream printStream) {
+        this.printStream = printStream;
+    }
 
     @Override
     public void printBalanceOf(Money balance) {
@@ -30,9 +34,5 @@ public class ConsoleStatementWriter implements StatementWriter {
 
     private void printStatementLineTo(PrintStream printStream, Transaction t, Money balance) {
         printStream.println("| " + t.getDate() + " | " + t.balanceImpact() + " | " + balance + " |");
-    }
-
-    public void setPrintStream(PrintStream printStream) {
-        this.printStream = printStream;
     }
 }
