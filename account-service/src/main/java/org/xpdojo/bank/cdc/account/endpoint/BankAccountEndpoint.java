@@ -46,6 +46,9 @@ public class BankAccountEndpoint {
     @GetMapping("accounts/{accountId}/balance")
     public BalanceResponse getBalance(@PathVariable Long accountId){
         Account account = repository.getById(accountId);
+        if(account == null){
+            throw new IllegalStateException("No account exists with an account number of " + accountId);
+        }
         return new BalanceResponse(account.getAccountNumber(), account.getAccountDescription(), account.getOverdraftFacility(), account.balance());
     }
 

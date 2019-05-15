@@ -28,7 +28,7 @@ ext {
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
                     pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.6',
-                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit_2.12:3.6.6',
+                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.6',
                     pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.6'
             ]
     ]

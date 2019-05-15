@@ -19,9 +19,9 @@ public class AccountData {
     private final Double balance;
 
     public AccountData(@JsonProperty("accountNumber") final Long accountNumber,
-                       @JsonProperty("accountDescription") final String accountDescription,
-                       @JsonProperty("accountOverdraftFacility") final Money overdraftFacility,
-                       @JsonProperty("accountBalance") final Money balance) {
+                       @JsonProperty("description") final String accountDescription,
+                       @JsonProperty("overdraftFacility") final Money overdraftFacility,
+                       @JsonProperty("balance") final Money balance) {
         this.accountNumber = accountNumber;
         this.accountDescription = accountDescription;
         this.overdraftFacility = overdraftFacility.value;

@@ -27,6 +27,11 @@ public class AccountRepository {
         otherAccount.setAccountDescription("My steady savings account");
         otherAccount.deposit(anAmountOf(120.0d));
         accounts.put(otherAccount.getAccountNumber(), otherAccount);
+
+        Account pactAccount = anAccountWith(2468L, anAmountOf(1000.0D));
+        pactAccount.setAccountDescription("Account used for pact testing");
+        pactAccount.setOverdraftFacility(anAmountOf(23.0D));
+        accounts.put(pactAccount.getAccountNumber(), pactAccount);
     }
 
     public Account create() {

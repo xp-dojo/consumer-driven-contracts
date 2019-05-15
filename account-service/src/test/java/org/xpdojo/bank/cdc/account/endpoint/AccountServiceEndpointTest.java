@@ -27,24 +27,24 @@ class AccountServiceEndpointTest {
     int port;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         RestAssured.port = port;
     }
 
     @Test
-    public void createsAccounts() {
+    void createsAccounts() {
         Account account = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
                 .post("/accounts")
                 .then().log().all()
                 .extract().body().as(Account.class);
-        assertThat(account.getAccountNumber()).isGreaterThan(0l);
+        assertThat(account.getAccountNumber()).isGreaterThan(0L);
         assertThat(account.getTransactions().size()).isEqualTo(0);
     }
 
     @Test
-    public void readsAccounts() {
+    void readsAccounts() {
         List<Account> accounts = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
@@ -52,22 +52,22 @@ class AccountServiceEndpointTest {
                 .then().log().all()
                 .extract().body()
                 .jsonPath().getList(".", Account.class);
-        assertThat(accounts.size()).isEqualTo(2);
+        assertThat(accounts.size()).isEqualTo(3);
     }
 
     @Test
-    public void retrievesAccountsById() {
+    void retrievesAccountsById() {
         Account account = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
                 .get("accounts/1234")
                 .then().log().all()
                 .extract().body().as(Account.class);
-        assertThat(account.getAccountNumber()).isEqualTo(1234l);
+        assertThat(account.getAccountNumber()).isEqualTo(1234L);
     }
 
     @Test
-    public void retrievesTransactionsFromAccounts() {
+    void retrievesTransactionsFromAccounts() {
         List<Transaction> transactions = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
@@ -79,7 +79,7 @@ class AccountServiceEndpointTest {
     }
 
     @Test
-    public void updatesAccountsWithTransactions() {
+    void updatesAccountsWithTransactions() {
         Account account = given()
                 .header("Content-Type", "application/json")
                 .body(new Transaction(anAmountOf(100.0d), CREDIT, now()))
@@ -91,7 +91,7 @@ class AccountServiceEndpointTest {
     }
 
     @Test
-    public void getBalanceForAccount(){
+    void getBalanceForAccount() {
         BalanceResponse response = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
@@ -103,14 +103,14 @@ class AccountServiceEndpointTest {
     }
 
     @Test
-    public void createAndUpdateAccountEndToEndTest() {
+    void createAndUpdateAccountEndToEndTest() {
         Account account = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
                 .post("/accounts")
                 .then().log().all()
                 .extract().body().as(Account.class);
-        assertThat(account.getAccountNumber()).isGreaterThan(0l);
+        assertThat(account.getAccountNumber()).isGreaterThan(0L);
         assertThat(account.getTransactions().size()).isEqualTo(0);
 
         Account updatedAccount = given()
