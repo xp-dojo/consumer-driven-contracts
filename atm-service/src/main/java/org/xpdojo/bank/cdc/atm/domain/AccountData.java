@@ -20,8 +20,8 @@ public class AccountData {
 
     public AccountData(@JsonProperty("accountNumber") final Long accountNumber,
                        @JsonProperty("description") final String accountDescription,
-                       @JsonProperty("overdraftFacility") final Money overdraftFacility,
-                       @JsonProperty("balance") final Money balance) {
+                       @JsonProperty("overdraftFacility") final Amount overdraftFacility,
+                       @JsonProperty("balance") final Amount balance) {
         this.accountNumber = accountNumber;
         this.accountDescription = accountDescription;
         this.overdraftFacility = overdraftFacility.value;
@@ -73,11 +73,3 @@ public class AccountData {
 
 }
 
-@JsonAutoDetect(fieldVisibility = ANY)
-class Money {
-    final Double value;
-
-    public Money(@JsonProperty("value") final Double value) {
-        this.value = value;
-    }
-}

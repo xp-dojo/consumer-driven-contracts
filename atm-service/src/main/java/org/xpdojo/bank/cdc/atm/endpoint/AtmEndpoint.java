@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import org.xpdojo.bank.cdc.atm.domain.AccountData;
+import org.xpdojo.bank.cdc.atm.domain.WithdrawlRequest;
 
 @Controller
 public class AtmEndpoint {
@@ -27,10 +30,14 @@ public class AtmEndpoint {
     }
 
     private AccountData getAccountDataFor(Long accountNumber) {
-        return restTemplate.getForObject(buildRestUrl(accountNumber), AccountData.class);
+        return restTemplate.getForObject(buildBalanceUrl(accountNumber), AccountData.class);
     }
 
-    private String buildRestUrl(Long accountNumber) {
+    private String buildBalanceUrl(Long accountNumber) {
         return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/balance";
+    }
+
+    private String buildWithdrawlUrl(Long accountNumber) {
+        return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/transactions";
     }
 }
