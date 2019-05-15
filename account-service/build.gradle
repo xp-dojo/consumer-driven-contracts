@@ -1,15 +1,20 @@
+apply plugin: 'org.springframework.boot'
+
 bootJar {
     archiveBaseName = 'account-service'
     version = '0.0.1'
 }
 
 dependencies {
-    compile libs.eurekaClient,
+
+    implementation project(':bank-account')
+
+    implementation libs.eurekaClient,
             libs.gson
 
     runtime libs.jacksonDatatypeJsr310
 
-    testCompile libs.test.pactJvmProvider,
+    testImplementation libs.test.pactJvmProvider,
             libs.test.pactSpring,
             libs.test.restAssured
 

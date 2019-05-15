@@ -29,7 +29,6 @@ subprojects {
     }
 
     apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
     apply plugin: 'au.com.dius.pact'
 
     dependencies {
@@ -47,12 +46,13 @@ subprojects {
     }
 
     ext {
-        sourceCompatibility = 1.11
-        targetCompatibility = 1.11
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
     test {
         useJUnitPlatform()
-        systemProperties['pact.rootDir'] = "$buildDir/pacts"
+        systemProperties['contract.rootDir'] = "$buildDir/pacts"
+        systemProperties['pact.writer.overwrite'] = true
     }
 }

@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ATM balance</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"></link>
+</head>
+
+<body>
+
+<h2>ATM Viewer: <span th:text="${accountNumber}">accountNumber</span></h2>
+
+<div th:if="data ne null">
+    <table>
+        <th><tr>Attribute</tr><tr>Value</tr></th>
+        <tr><td>AccountNumber</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
+        <tr><td>Description</td><td><span th:text="${data.accountDescription}">name</span></td></tr>
+        <tr><td>Overdraft</td><td><span th:text="${data.overdraftFacility}">location</span></td></tr>
+        <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
+    </table>
+</div>
+
+
+
+<div th:if="data eq null">
+    <p>We could not find any Account information for ID:<span th:text="${accountNumber}">accountNumber</span></p>
+</div>
+
+</body>
+</html>

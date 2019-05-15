@@ -17,7 +17,6 @@ import static org.springframework.boot.WebApplicationType.SERVLET;
 @EnableSwagger2
 public class AccountService {
 
-
     public static void main(String[] args) {
         new SpringApplicationBuilder(AccountService.class)
                 .web(SERVLET)

@@ -1,0 +1,130 @@
+{
+  "provider": {
+    "name": "account_provider"
+  },
+  "consumer": {
+    "name": "atm_consumer"
+  },
+  "interactions": [
+    {
+      "description": "Request for account information with an ID of 2468",
+      "request": {
+        "method": "GET",
+        "path": "/accounts/2468/balance"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "accountOverdraftFacility": {
+            "value": 23
+          },
+          "accountDescription": "string",
+          "accountNumber": 1234,
+          "accountBalance": {
+            "value": 1000
+          }
+        },
+        "matchingRules": {
+          "body": {
+            "$.accountNumber": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.accountDescription": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.accountDescription": {
+              "type": "RandomString",
+              "size": 20
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Account with AccountNumber 2468 exists"
+        }
+      ]
+    },
+    {
+      "description": "Request for account information with an ID of 1234",
+      "request": {
+        "method": "GET",
+        "path": "/accounts/1234/balance"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "accountOverdraftFacility": {
+            "value": 23
+          },
+          "accountDescription": "string",
+          "accountNumber": 1234,
+          "accountBalance": {
+            "value": 1000
+          }
+        },
+        "matchingRules": {
+          "body": {
+            "$.accountNumber": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.accountDescription": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.accountDescription": {
+              "type": "RandomString",
+              "size": 20
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Account with ID:1234 exists"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.6"
+    }
+  }
+}

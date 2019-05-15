@@ -1,10 +1,14 @@
+apply plugin: 'org.springframework.boot'
+
 bootJar {
     archiveBaseName = 'atm-service'
     version = '0.0.1'
 }
 
+
 dependencies {
-    compile libs.springBootStarterWeb,
+
+    implementation libs.springBootStarterWeb,
             libs.eurekaClient,
             libs.springBootThymeLeafStarter,
             libs.swagger,
@@ -12,7 +16,7 @@ dependencies {
 
     runtime libs.jacksonDatatypeJsr310
 
-    testCompile libs.test.pactJvmConsumer
+    testImplementation libs.test.pactJvmConsumer
 
     runtime project(':discovery-service')
 }

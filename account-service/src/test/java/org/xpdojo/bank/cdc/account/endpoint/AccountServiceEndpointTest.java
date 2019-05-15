@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.xpdojo.bank.cdc.account.domain.Account;
+import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
 import org.xpdojo.bank.cdc.account.domain.Transaction;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.CREDIT;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class BankAccountEndpointTest {
+class AccountServiceEndpointTest {
 
     @LocalServerPort
     int port;
@@ -87,6 +88,18 @@ class BankAccountEndpointTest {
                 .then().log().all()
                 .extract().body().as(Account.class);
         assertThat(account.getTransactions().size()).isEqualTo(2);
+    }
+
+    @Test
+    public void getBalanceForAccount(){
+        BalanceResponse response = given()
+                .header("Content-Type", "application/json")
+                .when().log().all()
+                .get("/accounts/1234/balance")
+                .then().log().all()
+                .extract().body().as(BalanceResponse.class);
+        assertThat(response.getAccountNumber()).isEqualTo(1234L);
+        assertThat(response.getBalance()).isEqualTo(anAmountOf(-900.0D));
     }
 
     @Test
