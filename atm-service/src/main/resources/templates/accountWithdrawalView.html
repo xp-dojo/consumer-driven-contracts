@@ -1,10 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ATM Withdrawl</title>
+    <title>ATM Withdrawal</title>
     <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"></link>
 </head>
 
-<h2>ATM Withdrawl: <span th:text="${accountNumber}">accountNumber</span></h2>
+<h2>ATM Withdrawal: <span th:text="${accountNumber}">accountNumber</span></h2>
 
 <div th:if="data ne null">
     <table>
@@ -13,7 +13,7 @@
         <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
     </table>
 
-    <form action="#" th:action="@{/atm/accounts/{id}/withdraw(id=${accountNumber})}" th:object="${withdrawlRequest}" method="post">
+    <form action="#" th:action="@{/atm/accounts/{id}/withdraw(id=${accountNumber})}" th:object="${withdrawalRequest}" method="post">
         <p>Amount to withdraw: <input type="text" th:field="*{amount}"></p>
         <p><input type="submit" value="Submit"/> <input type="reset" value="Clear"/></p>
     </form>

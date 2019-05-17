@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.xpdojo.bank.cdc.account.domain.Account;
 import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
 import org.xpdojo.bank.cdc.account.domain.Transaction;
+import org.xpdojo.bank.cdc.account.domain.TransactionResponse;
 
 import java.util.List;
 
@@ -80,14 +81,14 @@ class AccountServiceEndpointTest {
 
     @Test
     void updatesAccountsWithTransactions() {
-        Account account = given()
+        TransactionResponse response = given()
                 .header("Content-Type", "application/json")
                 .body(new Transaction(anAmountOf(100.0d), CREDIT, now()))
                 .when().log().all()
                 .post("/accounts/5678/transactions")
                 .then().log().all()
-                .extract().body().as(Account.class);
-        assertThat(account.getTransactions().size()).isEqualTo(2);
+                .extract().body().as(TransactionResponse.class);
+        assertThat(response.getResultingBalance()).isEqualTo(anAmountOf(220.0D));
     }
 
     @Test
@@ -113,15 +114,14 @@ class AccountServiceEndpointTest {
         assertThat(account.getAccountNumber()).isGreaterThan(0L);
         assertThat(account.getTransactions().size()).isEqualTo(0);
 
-        Account updatedAccount = given()
+        TransactionResponse response = given()
                 .header("Content-Type", "application/json")
                 .body(new Transaction(anAmountOf(30.0d), CREDIT, now()))
                 .when().log().all()
                 .post("/accounts/" + account.getAccountNumber() + "/transactions")
                 .then().log().all()
-                .extract().body().as(Account.class);
-        assertThat(updatedAccount.getTransactions().size()).isEqualTo(1);
-        assertThat(updatedAccount.balance()).isEqualTo(anAmountOf(30.0d));
+                .extract().body().as(TransactionResponse.class);
+        assertThat(response.getResultingBalance()).isEqualTo(anAmountOf(30.0d));
     }
 
 }

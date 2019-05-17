@@ -7,17 +7,17 @@ import java.time.LocalDateTime;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 
 @JsonAutoDetect(fieldVisibility = ANY)
-public class WithdrawlRequest {
+public class WithdrawalRequest {
 
     private Double amount;
     private final String direction = "DEBIT";
     private final LocalDateTime date = LocalDateTime.now();
     private final String description = "Withdrawl from ATM on " + date;
 
-    public WithdrawlRequest() {
+    public WithdrawalRequest() {
     }
 
-    public WithdrawlRequest(final Double amount) {
+    public WithdrawalRequest(final Double amount) {
         this.amount = amount;
     }
 
@@ -31,7 +31,7 @@ public class WithdrawlRequest {
 
     @Override
     public String toString() {
-        return "WithdrawlRequest{" +
+        return "WithdrawalRequest{" +
                 "amount=" + amount +
                 ", direction='" + direction + '\'' +
                 ", date=" + date +

@@ -34,11 +34,19 @@ public class Transaction {
         this.date = date;
     }
 
+    Direction direction(){
+        return direction;
+    }
+
+    Money amount(){
+        return amount;
+    }
+
     public LocalDateTime getDate() {
         return date;
     }
 
-    public Money balanceImpact() {
+    Money balanceImpact() {
         if (direction == DEBIT)
             return amount.negative();
         else

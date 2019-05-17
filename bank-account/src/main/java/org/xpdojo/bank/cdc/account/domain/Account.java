@@ -2,6 +2,7 @@ package org.xpdojo.bank.cdc.account.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.bytebuddy.dynamic.loading.ClassInjector;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -69,8 +70,13 @@ public class Account {
         return transactions.stream().map(transaction -> transaction.balanceImpact()).reduce(Money::add).get();
     }
 
-    public void addTransaction(final Transaction transaction){
-        transactions.add(transaction);
+    public void applyTransaction(final Transaction transaction){
+        if(transaction.direction() == Direction.DEBIT){
+            withdraw(transaction.amount());
+        }
+        else{
+            deposit(transaction.amount());
+        }
     }
 
     public void deposit(final Money anAmount) {

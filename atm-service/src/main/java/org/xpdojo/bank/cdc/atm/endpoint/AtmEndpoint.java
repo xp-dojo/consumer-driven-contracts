@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.xpdojo.bank.cdc.atm.domain.AccountData;
-import org.xpdojo.bank.cdc.atm.domain.WithdrawlRequest;
-import org.xpdojo.bank.cdc.atm.domain.WithdrawlResponse;
+import org.xpdojo.bank.cdc.atm.domain.WithdrawalRequest;
+import org.xpdojo.bank.cdc.atm.domain.WithdrawalResponse;
 
 @Controller
 public class AtmEndpoint {
@@ -31,20 +31,21 @@ public class AtmEndpoint {
     }
 
     @GetMapping(value ="/atm/accounts/{accountNumber}/withdraw")
-    public String getWithdraw(@ModelAttribute WithdrawlRequest withdrawlRequest, @PathVariable Long accountNumber, Model model){
-        LOG.info("############################## get" + withdrawlRequest);
+    public String getWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model){
         model.addAttribute("accountNumber", accountNumber);
         model.addAttribute("data", getAccountDataFor(accountNumber));
-        return "accountWithdrawlView";
+        return "accountWithdrawalView";
     }
 
     @PostMapping(value ="/atm/accounts/{accountNumber}/withdraw")
-    public String postWithdraw(@ModelAttribute WithdrawlRequest withdrawlRequest, @PathVariable Long accountNumber, Model model){
-        LOG.info("############################## post" + withdrawlRequest);
-
-        model.addAttribute("response", new WithdrawlResponse("It all went swimmingly"));
+    public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model){
         model.addAttribute("accountNumber", accountNumber);
-        return "withdrawlResponse";
+        model.addAttribute("response", withDrawFromAccounts(withdrawalRequest));
+        return "withdrawalResponse";
+    }
+
+    private WithdrawalResponse withDrawFromAccounts(WithdrawalRequest withdrawalRequest) {
+        return null;
     }
 
     private AccountData getAccountDataFor(Long accountNumber) {
@@ -55,7 +56,7 @@ public class AtmEndpoint {
         return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/balance";
     }
 
-    private String buildWithdrawlUrl(Long accountNumber) {
+    private String buildWithdrawalUrl(Long accountNumber) {
         return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/transactions";
     }
 }

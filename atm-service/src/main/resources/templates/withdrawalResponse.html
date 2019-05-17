@@ -1,19 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ATM Withdrawl</title>
+    <title>ATM Withdrawal</title>
     <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"></link>
 </head>
 
-<h2>ATM Withdrawl: <span th:text="${accountNumber}">accountNumber</span></h2>
+<h2>ATM Withdrawal: <span th:text="${accountNumber}">accountNumber</span></h2>
 
-<div th:if="data ne null">
+<div th:if="response ne null">
     <p><span th:text="${response.response}">response</span></p>
     <form method="get" action="/menu.html">
         <button type="submit">Return</button>
     </form>
 </div>
 
-<div th:if="data eq null">
+<div th:if="response eq null">
     <p>Something went wrong</span></p>
 </div>
 

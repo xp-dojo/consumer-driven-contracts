@@ -5,15 +5,14 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 
 @JsonAutoDetect(fieldVisibility = ANY)
-public class WithdrawlResponse {
+public class WithdrawalResponse {
 
     private String response = "no response";
 
-    public WithdrawlResponse(){
-
+    public WithdrawalResponse(){
     }
 
-    public WithdrawlResponse(String response) {
+    public WithdrawalResponse(String response) {
         this.response = response;
     }
 

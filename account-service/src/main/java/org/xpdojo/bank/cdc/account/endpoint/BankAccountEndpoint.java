@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.xpdojo.bank.cdc.account.domain.Account;
 import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
 import org.xpdojo.bank.cdc.account.domain.Transaction;
+import org.xpdojo.bank.cdc.account.domain.TransactionResponse;
 
 import java.util.Collection;
 
@@ -36,11 +37,11 @@ public class BankAccountEndpoint {
     }
 
     @PostMapping("accounts/{accountId}/transactions")
-    public Account addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
+    public TransactionResponse addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
         Account account = repository.getById(accountId);
-        account.addTransaction(transaction);
+        account.applyTransaction(transaction);
         repository.update(account);
-        return account;
+        return new TransactionResponse(accountId, account.balance(), "Thank you for using Dojo Bank");
     }
 
     @GetMapping("accounts/{accountId}/balance")
