@@ -1,33 +1,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>ATM balance</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"></link>
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/atm.css"/>
 </head>
+<body>
+<div class="content">
+    <h1>ATM Viewer: <span th:text="${accountNumber}">accountNumber</span></h1>
 
-<h2>ATM Viewer: <span th:text="${accountNumber}">accountNumber</span></h2>
+    <div th:if="data ne null">
+        <table>
+            <tr><th>Attribute</th><th>Value</th></tr>
+            <tr><td>AccountNumber</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
+            <tr><td>Description</td><td><span th:text="${data.accountDescription}">name</span></td></tr>
+            <tr><td>Overdraft</td><td><span th:text="${data.overdraftFacility}">location</span></td></tr>
+            <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
+        </table>
 
-<div th:if="data ne null">
-    <table>
-        <th><tr>Attribute</tr><tr>Value</tr></th>
-        <tr><td>AccountNumber</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
-        <tr><td>Description</td><td><span th:text="${data.accountDescription}">name</span></td></tr>
-        <tr><td>Overdraft</td><td><span th:text="${data.overdraftFacility}">location</span></td></tr>
-        <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
-    </table>
+        <div class="row stick-to-top-buttons">
+            <form class="column" method="get" action="/atm/accounts/1234/withdraw">
+                <button class="button" type="submit"></button>
+                <span class="label">Withdraw from account</span>
+            </form>
 
-    <form method="get" action="/atm/accounts/1234/withdraw">
-        <button type="submit">Withdraw from account</button>
-    </form>
+            <form class="column" method="get" action="/menu.html">
+                <button class="button" type="submit"></button>
+                <span class="label">Return</span>
+            </form>
+        </div>
+    </div>
 
-    <form method="get" action="/menu.html">
-        <button type="submit">Return</button>
-    </form>
-
+    <div th:if="data eq null">
+        <p>We could not find any Account information for ID:<span th:text="${accountNumber}">accountNumber</span></p>
+    </div>
 </div>
-
-<div th:if="data eq null">
-    <p>We could not find any Account information for ID:<span th:text="${accountNumber}">accountNumber</span></p>
-</div>
-
 </body>
 </html>

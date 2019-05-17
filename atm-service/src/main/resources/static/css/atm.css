@@ -1,0 +1,117 @@
+body {
+    color: #d3d3d3;
+    background-image: url('/images/atm-photo.jpg');
+    background-size: 1100px 750px;
+    background-repeat: no-repeat;
+}
+
+* {
+    font-family: 'VT323', monospace;
+}
+
+.content {
+    margin-top: 85px;
+    margin-left: 155px;
+    width: 750px;
+    height: 550px;
+    background-color: #000066;
+    padding: 1rem;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.stick-to-top-buttons {
+    top: 293px;
+    left: 0;
+    right: 0;
+}
+
+.stick-to-bottom-buttons {
+    bottom: 15px;
+    left: 0;
+    right: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+}
+
+.row > .column {
+    flex: 0 0 50%;
+    max-width: 50%;
+    justify-self: flex-end;
+    display: flex;
+    margin-bottom: 2.3rem;
+    align-items: center;
+    position: relative;
+}
+
+.row > .column:nth-child(even) {
+    justify-content: flex-end;
+}
+
+.label {
+    font-size: 2rem;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.button {
+    background-color: #989898;
+    height: 3.5rem;
+    width: 3.6rem;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+button:hover {
+    background-color: grey;
+    opacity: 0.3;
+}
+
+.row > .column:nth-child(odd) > .button {
+    left: -4.3rem;
+}
+
+.row > .column:nth-child(even) > .button {
+    right: -4.1rem;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-container .input-field {
+    margin-left: 15px;
+    width: 250px;
+    font-size: 1.5rem;
+}
+
+.response-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    font-size: 2rem;
+}

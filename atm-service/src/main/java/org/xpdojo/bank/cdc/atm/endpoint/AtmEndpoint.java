@@ -11,17 +11,16 @@ import org.xpdojo.bank.cdc.atm.domain.AccountData;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalRequest;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalResponse;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Controller
+@RequestMapping(produces = APPLICATION_JSON_VALUE)
 public class AtmEndpoint {
 
     @Autowired
     private RestTemplate restTemplate;
     private static final String ACCOUNT_SERVICE = "account-service";
     private static final Logger LOG = LoggerFactory.getLogger(AtmEndpoint.class);
-
-    // login with an account
-    // get account data
-    // withdraw cash
 
     @GetMapping(value = "/atm/accounts/{accountNumber}")
     public String getBalanceOfAccount(@PathVariable Long accountNumber, Model model) {
@@ -45,7 +44,8 @@ public class AtmEndpoint {
     }
 
     private WithdrawalResponse withDrawFromAccounts(WithdrawalRequest withdrawalRequest) {
-        return null;
+        return new WithdrawalResponse("Cooking on gas!!!");
+        //return restTemplate.postForObject(buildWithdrawalUrl(withdrawalRequest.getAccountNumber()), withdrawalRequest, WithdrawalResponse.class);
     }
 
     private AccountData getAccountDataFor(Long accountNumber) {
