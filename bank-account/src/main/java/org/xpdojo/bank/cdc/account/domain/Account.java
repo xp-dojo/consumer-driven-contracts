@@ -1,6 +1,7 @@
 package org.xpdojo.bank.cdc.account.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.bytebuddy.dynamic.loading.ClassInjector;
 
@@ -15,6 +16,7 @@ import static org.xpdojo.bank.cdc.account.domain.Money.anAmountOf;
 import static org.xpdojo.bank.cdc.account.domain.Transaction.*;
 
 @JsonAutoDetect(fieldVisibility = ANY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
 
     private final Long accountNumber;

@@ -44,8 +44,7 @@ public class AtmEndpoint {
     }
 
     private WithdrawalResponse withDrawFromAccounts(WithdrawalRequest withdrawalRequest) {
-        return new WithdrawalResponse("Cooking on gas!!!");
-        //return restTemplate.postForObject(buildWithdrawalUrl(withdrawalRequest.getAccountNumber()), withdrawalRequest, WithdrawalResponse.class);
+        return restTemplate.postForObject(buildWithdrawalUrl(withdrawalRequest.getAccountNumber()), withdrawalRequest, WithdrawalResponse.class);
     }
 
     private AccountData getAccountDataFor(Long accountNumber) {

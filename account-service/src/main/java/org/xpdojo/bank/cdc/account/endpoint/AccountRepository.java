@@ -17,18 +17,18 @@ public class AccountRepository {
     private final Map<Long, Account> accounts = new HashMap<>();
 
     {
-        Account account = anAccountWith(1234L, anAmountOf(100.0d));
+        Account account = anAccountWith(30001234L, anAmountOf(100.0d));
         account.setAccountDescription("My private account for dangerous gambling");
         account.setOverdraftFacility(anAmountOf(5000D));
         account.withdraw(anAmountOf(1000.0d));
         accounts.put(account.getAccountNumber(), account);
 
-        Account otherAccount = anEmptyAccount(5678L);
+        Account otherAccount = anEmptyAccount(30005678L);
         otherAccount.setAccountDescription("My steady savings account");
         otherAccount.deposit(anAmountOf(120.0d));
         accounts.put(otherAccount.getAccountNumber(), otherAccount);
 
-        Account pactAccount = anAccountWith(2468L, anAmountOf(1000.0D));
+        Account pactAccount = anAccountWith(30002468L, anAmountOf(1000.0D));
         pactAccount.setAccountDescription("Account used for pact testing");
         pactAccount.setOverdraftFacility(anAmountOf(23.0D));
         accounts.put(pactAccount.getAccountNumber(), pactAccount);

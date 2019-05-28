@@ -10,12 +10,22 @@
 
     <div th:if="data ne null">
         <table>
-            <tr><th>Attribute</th><th>Value</th></tr>
-            <tr><td>AccountNumber</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
-            <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>AccountNumber</td>
+                <td><span th:text="${data.accountNumber}">id</span></td>
+            </tr>
+            <tr>
+                <td>Balance</td>
+                <td><span th:text="${data.balance}">location</span></td>
+            </tr>
         </table>
 
-        <form class="mt-2" id="amount-form" action="#" th:action="@{/atm/accounts/{id}/withdraw(id=${accountNumber})}" th:object="${withdrawalRequest}" method="post">
+        <form class="mt-2" id="amount-form" action="#" th:action="@{/atm/accounts/{id}/withdraw(id=${accountNumber})}"
+              th:object="${withdrawalRequest}" method="post">
             <div class="input-container">
                 <span>Amount to withdraw:</span>
                 <input autocomplete="off" class="input-field" id="amount-field" type="number" th:field="*{amount}">
@@ -67,11 +77,8 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function submitWithValue(value) {
-        document.querySelector('#amount-field').value = value;
-        document.querySelector('#amount-form').submit();
-    }
-</script>
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/atm_functions.js"></script>
+
 </body>
 </html>

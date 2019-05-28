@@ -39,9 +39,9 @@ public class AccountServiceContractTest {
         context.verifyInteraction();
     }
 
-    @State("Account with AccountNumber 2468 exists")
+    @State("Account with AccountNumber 30002468 exists")
     public void toGetState() {
-        LOG.info("Checking that account with account number #2468 exists");
+        LOG.info("Checking that account with account number #30002468 exists");
     }
 
 }

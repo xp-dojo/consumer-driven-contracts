@@ -61,10 +61,10 @@ class AccountServiceEndpointTest {
         Account account = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
-                .get("accounts/1234")
+                .get("accounts/30001234")
                 .then().log().all()
                 .extract().body().as(Account.class);
-        assertThat(account.getAccountNumber()).isEqualTo(1234L);
+        assertThat(account.getAccountNumber()).isEqualTo(30001234L);
     }
 
     @Test
@@ -72,7 +72,7 @@ class AccountServiceEndpointTest {
         List<Transaction> transactions = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
-                .get("/accounts/1234/transactions")
+                .get("/accounts/30001234/transactions")
                 .then().log().all()
                 .extract().body()
                 .jsonPath().getList(".", Transaction.class);
@@ -85,7 +85,7 @@ class AccountServiceEndpointTest {
                 .header("Content-Type", "application/json")
                 .body(new Transaction(anAmountOf(100.0d), CREDIT, now()))
                 .when().log().all()
-                .post("/accounts/5678/transactions")
+                .post("/accounts/30005678/transactions")
                 .then().log().all()
                 .extract().body().as(TransactionResponse.class);
         assertThat(response.getResultingBalance()).isEqualTo(anAmountOf(220.0D));
@@ -96,10 +96,10 @@ class AccountServiceEndpointTest {
         BalanceResponse response = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
-                .get("/accounts/1234/balance")
+                .get("/accounts/30001234/balance")
                 .then().log().all()
                 .extract().body().as(BalanceResponse.class);
-        assertThat(response.getAccountNumber()).isEqualTo(1234L);
+        assertThat(response.getAccountNumber()).isEqualTo(30001234L);
         assertThat(response.getBalance()).isEqualTo(anAmountOf(-900.0D));
     }
 

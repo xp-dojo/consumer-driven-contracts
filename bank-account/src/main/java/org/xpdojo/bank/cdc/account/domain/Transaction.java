@@ -1,6 +1,7 @@
 package org.xpdojo.bank.cdc.account.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.CREDIT;
 import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.DEBIT;
 
 @JsonAutoDetect(fieldVisibility = ANY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Transaction {
     private final Money amount;
     private final Direction direction;

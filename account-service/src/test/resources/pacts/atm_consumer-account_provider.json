@@ -7,10 +7,10 @@
   },
   "interactions": [
     {
-      "description": "Request for account information with an ID of 2468",
+      "description": "Request for account information with an ID of 30002468",
       "request": {
         "method": "GET",
-        "path": "/accounts/2468/balance"
+        "path": "/accounts/30002468/balance"
       },
       "response": {
         "status": 200,
@@ -25,7 +25,7 @@
             "value": 23
           },
           "description": "string",
-          "accountNumber": 2468
+          "accountNumber": 30002468
         },
         "matchingRules": {
           "body": {
@@ -74,7 +74,7 @@
       },
       "providerStates": [
         {
-          "name": "Account with AccountNumber 2468 exists"
+          "name": "Account with AccountNumber 30002468 exists"
         }
       ]
     }

@@ -1,6 +1,7 @@
 package org.xpdojo.bank.cdc.account.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -8,6 +9,7 @@ import static java.lang.Double.valueOf;
 import static java.util.Objects.hash;
 
 @JsonAutoDetect(fieldVisibility = ANY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Money implements Comparable<Money> {
 
     private final double value;

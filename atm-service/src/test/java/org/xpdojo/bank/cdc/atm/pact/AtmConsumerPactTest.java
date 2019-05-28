@@ -28,9 +28,9 @@ public class AtmConsumerPactTest {
     @Pact(provider = "account_provider", consumer = "atm_consumer")
     public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
         return builder
-                .given("Account with AccountNumber 2468 exists")
-                .uponReceiving("Request for account information with an ID of 2468")
-                .path("/accounts/2468/balance").method("GET")
+                .given("Account with AccountNumber 30002468 exists")
+                .uponReceiving("Request for account information with an ID of 30002468")
+                .path("/accounts/30002468/balance").method("GET")
                 .willRespondWith().status(200).headers(expectedHeaders())
                 .body(expectedAccountBody())
                 .toPact();
@@ -44,7 +44,7 @@ public class AtmConsumerPactTest {
 
     private PactDslJsonBody expectedAccountBody() {
         return new PactDslJsonBody()
-                .id("accountNumber", 2468L)
+                .id("accountNumber", 30002468L)
                 .stringType("description")
                 .object("overdraftFacility", expectAmountValue(23.0D))
                 .object("balance", expectAmountValue(1000.0D))
@@ -65,14 +65,14 @@ public class AtmConsumerPactTest {
         assertThat(response.getBody()).as("Response body from the accounts service is expected to be populated").isNotEmpty();
 
         AccountData accountData = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), AccountData.class);
-        assertThat(accountData.getAccountNumber()).isEqualTo(2468L);
+        assertThat(accountData.getAccountNumber()).isEqualTo(30002468L);
         assertThat(accountData.getAccountDescription()).isNotEmpty();
         assertThat(accountData.getOverdraftFacility()).isEqualTo(23.0D);
         assertThat(accountData.getBalance()).isEqualTo(1000.0D);
     }
 
     private ResponseEntity<String> retrieveAccountData(MockServer mockProvider) {
-        return new RestTemplate().getForEntity(mockProvider.getUrl() + "/accounts/2468/balance", String.class);
+        return new RestTemplate().getForEntity(mockProvider.getUrl() + "/accounts/30002468/balance", String.class);
     }
 
 }
