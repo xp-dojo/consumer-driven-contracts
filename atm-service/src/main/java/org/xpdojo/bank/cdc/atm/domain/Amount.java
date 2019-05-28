@@ -1,24 +1,20 @@
 package org.xpdojo.bank.cdc.atm.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static java.lang.Double.valueOf;
 
-@JsonAutoDetect(fieldVisibility = ANY)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Amount {
-    final Double value;
+    final double value;
 
     public Amount(@JsonProperty("value") final Double value) {
         this.value = value;
     }
 
-    public Amount(String value) {
-        this.value = Double.valueOf(value);
+    public Amount(final String value) {
+        this.value = valueOf(value);
     }
 
     public Double getValue() {

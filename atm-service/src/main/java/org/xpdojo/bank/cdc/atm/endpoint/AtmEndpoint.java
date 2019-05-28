@@ -3,6 +3,9 @@ package org.xpdojo.bank.cdc.atm.endpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,12 +42,19 @@ public class AtmEndpoint {
     @PostMapping(value ="/atm/accounts/{accountNumber}/withdraw")
     public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model){
         model.addAttribute("accountNumber", accountNumber);
-        model.addAttribute("response", withDrawFromAccounts(withdrawalRequest));
+        model.addAttribute("response", withdrawFromAccounts(withdrawalRequest));
         return "withdrawalResponse";
     }
 
-    private WithdrawalResponse withDrawFromAccounts(WithdrawalRequest withdrawalRequest) {
-        return restTemplate.postForObject(buildWithdrawalUrl(withdrawalRequest.getAccountNumber()), withdrawalRequest, WithdrawalResponse.class);
+    private WithdrawalResponse withdrawFromAccounts(WithdrawalRequest withdrawalRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(withdrawalRequest, headers);
+        return restTemplate.postForObject(buildWithdrawalUrl(withdrawalRequest.getAccountNumber()), entity, WithdrawalResponse.class);
+    }
+
+    private String buildWithdrawalUrl(Long accountNumber) {
+        return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/transactions";
     }
 
     private AccountData getAccountDataFor(Long accountNumber) {
@@ -53,9 +63,5 @@ public class AtmEndpoint {
 
     private String buildBalanceUrl(Long accountNumber) {
         return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/balance";
-    }
-
-    private String buildWithdrawalUrl(Long accountNumber) {
-        return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/transactions";
     }
 }

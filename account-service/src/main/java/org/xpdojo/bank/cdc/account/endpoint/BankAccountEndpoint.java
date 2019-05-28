@@ -1,6 +1,8 @@
 package org.xpdojo.bank.cdc.account.endpoint;
 
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.xpdojo.bank.cdc.account.domain.Account;
 import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
@@ -17,6 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 public class BankAccountEndpoint {
 
     private final AccountRepository repository = new AccountRepository();
+    private static final Logger LOG = LoggerFactory.getLogger(BankAccountEndpoint.class);
 
     @ApiOperation(value = "Get all accounts", notes = "gets all accounts in the repository.  If we had the notion of a customer we would limit to all accounts for a customer.", response = Account.class, responseContainer = "Collection")
     @GetMapping("/accounts")
@@ -45,7 +48,7 @@ public class BankAccountEndpoint {
     }
 
     @ApiOperation(value = "Create transaction on an account", notes = "Creates a single transcation on an account", response = TransactionResponse.class)
-    @PostMapping(value = "accounts/{accountId}/transactions", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
+    @PostMapping(value = "accounts/{accountId}/transactions", consumes = APPLICATION_JSON_VALUE)
     public TransactionResponse addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
         Account account = repository.getById(accountId);
         account.applyTransaction(transaction);
