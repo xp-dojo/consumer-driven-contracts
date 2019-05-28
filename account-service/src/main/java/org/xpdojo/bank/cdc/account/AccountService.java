@@ -40,6 +40,7 @@ public class AccountService {
         loggingFilter.setIncludeHeaders(true);
         loggingFilter.setIncludeQueryString(true);
         loggingFilter.setIncludePayload(true);
+        loggingFilter.setMaxPayloadLength(1000);
         return loggingFilter;
     }
 }

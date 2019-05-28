@@ -10,6 +10,7 @@ import org.xpdojo.bank.cdc.account.domain.TransactionResponse;
 import java.util.Collection;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
 @RequestMapping(produces = APPLICATION_JSON_VALUE)
@@ -17,18 +18,13 @@ public class BankAccountEndpoint {
 
     private final AccountRepository repository = new AccountRepository();
 
-    @ApiOperation(value = "Get all accounts",
-            notes = "gets all accounts in the repository.  If we had the notion of a customer we would limit to all accounts for a customer.",
-            response = Account.class,
-            responseContainer = "Collection")
+    @ApiOperation(value = "Get all accounts", notes = "gets all accounts in the repository.  If we had the notion of a customer we would limit to all accounts for a customer.", response = Account.class, responseContainer = "Collection")
     @GetMapping("/accounts")
     public Collection<Account> getAccounts() {
         return repository.readAccounts();
     }
 
-    @ApiOperation(value = "Create an account",
-            notes = "create an account and respond back with that account",
-            response = Account.class)
+    @ApiOperation(value = "Create an account", notes = "create an account and respond back with that account", response = Account.class)
     @PostMapping("/accounts")
     public Account newAccount() {
         return repository.create();
@@ -37,24 +33,19 @@ public class BankAccountEndpoint {
     @ApiOperation(value = "Retrieve a single account",
             notes = "retrieves a single account by its ID",
             response = Account.class)
-    @GetMapping("accounts/{accountId}")
+    @GetMapping(value = "accounts/{accountId}", produces = APPLICATION_JSON_VALUE)
     public Account getAccount(@PathVariable Long accountId) {
         return repository.getById(accountId);
     }
 
-    @ApiOperation(value = "Retrieve transactions for an account",
-            notes = "retrieves all transactions for a given account",
-            response = Transaction.class,
-            responseContainer = "Collection")
-    @GetMapping("accounts/{accountId}/transactions")
+    @ApiOperation(value = "Retrieve transactions for an account", notes = "retrieves all transactions for a given account", response = Transaction.class, responseContainer = "Collection")
+    @GetMapping(value = "accounts/{accountId}/transactions", produces = APPLICATION_JSON_VALUE)
     public Collection<Transaction> getTransactions(@PathVariable Long accountId) {
         return repository.getById(accountId).getTransactions();
     }
 
-    @ApiOperation(value = "Create transaction on an account",
-            notes = "Creates a single transcation on an account",
-            response = TransactionResponse.class)
-    @PostMapping(value = "accounts/{accountId}/transactions")
+    @ApiOperation(value = "Create transaction on an account", notes = "Creates a single transcation on an account", response = TransactionResponse.class)
+    @PostMapping(value = "accounts/{accountId}/transactions", consumes = {APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE})
     public TransactionResponse addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
         Account account = repository.getById(accountId);
         account.applyTransaction(transaction);
@@ -62,10 +53,8 @@ public class BankAccountEndpoint {
         return new TransactionResponse(accountId, account.balance(), "Thank you for using Dojo Bank");
     }
 
-    @ApiOperation(value = "Retrieves the balance of an account",
-            notes = "retrieves the balance of an account from the repository without the transactions",
-            response = BalanceResponse.class)
-    @GetMapping("accounts/{accountId}/balance")
+    @ApiOperation(value = "Retrieves the balance of an account", notes = "retrieves the balance of an account from the repository without the transactions", response = BalanceResponse.class)
+    @GetMapping(value = "accounts/{accountId}/balance", produces = APPLICATION_JSON_VALUE)
     public BalanceResponse getBalance(@PathVariable Long accountId) {
         Account account = repository.getById(accountId);
         if (account == null) {

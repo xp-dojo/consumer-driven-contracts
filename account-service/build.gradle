@@ -9,8 +9,7 @@ dependencies {
 
     implementation project(':bank-account')
 
-    implementation libs.eurekaClient,
-            libs.gson
+    implementation libs.eurekaClient
 
     runtime libs.jacksonDatatypeJsr310
 

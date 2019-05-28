@@ -6,11 +6,8 @@ bootJar {
 }
 
 dependencies {
-    compile libs.springBootStarterWeb,
-            libs.eurekaClient,
-            libs.springBootThymeLeafStarter,
-            libs.swagger,
-            libs.swaggerUI
+    compile libs.eurekaClient,
+            libs.springBootThymeLeafStarter
 
     runtime libs.jacksonDatatypeJsr310
 
