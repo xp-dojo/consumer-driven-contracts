@@ -1,15 +1,11 @@
 package org.xpdojo.bank.cdc.atm.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-
-@JsonAutoDetect(fieldVisibility = ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountData {
 
@@ -24,8 +20,8 @@ public class AccountData {
                        @JsonProperty("balance") final Amount balance) {
         this.accountNumber = accountNumber;
         this.accountDescription = accountDescription;
-        this.overdraftFacility = overdraftFacility.value;
-        this.balance = balance.value;
+        this.overdraftFacility = overdraftFacility.getValue();
+        this.balance = balance.getValue();
     }
 
     public Long getAccountNumber() {

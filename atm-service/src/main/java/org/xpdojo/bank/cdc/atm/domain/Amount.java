@@ -7,7 +7,7 @@ import java.util.Objects;
 import static java.lang.Double.valueOf;
 
 public class Amount {
-    final double value;
+    private final double value;
 
     public Amount(@JsonProperty("value") final Double value) {
         this.value = value;
