@@ -32,15 +32,15 @@ public class AtmEndpoint {
         return "accountSummaryView";
     }
 
-    @GetMapping(value ="/atm/accounts/{accountNumber}/withdraw")
-    public String getWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model){
+    @GetMapping(value = "/atm/accounts/{accountNumber}/withdraw")
+    public String getWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model) {
         model.addAttribute("accountNumber", accountNumber);
         model.addAttribute("data", getAccountDataFor(accountNumber));
         return "accountWithdrawalView";
     }
 
-    @PostMapping(value ="/atm/accounts/{accountNumber}/withdraw")
-    public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model){
+    @PostMapping(value = "/atm/accounts/{accountNumber}/withdraw")
+    public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model) {
         model.addAttribute("accountNumber", accountNumber);
         model.addAttribute("response", withdrawFromAccounts(withdrawalRequest));
         return "withdrawalResponse";
@@ -48,7 +48,7 @@ public class AtmEndpoint {
 
     private WithdrawalResponse withdrawFromAccounts(WithdrawalRequest withdrawalRequest) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(withdrawalRequest, headers);
         return restTemplate.postForObject(buildWithdrawalUrl(withdrawalRequest.getAccountNumber()), entity, WithdrawalResponse.class);
     }

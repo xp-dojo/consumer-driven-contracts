@@ -23,15 +23,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "account_provider")
-public class AtmConsumerPactTest {
+public class AtmConsumerBalancePactTest {
 
     @Pact(provider = "account_provider", consumer = "atm_consumer")
     public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
         return builder
                 .given("Account with AccountNumber 30002468 exists")
                 .uponReceiving("Request for account information with an ID of 30002468")
-                .path("/accounts/30002468/balance").method("GET")
-                .willRespondWith().status(200).headers(expectedHeaders())
+                .path("/accounts/30002468/balance")
+                .method("GET")
+                .willRespondWith()
+                .status(200)
+                .headers(expectedHeaders())
                 .body(expectedAccountBody())
                 .toPact();
     }
