@@ -30,7 +30,7 @@ public class AccountRepository {
 
         Account pactAccount = anAccountWith(30002468L, anAmountOf(1000.0D));
         pactAccount.setAccountDescription("Account used for pact testing");
-        pactAccount.setOverdraftFacility(anAmountOf(23.0D));
+        pactAccount.setOverdraftFacility(anAmountOf(5000.0D));
         accounts.put(pactAccount.getAccountNumber(), pactAccount);
     }
 

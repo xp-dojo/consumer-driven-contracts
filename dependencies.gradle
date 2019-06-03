@@ -1,6 +1,6 @@
 ext {
 
-    springBootVersion = '2.1.4.RELEASE'
+    springBootVersion = '2.1.5.RELEASE'
 
     libs = [
             eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.1.1.RELEASE',
@@ -27,9 +27,9 @@ ext {
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.6',
-                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.6',
-                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.6'
+                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.7',
+                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.7',
+                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.7'
             ]
     ]
 }

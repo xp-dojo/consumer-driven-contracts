@@ -3,6 +3,7 @@ package org.xpdojo.bank.cdc.account.endpoint;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.xpdojo.bank.cdc.account.domain.Account;
 import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
@@ -49,6 +50,7 @@ public class BankAccountEndpoint {
 
     @ApiOperation(value = "Create transaction on an account", notes = "Creates a single transcation on an account", response = TransactionResponse.class)
     @PostMapping(value = "accounts/{accountId}/transactions", consumes = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public TransactionResponse addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
         Account account = repository.getById(accountId);
         account.applyTransaction(transaction);
