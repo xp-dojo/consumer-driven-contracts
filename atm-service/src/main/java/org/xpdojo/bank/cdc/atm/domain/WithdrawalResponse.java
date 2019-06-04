@@ -12,7 +12,7 @@ public class WithdrawalResponse {
 
     public WithdrawalResponse(@JsonProperty("accountNumber") Long accountNumber,
                               @JsonProperty("response") String response,
-                              @JsonProperty("resultingBalance") Amount balance) {
+                              @JsonProperty("balance") Amount balance) {
         this.accountNumber = accountNumber;
         this.response = response;
         this.balance = balance;

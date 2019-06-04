@@ -88,7 +88,7 @@ class AccountServiceEndpointTest {
                 .post("/accounts/30005678/transactions")
                 .then().log().all()
                 .extract().body().as(TransactionResponse.class);
-        assertThat(response.getResultingBalance()).isEqualTo(anAmountOf(220.0D));
+        assertThat(response.getBalance()).isEqualTo(anAmountOf(220.0D));
     }
 
     @Test
@@ -121,7 +121,7 @@ class AccountServiceEndpointTest {
                 .post("/accounts/" + account.getAccountNumber() + "/transactions")
                 .then().log().all()
                 .extract().body().as(TransactionResponse.class);
-        assertThat(response.getResultingBalance()).isEqualTo(anAmountOf(30.0d));
+        assertThat(response.getBalance()).isEqualTo(anAmountOf(30.0d));
     }
 
 }

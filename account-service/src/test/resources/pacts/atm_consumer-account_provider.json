@@ -7,6 +7,114 @@
   },
   "interactions": [
     {
+      "description": "POST REQUEST with a transaction",
+      "request": {
+        "method": "POST",
+        "path": "/accounts/30002468/transactions",
+        "headers": {
+          "Content-Type": "application/json; charset\u003dUTF-8"
+        },
+        "body": {
+          "amount": {
+            "value": 100
+          },
+          "description": "string",
+          "accountNumber": 30002468,
+          "direction": "DEBIT"
+        },
+        "matchingRules": {
+          "body": {
+            "$.accountNumber": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.amount.value": {
+              "matchers": [
+                {
+                  "match": "decimal"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.description": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.description": {
+              "type": "RandomString",
+              "size": 20
+            }
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "balance": {
+            "value": 900
+          },
+          "response": "string",
+          "accountNumber": 30002468
+        },
+        "matchingRules": {
+          "body": {
+            "$.accountNumber": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.response": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.balance.value": {
+              "matchers": [
+                {
+                  "match": "decimal"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.response": {
+              "type": "RandomString",
+              "size": 20
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "Account with AccountNumber 30002468 exists"
+        }
+      ]
+    },
+    {
       "description": "Request for account information with an ID of 30002468",
       "request": {
         "method": "GET",
@@ -84,7 +192,7 @@
       "version": "3.0.0"
     },
     "pact-jvm": {
-      "version": "3.6.6"
+      "version": "3.6.7"
     }
   }
 }

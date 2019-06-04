@@ -18,7 +18,7 @@ class WithdrawalResponseTest {
     }
 
     private String createJsonString() {
-        return "{\"accountNumber\":30001234,\"response\":\"Thank you for using Dojo Bank\",\"resultingBalance\":{\"value\":-910.0}}";
+        return "{\"accountNumber\":30001234,\"response\":\"Thank you for using Dojo Bank\",\"balance\":{\"value\":-910.0}}";
     }
 
 }

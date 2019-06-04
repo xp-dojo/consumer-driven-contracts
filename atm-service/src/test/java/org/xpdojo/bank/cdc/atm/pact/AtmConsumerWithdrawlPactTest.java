@@ -62,7 +62,7 @@ public class AtmConsumerWithdrawlPactTest {
         return new PactDslJsonBody()
                 .id("accountNumber", 30002468L)
                 .stringType("response")
-                .object("resultingBalance", expectAmountValue(-1000D))
+                .object("balance", expectAmountValue(900.0D))
                 .asBody();
     }
 
@@ -84,7 +84,7 @@ public class AtmConsumerWithdrawlPactTest {
 
         assertThat(postResponse.getBody().getAccountNumber()).isEqualTo(30002468L);
         assertThat(postResponse.getBody().getResponse()).isNotEmpty();
-        assertThat(postResponse.getBody().getBalance()).isEqualTo(new Amount(-1000.D));
+        assertThat(postResponse.getBody().getBalance()).isEqualTo(new Amount(900.0D));
     }
 
 }
