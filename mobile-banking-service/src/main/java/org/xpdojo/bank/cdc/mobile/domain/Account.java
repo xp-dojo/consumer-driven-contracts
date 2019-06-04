@@ -1,28 +1,25 @@
-package org.xpdojo.bank.cdc.account.domain;
+package org.xpdojo.bank.cdc.mobile.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-
-@JsonAutoDetect(fieldVisibility = ANY)
-public class BalanceResponse {
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Account {
     private final Long accountNumber;
     private final String description;
-    private final Money overdraftFacility;
-    private final Money balance;
+    private final Double overdraftFacility;
+    private final Double balance;
 
-    public BalanceResponse(@JsonProperty("accountNumber") final Long accountNumber,
-                           @JsonProperty("description") final String description,
-                           @JsonProperty("overdraftFacility") final Money overdraftFacility,
-                           @JsonProperty("balance") final Money balance) {
+    public Account(@JsonProperty("accountNumber") final Long accountNumber,
+                   @JsonProperty("description") final String description,
+                   @JsonProperty("overdraftFacility") final Money overdraftFacility,
+                   @JsonProperty("balance") final Money balance) {
         this.accountNumber = accountNumber;
         this.description = description;
-        this.overdraftFacility = overdraftFacility;
-        this.balance = balance;
+        this.overdraftFacility = overdraftFacility.getValue();
+        this.balance = balance.getValue();
     }
 
     public Long getAccountNumber() {
@@ -33,19 +30,19 @@ public class BalanceResponse {
         return description;
     }
 
-    public Money getBalance() {
-        return balance;
+    public Double getOverdraftFacility() {
+        return overdraftFacility;
     }
 
-    public Money getOverdraftFacility() {
-        return overdraftFacility;
+    public Double getBalance() {
+        return balance;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BalanceResponse that = (BalanceResponse) o;
+        Account that = (Account) o;
         return Objects.equals(accountNumber, that.accountNumber) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(overdraftFacility, that.overdraftFacility) &&
@@ -59,7 +56,7 @@ public class BalanceResponse {
 
     @Override
     public String toString() {
-        return "BalanceResponse{" +
+        return "Account{" +
                 "accountNumber=" + accountNumber +
                 ", description='" + description + '\'' +
                 ", overdraftFacility=" + overdraftFacility +

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.xpdojo.bank.cdc.account.domain.Account;
-import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
+import org.xpdojo.bank.cdc.account.domain.AccountSummary;
 import org.xpdojo.bank.cdc.account.domain.Transaction;
 import org.xpdojo.bank.cdc.account.domain.TransactionResponse;
 
@@ -93,12 +93,12 @@ class AccountServiceEndpointTest {
 
     @Test
     void getBalanceForAccount() {
-        BalanceResponse response = given()
+        AccountSummary response = given()
                 .header("Content-Type", "application/json")
                 .when().log().all()
                 .get("/accounts/30001234/balance")
                 .then().log().all()
-                .extract().body().as(BalanceResponse.class);
+                .extract().body().as(AccountSummary.class);
         assertThat(response.getAccountNumber()).isEqualTo(30001234L);
         assertThat(response.getBalance()).isEqualTo(anAmountOf(-900.0D));
     }

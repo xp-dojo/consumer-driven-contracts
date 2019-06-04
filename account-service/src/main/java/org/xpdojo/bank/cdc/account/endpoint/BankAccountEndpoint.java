@@ -6,14 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.xpdojo.bank.cdc.account.domain.Account;
-import org.xpdojo.bank.cdc.account.domain.BalanceResponse;
+import org.xpdojo.bank.cdc.account.domain.AccountSummary;
 import org.xpdojo.bank.cdc.account.domain.Transaction;
 import org.xpdojo.bank.cdc.account.domain.TransactionResponse;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
 @RequestMapping(produces = APPLICATION_JSON_VALUE)
@@ -24,8 +24,12 @@ public class BankAccountEndpoint {
 
     @ApiOperation(value = "Get all accounts", notes = "gets all accounts in the repository.  If we had the notion of a customer we would limit to all accounts for a customer.", response = Account.class, responseContainer = "Collection")
     @GetMapping("/accounts")
-    public Collection<Account> getAccounts() {
-        return repository.readAccounts();
+    public Collection<AccountSummary> getAccounts() {
+        return repository
+                .readAccounts()
+                .stream()
+                .map(acc -> new AccountSummary(acc.getAccountNumber(), acc.getAccountDescription(), acc.getOverdraftFacility(), acc.balance()))
+                .collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Create an account", notes = "create an account and respond back with that account", response = Account.class)
@@ -58,14 +62,14 @@ public class BankAccountEndpoint {
         return new TransactionResponse(accountId, account.balance(), "Thank you for using Dojo Bank");
     }
 
-    @ApiOperation(value = "Retrieves the balance of an account", notes = "retrieves the balance of an account from the repository without the transactions", response = BalanceResponse.class)
+    @ApiOperation(value = "Retrieves the balance of an account", notes = "retrieves the balance of an account from the repository without the transactions", response = AccountSummary.class)
     @GetMapping(value = "accounts/{accountId}/balance", produces = APPLICATION_JSON_VALUE)
-    public BalanceResponse getBalance(@PathVariable Long accountId) {
+    public AccountSummary getBalance(@PathVariable Long accountId) {
         Account account = repository.getById(accountId);
         if (account == null) {
             throw new IllegalStateException("No account exists with an account number of " + accountId);
         }
-        return new BalanceResponse(account.getAccountNumber(), account.getAccountDescription(), account.getOverdraftFacility(), account.balance());
+        return new AccountSummary(account.getAccountNumber(), account.getAccountDescription(), account.getOverdraftFacility(), account.balance());
     }
 
 }

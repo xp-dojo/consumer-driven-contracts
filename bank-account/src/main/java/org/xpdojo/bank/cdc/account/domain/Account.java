@@ -1,26 +1,25 @@
 package org.xpdojo.bank.cdc.account.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.bytebuddy.dynamic.loading.ClassInjector;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static java.util.Objects.hash;
 import static org.xpdojo.bank.cdc.account.domain.Money.anAmountOf;
 import static org.xpdojo.bank.cdc.account.domain.Transaction.*;
 
-@JsonAutoDetect(fieldVisibility = ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
 
+    @JsonProperty("accountNumber")
     private final Long accountNumber;
+    @JsonProperty("description")
     private String accountDescription = "";
+    @JsonProperty("overdraftFacility")
     private Money overdraftFacility = anAmountOf(0.0d);
     private final List<Transaction> transactions = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class Account {
         return new Account(accountNumber, amount);
     }
 
-    private Account(@JsonProperty("accountNumber") final Long accountNumber) {
+    private Account( final Long accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -72,11 +71,10 @@ public class Account {
         return transactions.stream().map(transaction -> transaction.balanceImpact()).reduce(Money::add).get();
     }
 
-    public void applyTransaction(final Transaction transaction){
-        if(transaction.direction() == Direction.DEBIT){
+    public void applyTransaction(final Transaction transaction) {
+        if (transaction.direction() == Direction.DEBIT) {
             withdraw(transaction.amount());
-        }
-        else{
+        } else {
             deposit(transaction.amount());
         }
     }

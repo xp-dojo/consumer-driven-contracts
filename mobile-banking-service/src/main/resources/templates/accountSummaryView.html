@@ -1,17 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ATM balance</title>
-    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/atm.css"/>
+    <title>Mobile Banking Service</title>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css"/>
 </head>
 <body>
 <div class="content">
-    <h1>ATM Viewer: <span th:text="${accountNumber}">accountNumber</span></h1>
+    <h1>Mobile Banking: account summary for <span th:text="${data.accountNumber}">id</span></h1>
 
     <div th:if="data ne null">
         <table>
             <tr><td>AccountNumber</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
-            <tr><td>Description</td><td><span th:text="${data.accountDescription}">name</span></td></tr>
+            <tr><td>Description</td><td><span th:text="${data.description}">name</span></td></tr>
             <tr><td>Overdraft</td><td><span th:text="${data.overdraftFacility}">location</span></td></tr>
             <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
         </table>
@@ -29,9 +28,10 @@
         </div>
     </div>
 
-    <div th:if="data eq null">
-        <p>We could not find any Account information for ID:<span th:text="${accountNumber}">accountNumber</span></p>
+    <div th:if="accounts eq null">
+        <p>We could not find any Account information at this time</span></p>
     </div>
+
 </div>
 </body>
 </html>
