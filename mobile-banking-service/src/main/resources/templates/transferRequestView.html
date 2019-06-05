@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mobile Banking Service</title>
+    <link rel="stylesheet" type="text/css" href="/css/mobile.css"/>
+</head>
+<body>
+
+<div>
+    <h1>&#x1f3e6; Transfers</h1>
+
+    <div class="content">
+        <div class="detail-line-without-hover">
+            <form id="transfer-form" class="transfer-form" action="#" th:action="@{/mobile/accounts/transfers}"
+                  th:object="${transferRequest}" method="post">
+                <div class="input-container">
+                    <div class="input-label">From Account</div>
+                    <select class="input-field" th:field="*{fromAccount}">
+                        <option th:value="0" text="Please Select"></option>
+                        <option th:each="acc: ${accounts}" th:value="${acc.accountNumber}" th:text="${acc.accountDisplay}"></option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">To Account</div>
+                    <select class="input-field" th:field="*{toAccount}">
+                        <option th:value="0" text="Please Select"></option>
+                        <option th:each="acc: ${accounts}" th:value="${acc.accountNumber}" th:text="${acc.accountDisplay}"></option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <div class="input-label">Amount (£)</div>
+                    <input autocomplete="off" class="input-field" id="amount-field" type="number" th:field="*{amount}">
+                </div>
+
+                <div class="input-container">
+                    <div class="input-label">Description</div>
+                    <textarea autocomplete="off" rows="3" class="input-field" id="description-field" text="Transfer from mobile device" type="text" th:field="*{description}"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <div class="button-container">
+        <button onclick="document.querySelector('#transfer-form').submit()">
+            <div class="symbol">&#x2713;</div>
+            <div class="text">Transfer</div>
+        </button>
+    </div>
+
+    <form class="button-container" method="get" action="/mobile/accounts">
+        <button type="submit">
+            <div class="symbol">&#x1F4B0</div>
+            <div class="text">Accounts</div>
+        </button>
+    </form>
+
+    <form class="button-container" method="get" action="/mobile/accounts">
+        <button type="submit">
+            <div class="symbol">&#8630;</div>
+            <div class="text">Return</div>
+        </button>
+    </form>
+</footer>
+
+</body>
+</html>

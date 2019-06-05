@@ -5,10 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.xpdojo.bank.cdc.account.domain.Account;
-import org.xpdojo.bank.cdc.account.domain.AccountSummary;
-import org.xpdojo.bank.cdc.account.domain.Transaction;
-import org.xpdojo.bank.cdc.account.domain.TransactionResponse;
+import org.xpdojo.bank.cdc.account.domain.*;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -47,13 +44,13 @@ public class BankAccountEndpoint {
     }
 
     @ApiOperation(value = "Retrieve transactions for an account", notes = "retrieves all transactions for a given account", response = Transaction.class, responseContainer = "Collection")
-    @GetMapping(value = "accounts/{accountId}/transactions", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/accounts/{accountId}/transactions", produces = APPLICATION_JSON_VALUE)
     public Collection<Transaction> getTransactions(@PathVariable Long accountId) {
         return repository.getById(accountId).getTransactions();
     }
 
     @ApiOperation(value = "Create transaction on an account", notes = "Creates a single transcation on an account", response = TransactionResponse.class)
-    @PostMapping(value = "accounts/{accountId}/transactions", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/accounts/{accountId}/transactions", consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public TransactionResponse addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
         Account account = repository.getById(accountId);
@@ -63,13 +60,25 @@ public class BankAccountEndpoint {
     }
 
     @ApiOperation(value = "Retrieves the balance of an account", notes = "retrieves the balance of an account from the repository without the transactions", response = AccountSummary.class)
-    @GetMapping(value = "accounts/{accountId}/balance", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/accounts/{accountId}/balance", produces = APPLICATION_JSON_VALUE)
     public AccountSummary getBalance(@PathVariable Long accountId) {
         Account account = repository.getById(accountId);
         if (account == null) {
             throw new IllegalStateException("No account exists with an account number of " + accountId);
         }
         return new AccountSummary(account.getAccountNumber(), account.getAccountDescription(), account.getOverdraftFacility(), account.balance());
+    }
+
+    @ApiOperation(value = "creates a transfer between two accounts")
+    @PostMapping(value = "/accounts/transfers", consumes = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public TransferResponse processTransfer(@RequestBody TransferRequest request) {
+        Account fromAccount = repository.getById(request.getFromAccount());
+        Account toAccount = repository.getById(request.getToAccount());
+        fromAccount.transferTo(toAccount, request.getAmount());
+        repository.update(fromAccount);
+        repository.update(toAccount);
+        return new TransferResponse(request.getAmount().value() + " transferred from " + fromAccount.getAccountNumber() + " to " + toAccount.getAccountNumber() + ", thank you for using Dojo Bank");
     }
 
 }

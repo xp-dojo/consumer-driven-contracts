@@ -4,32 +4,41 @@
     <link rel="stylesheet" type="text/css" href="/css/mobile.css"/>
 </head>
 <body>
-<div class="content">
-    <h1>Mobile Banking: account summary for <span th:text="${data.accountNumber}">id</span></h1>
+<div>
+    <h1>&#x1f3e6; Account Summary</h1>
 
-    <div th:if="data ne null">
-        <table>
-            <tr><td>AccountNumber</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
-            <tr><td>Description</td><td><span th:text="${data.description}">name</span></td></tr>
-            <tr><td>Overdraft</td><td><span th:text="${data.overdraftFacility}">location</span></td></tr>
-            <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
-        </table>
+    <div class="content" th:if="data ne null">
 
-        <div class="row stick-to-top-buttons">
-            <form class="column" method="get" action="/mobile/accounts/30001234/transfer">
-                <button class="button" type="submit"></button>
-                <span class="label">Transfer between accounts</span>
-            </form>
-
-            <form class="column" method="get" action="/menu.html">
-                <button class="button" type="submit"></button>
-                <span class="label">Return</span>
-            </form>
+        <div class="detail-line">
+            <table class="table-account-summary">
+                <tr class="pb-1"><td>Account No</td><td><span th:text="${data.accountNumber}">id</span></td></tr>
+                <tr class="pb-1"><td>Description</td><td><span th:text="${data.description}">name</span></td></tr>
+                <tr class="pb-1"><td>Overdraft</td><td><span th:text="${data.overdraftFacility}">location</span></td></tr>
+                <tr><td>Balance</td><td><span th:text="${data.balance}">location</span></td></tr>
+            </table>
         </div>
+
+        <footer>
+            <form class="button-container" method="get" action="/mobile/accounts/transfers">
+                <button type="submit">
+                    <div class="symbol">&#8646;</div>
+                    <div class="text">Transfers</div>
+                </button>
+            </form>
+
+            <form class="button-container" method="get" action="/mobile/accounts">
+                <button type="submit">
+                    <div class="symbol">&#8630;</div>
+                    <div class="text">Return</div>
+                </button>
+            </form>
+        </footer>
     </div>
 
     <div th:if="accounts eq null">
-        <p>We could not find any Account information at this time</span></p>
+        <div class="detail-line">
+            <p>We could not find any Account information at this time</span></p>
+        </div>
     </div>
 
 </div>

@@ -38,6 +38,10 @@ public class Money implements Comparable<Money> {
         return anAmountOf(value * -1);
     }
 
+    public double value(){
+        return value;
+    }
+
     @Override
     public int compareTo(Money otherAmount) {
         return valueOf(value).compareTo(valueOf(otherAmount.value));

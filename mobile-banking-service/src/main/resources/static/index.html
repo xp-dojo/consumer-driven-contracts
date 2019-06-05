@@ -3,31 +3,46 @@
 <head>
     <title>Mobile Banking Service</title>
     <link rel="stylesheet" type="text/css" href="/css/mobile.css"/>
+    <script type="application/javascript" src="/js/mob_functions.js"></script>
 </head>
 <body>
 <div class="content">
 
-    <h1>Mobile Banking Service</h1>
+    <h1>&#x1f3e6; Mobile Banking Service</h1>
 
-    <div class="input-container">
-        <span>Please enter your PIN: </span>
-        <input autocomplete="off"    class="input-field" id="pin-field" type="number">
-    </div>
+    <input autocomplete="off" readonly class="input-field centered" id="pin-field" type="number">
 
-    <div class="row stick-to-top-buttons">
-        <form class="column" method="get" action="/mobile/accounts">
-            <button class="button" type="submit"></button>
-            <span class="label">Login</span>
-        </form>
-
-        <div class="column"></div>
-
-        <div class="column">
-            <button class="button" onclick="document.querySelector('#pin-field').value= '';"></button>
-            <span class="label">Clear</span>
+    <div class="num-pad">
+        <div class="row">
+            <button onclick="addNumberToPass(1)">1</button>
+            <button onclick="addNumberToPass(2)">2</button>
+            <button onclick="addNumberToPass(3)">3</button>
+        </div>
+        <div class="row">
+            <button onclick="addNumberToPass(4)">4</button>
+            <button onclick="addNumberToPass(5)">5</button>
+            <button onclick="addNumberToPass(6)">6</button>
+        </div>
+        <div class="row">
+            <button onclick="addNumberToPass(7)">7</button>
+            <button onclick="addNumberToPass(8)">8</button>
+            <button onclick="addNumberToPass(9)">9</button>
+        </div>
+        <div class="row">
+            <div class="num-pad-filler"></div>
+            <button onclick="addNumberToPass(0)">0</button>
+            <div class="num-pad-filler"></div>
         </div>
     </div>
 
+    <footer>
+        <div class="button-container">
+            <button type="submit" onclick="document.querySelector('#pin-field').value= '';">
+                <div class="symbol">&#x232b;</div>
+                <div class="text">Clear</div>
+            </button>
+        </div>
+    </footer>
 </div>
 </body>
 </html>
