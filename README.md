@@ -58,7 +58,7 @@ We will be continuing the Bank Account theme and have provided **three applicati
  * The **ATM application** is installed on ATM branches and allows users to physically withdraw money and perform basic banking tasks
  
  
-The project is split up as follows.
+The project is split up into the following folders.
 
 | Folder                   | Description              |
 |--------------------------|--------------------------|
@@ -69,7 +69,7 @@ The project is split up as follows.
 | `discovery-service`      | Discovery services       |
 
 
-The interactions between the components are shown below.
+The components and their interactions are shown below.
 
 ![](architecture.png)
 
