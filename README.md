@@ -46,7 +46,7 @@ As we use Gradle, performing the steps below before the session will save time d
 
 All API's are contractual; they define how to make calls and what to expect in return. Formalising these contracts into some kind of external specification allows us to test consumers and producers of these APIs. There are lots of techniques we can use to do this, the previous session on [ATDD](https://github.com/xp-dojo/atdd-bank-account) is one example.
 
-Consumer driven contracts or _contract testing_ is another technique where by auto-generated "contracts" are executed against consumers and producers to ensure neither deviate.
+Consumer driven contracts or _contract testing_ is another technique whereby auto-generated "contracts" are executed against consumers and producers to ensure neither deviate.
 
 
 ## Architecture Overview
