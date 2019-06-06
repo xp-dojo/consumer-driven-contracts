@@ -63,7 +63,7 @@ public class MobileConsumerAccountSummaryPactTest {
 
     @Test
     void checkWeCanProcessTheAccountData(MockServer server) throws IOException {
-        ResponseEntity<String> response = retrieveAccountData(server);
+        ResponseEntity<String> response = makeHttpRequest("/accounts/30002468/balance", server);
 
         assertThat(response.getStatusCode().value()).isEqualTo(200);
         assertThat(response.getHeaders().get("Content-Type")).contains("application/json");
@@ -78,8 +78,8 @@ public class MobileConsumerAccountSummaryPactTest {
         assertThat(account.getBalance()).isNotZero();
     }
 
-    private ResponseEntity<String> retrieveAccountData(MockServer server) {
-        return new RestTemplate().getForEntity(server.getUrl() + "/accounts/30002468/balance", String.class);
+    private ResponseEntity<String> makeHttpRequest(String endpoint, MockServer server) {
+        return new RestTemplate().getForEntity(server.getUrl() + endpoint, String.class);
     }
 
 }
