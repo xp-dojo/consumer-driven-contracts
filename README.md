@@ -41,15 +41,39 @@ As we use Gradle, performing the steps below before the session will save time d
 
 [What are they supposed to be doing?]
 
-## Architecture Overview
-
-![](architecture.png)
 
 ## Consumer Driven Contracts
 
-The API's services use to call each other contractual. If your application is expecting a certain response when it makes a HTTP `GET`, any change to the server providing that 
+All API's are contractual; they define how to make calls and what to expect in return. Formalising these contracts into some kind of external specification allows us to test consumers and producers of these APIs. There are lots of techniques we can use to do this, the previous session on [ATDD](https://github.com/xp-dojo/atdd-bank-account) is one example.
 
-Defining a "contract" between services
+Consumer driven contracts or _contract testing_ is another technique where by auto-generated "contracts" are executed against consumers and producers to ensure neither deviate.
+
+
+## Architecture Overview
+
+We will be continuing the Bank Account theme and have provided **three applications** and one **library jar**. 
+
+ * The **central banking** platform uses the **bank account library** to manage a single user's accounts
+ * The **Mobile application** allows user's to interact with thier accounts from their mobile device
+ * The **ATM application** is installed on ATM branches and allows users to physically withdraw money and perform basic banking tasks
+ 
+ 
+The project is split up as follows.
+
+| Location               | Description              |
+|------------------------|--------------------------|
+| banking-service        | Central banking platform |
+| atm-service            | ATM application          |
+| mobile-banking-service | Mobile application       |
+| bank-account           | Banking library          |
+| discovery-service      | Discovery services       |
+
+
+The interactions between the components is shown below.
+
+![](architecture.png)
+
+
 
 
 # Additional Reading
