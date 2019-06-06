@@ -53,23 +53,23 @@ Consumer driven contracts or _contract testing_ is another technique where by au
 
 We will be continuing the Bank Account theme and have provided **three applications** and one **library jar**. 
 
- * The **central banking** platform uses the **bank account library** to manage a single user's accounts
+ * The **central banking platform** uses the **bank account library** to manage a single user's accounts
  * The **Mobile application** allows user's to interact with thier accounts from their mobile device
  * The **ATM application** is installed on ATM branches and allows users to physically withdraw money and perform basic banking tasks
  
  
 The project is split up as follows.
 
-| Location               | Description              |
-|------------------------|--------------------------|
-| banking-service        | Central banking platform |
-| atm-service            | ATM application          |
-| mobile-banking-service | Mobile application       |
-| bank-account           | Banking library          |
-| discovery-service      | Discovery services       |
+| Folder                   | Description              |
+|--------------------------|--------------------------|
+| `banking-service`        | Central banking platform |
+| `atm-service`            | ATM application          |
+| `mobile-banking-service` | Mobile application       |
+| `bank-account`           | Banking library          |
+| `discovery-service`      | Discovery services       |
 
 
-The interactions between the components is shown below.
+The interactions between the components are shown below.
 
 ![](architecture.png)
 
