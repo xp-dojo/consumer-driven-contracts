@@ -18,20 +18,25 @@ public class AccountRepository {
 
     {
         Account account = anAccountWith(30001234L, anAmountOf(100.0d));
-        account.setAccountDescription("My private account for dangerous gambling");
+        account.setDescription("My private account for dangerous gambling");
         account.setOverdraftFacility(anAmountOf(5000D));
         account.withdraw(anAmountOf(1000.0d));
         accounts.put(account.getAccountNumber(), account);
 
         Account otherAccount = anEmptyAccount(30005678L);
-        otherAccount.setAccountDescription("My steady savings account");
+        otherAccount.setDescription("My steady savings account");
         otherAccount.deposit(anAmountOf(120.0d));
         accounts.put(otherAccount.getAccountNumber(), otherAccount);
 
         Account pactAccount = anAccountWith(30002468L, anAmountOf(1000.0D));
-        pactAccount.setAccountDescription("Account used for pact testing");
+        pactAccount.setDescription("Account used for pact testing");
         pactAccount.setOverdraftFacility(anAmountOf(5000.0D));
         accounts.put(pactAccount.getAccountNumber(), pactAccount);
+
+        Account transferTestFromAccount = anAccountWith(30009876L, anAmountOf(100.0D));
+        accounts.put(transferTestFromAccount.getAccountNumber(), transferTestFromAccount);
+        Account transferTestToAccount = anAccountWith(30005432L, anAmountOf(100.0D));
+        accounts.put(transferTestToAccount.getAccountNumber(), transferTestToAccount);
     }
 
     public Account create() {

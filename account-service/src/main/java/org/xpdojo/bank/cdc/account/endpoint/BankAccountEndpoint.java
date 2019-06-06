@@ -25,22 +25,8 @@ public class BankAccountEndpoint {
         return repository
                 .readAccounts()
                 .stream()
-                .map(acc -> new AccountSummary(acc.getAccountNumber(), acc.getAccountDescription(), acc.getOverdraftFacility(), acc.balance()))
+                .map(acc -> new AccountSummary(acc.getAccountNumber(), acc.getDescription(), acc.getOverdraftFacility(), acc.balance()))
                 .collect(Collectors.toList());
-    }
-
-    @ApiOperation(value = "Create an account", notes = "create an account and respond back with that account", response = Account.class)
-    @PostMapping("/accounts")
-    public Account newAccount() {
-        return repository.create();
-    }
-
-    @ApiOperation(value = "Retrieve a single account",
-            notes = "retrieves a single account by its ID",
-            response = Account.class)
-    @GetMapping(value = "accounts/{accountId}", produces = APPLICATION_JSON_VALUE)
-    public Account getAccount(@PathVariable Long accountId) {
-        return repository.getById(accountId);
     }
 
     @ApiOperation(value = "Retrieve transactions for an account", notes = "retrieves all transactions for a given account", response = Transaction.class, responseContainer = "Collection")
@@ -66,7 +52,7 @@ public class BankAccountEndpoint {
         if (account == null) {
             throw new IllegalStateException("No account exists with an account number of " + accountId);
         }
-        return new AccountSummary(account.getAccountNumber(), account.getAccountDescription(), account.getOverdraftFacility(), account.balance());
+        return new AccountSummary(account.getAccountNumber(), account.getDescription(), account.getOverdraftFacility(), account.balance());
     }
 
     @ApiOperation(value = "creates a transfer between two accounts")

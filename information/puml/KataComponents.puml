@@ -1,0 +1,30 @@
+@startuml
+
+package "Accounts Services - producer" as ass{
+    (Discovery Service) as disc
+    [Account Repository] as rep
+    [Bank Account Service] as acc
+    rep <.. acc
+    acc .> disc : register
+}
+
+package "Mobile - consumer"{
+    [Mobile Banking Service] as mob
+    mob .> disc : register
+    acc <-- mob : ReST
+    Mobile_UI -> mob: ReST
+}
+
+package "ATM - consumer"{
+    [ATM Service] as atm
+    atm .> disc : register
+    acc <-- atm: ReST
+    atm <- ATM_UI: ReST
+}
+
+note right of disc
+    Service location
+    and load balancing
+endnote
+
+@enduml

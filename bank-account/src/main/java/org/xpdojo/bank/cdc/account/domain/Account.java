@@ -18,7 +18,7 @@ public class Account {
     @JsonProperty("accountNumber")
     private final Long accountNumber;
     @JsonProperty("description")
-    private String accountDescription = "";
+    private String description = "";
     @JsonProperty("overdraftFacility")
     private Money overdraftFacility = anAmountOf(0.0d);
     private final List<Transaction> transactions = new ArrayList<>();
@@ -40,12 +40,12 @@ public class Account {
         transactions.add(anOpeningBalanceOf(anAmount, LocalDateTime.now()));
     }
 
-    public String getAccountDescription() {
-        return accountDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAccountDescription(String accountDescription) {
-        this.accountDescription = accountDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Money getOverdraftFacility() {
