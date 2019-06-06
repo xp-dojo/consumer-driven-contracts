@@ -39,7 +39,17 @@ As we use Gradle, performing the steps below before the session will save time d
 
 # Instructions
 
-[What are they supposed to be doing?]
+> **@Pete** can you sense check this and make sure i've got the right idea. We'll have some time to adjust but should if anything is way off!
+
+1. We want to include an account's description along with the account summary information in mobile app.
+
+   There is a `description` attribute in `Account` and `AccountSummary` but it's not returned by the `account-service` (producer). We'd like to add it.
+   
+   Add a description to the mobile app's _contract_ and modify the tests to fail when run. This should demonstrate that the API does not yet send back the `description field`.
+   
+1. Fix the failing test from the previous step. 
+
+1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`. 
 
 
 ## Consumer Driven Contracts
