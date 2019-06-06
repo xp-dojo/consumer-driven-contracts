@@ -3,10 +3,11 @@
 In this workshop you'll be using [contract testing](http://pact.io) to explore:
 
  * how to ensure the APIs you depend don't accidentally break your applications
- * how to safe guard against accidentally breaking your APIs that other teams depend on
+ * how to safe guard against accidentally breaking other peoples applications that rely on your APIs
+ * how contract testing and other techniques can work together to give you confidence when working with external APIs
 
+Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs)
 
-[set the scene]
 
 # Prerequisites
 
@@ -42,8 +43,7 @@ As we use Gradle, performing the steps below before the session will save time d
 
 ## Architecture Overview
 
-[It's complicated enough that we'd need an overview IMO. I'm thinking an ASCII arch diagram]
-
+![](architecture.png)
 
 ## Consumer Driven Contracts
 
@@ -54,4 +54,4 @@ Defining a "contract" between services
 
 # Additional Reading
 
-[what else should I read?]
+[Roy Fielding's orginal discussion of RESTful architecture](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)  
