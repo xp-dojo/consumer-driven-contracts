@@ -71,11 +71,11 @@ public class MobileConsumerAccountSummaryPactTest {
 
         LOG.info(response.getBody());
 
-        Account accountData = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), Account.class);
-        assertThat(accountData.getAccountNumber()).isNotZero();
-        assertThat(accountData.getDescription()).isNotEmpty();
-        assertThat(accountData.getOverdraftFacility()).isNotZero();
-        assertThat(accountData.getBalance()).isNotZero();
+        Account account = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), Account.class);
+        assertThat(account.getAccountNumber()).isNotZero();
+        assertThat(account.getDescription()).isNotEmpty();
+        assertThat(account.getOverdraftFacility()).isNotZero();
+        assertThat(account.getBalance()).isNotZero();
     }
 
     private ResponseEntity<String> retrieveAccountData(MockServer mockProvider) {
