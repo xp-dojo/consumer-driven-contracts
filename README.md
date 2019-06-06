@@ -5,6 +5,7 @@ In this workshop you'll be using [contract testing](http://pact.io) to explore:
  * how to ensure the APIs you depend on don't change and accidentally break your applications.
  * how to safeguard against accidentally breaking other peoples applications that rely on your APIs
  * how contract testing and other techniques can work together to give you confidence when working with external APIs
+ * when contract testing can;t be employed or alternatives over other advantages
 
 Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs).
 
@@ -43,7 +44,7 @@ As we use Gradle, performing the steps below before the session will save time d
 
 ## Start with the Consumer
 
-Ensure the APIs you depend on don't change and accidentally break your applications.
+Ensuring the APIs you depend on don't change and accidentally break your applications.
 
 1. We want to include an account's description along with the account summary information in mobile app.
 
@@ -56,11 +57,26 @@ Ensure the APIs you depend on don't change and accidentally break your applicati
    Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
  
    > This is simulating the server sending back an additional JSON field. Have a think how you could test if it actually is already.
+ 
+1. Try preventing the server from sending the `description` field back in JSON. Does anything break for the mobile app?
+
+   Remove or comment out the `account-service` code that returns the description. What happens?
 
 1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`. 
 
 
 ## Build out the Producer
+
+Safeguarding against accidentally breaking other peoples applications that rely on your APIs.
+
+1. Having collected the contracts (as Pact JSON files) that are generated when running the tests (look in the `target` folder), ensure the `account-service` is using them in a test.
+
+   Run the `account-service` contract tests.
+   
+1. Modify the `account-service` somehow so that the format, URLs or verbs have altered and re-run the tests.
+
+   You should see a failure indicating that _known_ clients are relying on a _contract_ you no longer respect.
+
 
 
 # Background
