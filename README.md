@@ -2,11 +2,11 @@
 
 In this workshop you'll be using [contract testing](http://pact.io) to explore:
 
- * how to ensure the APIs you depend don't accidentally break your applications
- * how to safe guard against accidentally breaking other peoples applications that rely on your APIs
+ * how to ensure the APIs you depend on don't change and accidentally break your applications.
+ * how to safeguard against accidentally breaking other peoples applications that rely on your APIs
  * how contract testing and other techniques can work together to give you confidence when working with external APIs
 
-Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs)
+Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs).
 
 
 # Prerequisites
@@ -41,16 +41,29 @@ As we use Gradle, performing the steps below before the session will save time d
 
 > **@Pete** can you sense check this and make sure i've got the right idea. We'll have some time to adjust but should if anything is way off!
 
+## Start with the Consumer
+
+Ensure the APIs you depend on don't change and accidentally break your applications.
+
 1. We want to include an account's description along with the account summary information in mobile app.
 
-   There is a `description` attribute in `Account` and `AccountSummary` but it's not returned by the `account-service` (producer). We'd like to add it.
+   There is a `description` attribute in `Account` and `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application's contract when it gets account information.
    
-   Add a description to the mobile app's _contract_ and modify the tests to fail when run. This should demonstrate that the API does not yet send back the `description field`.
-   
-1. Fix the failing test from the previous step. 
+   Add an **assertion** in the mobile app's _contract_ to verify the description field is valid. Run the test. **Hint:** look in `MobileConsumerAccountSummaryPactTest.java`. Ensure you have as assertion along the lines of `assertThat(account.getDescription()).isNotEmpty()`.
+      
+1. You should see the test fail until you simulate the server sending back the description.
+
+   Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
+ 
+   > This is simulating the server sending back an additional JSON field. Have a think how you could test if it actually is already.
 
 1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`. 
 
+
+## Build out the Producer
+
+
+# Background
 
 ## Consumer Driven Contracts
 
@@ -88,4 +101,5 @@ The components and their interactions are shown below.
 
 # Additional Reading
 
-[Roy Fielding's orginal discussion of RESTful architecture](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)  
+[Pack.io](https://docs.pact.io/) has lots of interesting background and useful information  
+[Roy Fielding's orginal discussion of the RESTful architecture](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)  
