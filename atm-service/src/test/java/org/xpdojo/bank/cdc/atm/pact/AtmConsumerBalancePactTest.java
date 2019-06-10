@@ -69,7 +69,7 @@ public class AtmConsumerBalancePactTest {
 
         AccountData accountData = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), AccountData.class);
         assertThat(accountData.getAccountNumber()).isEqualTo(30002468L);
-        assertThat(accountData.getAccountDescription()).isNotEmpty();
+        assertThat(accountData.getDescription()).isNotEmpty();
         assertThat(accountData.getOverdraftFacility()).isEqualTo(23.0D);
         assertThat(accountData.getBalance()).isEqualTo(1000.0D);
     }

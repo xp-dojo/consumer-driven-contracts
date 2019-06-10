@@ -41,13 +41,38 @@ As we use Gradle, performing the steps below before the session will save time d
 
 # Instructions
 
-> **@Pete** can you sense check this and make sure i've got the right idea. We'll have some time to adjust but should if anything is way off!
+This session is broken down into three core parts:
+1. Getting to know the system
+1. Using a contract test to define consumption of an existing attribute
+1. Driving the addition of a new attribute from the data provider using a contract test
 
-## Start with the Consumer
+## Getting to know the system
 
-Ensuring the APIs you depend on don't change and accidentally break your applications.
+The project is split up into the following folders.
 
-1. We want to include an account's description along with the account summary information in mobile app.
+| Folder                   | Description              |
+|--------------------------|--------------------------|
+| `account-service`        | Central banking platform |
+| `atm-service`            | ATM application          |
+| `mobile-banking-service` | Mobile application       |
+| `bank-account`           | Banking library          |
+| `discovery-service`      | Discovery services       |
+
+The components and their interactions are shown below.
+
+![](architecture.png)
+
+In this part of the session, we would like you to start all of the services, starting with the discovery-service, then the account-service then the atm and mobile services.  Have a play with them withdrawing money from the ATM and transfering monies in the mobile application.  If you have any problems ask one of us in the room to help you.
+> Top tip: to start a service find the service main class in src/main/java and right click to find the runner.
+
+Now have a look at the account-service swagger API as it will tell you a lot about what you can do in that service.  The swagger UI can be found here: http://localhost:8901/swagger-ui.html#/bank-account-endpoint.  Use the Swagger UI to `GET` all the accounts.
+
+You now have a good idea about what the application architecture does, we can now change it a little.
+
+
+## Using a contract test to define consumption of an existing attribute
+
+1. We want to include an account's description along with the account summary information in mobile app.  Currently the Mobile app does not use this data attribute.
 
    There is a `description` attribute in `Account` and `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application's contract and use the value when getting account information.
    
@@ -63,7 +88,11 @@ Ensuring the APIs you depend on don't change and accidentally break your applica
 
    Remove or comment out the `account-service` code that returns the description. What happens?
 
-1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`. 
+1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
+
+1. You have now re-defined what you expect from the producer.  Run the pact test and see the contract in the build/pact 
+directory.  
+> Now we need to ensure the producer aligns to our contract ...   
 
 
 ## Build out the Producer
@@ -98,20 +127,7 @@ We will be continuing the Bank Account theme and have provided **three applicati
  * The **ATM application** is installed on ATM branches and allows users to physically withdraw money and perform basic banking tasks
  
  
-The project is split up into the following folders.
 
-| Folder                   | Description              |
-|--------------------------|--------------------------|
-| `banking-service`        | Central banking platform |
-| `atm-service`            | ATM application          |
-| `mobile-banking-service` | Mobile application       |
-| `bank-account`           | Banking library          |
-| `discovery-service`      | Discovery services       |
-
-
-The components and their interactions are shown below.
-
-![](architecture.png)
 
 
 
