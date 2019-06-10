@@ -112,9 +112,16 @@ __A great place for a commit!!__
 For this part of the session we are going to drive an end to end change into the services.  We will __drive__ the addition of a description to transactions.  You can see the current set of transactions if you view the transactions for account number 30001234 [here](http://localhost:8901/accounts/30001234/transactions).
 
 
-Now you are experienced with :
-1. In the ATM service find the pact contract to `POST` a withdrawl to the account-service in `AtmConsumerWithdrawlPactTest`.  You sho
+Now you are experienced with contract testing we would like you to:
+1. Update the ATM contract (see `AtmConsumerWithdrawlPactTest`) so it expects to see the additional description attribute in the `WithdrawlRequest` domain object.  You should update the domain object too.  Remember in this instance it's the `POST` body that we are defining. Generate the new ATM pact contract.
+> you may wish to hardcode a description rather than reconstructing the ATM machine
+1. Replace the ATM pact contract in the `account-service` and make the pact provider test pass by implementing the additional attribute.
+1. Now lets do the same thing for the Mobile service.
+Use the same URL above to see the additional attrribute in the accounts repository.
 
+## Part 4: Something to take away
+
+You will notice in that the mobile-service 
 
 ----
 # Background

@@ -18,7 +18,6 @@
           "amount": {
             "value": 100
           },
-          "description": "string",
           "accountNumber": 30002468,
           "direction": "DEBIT"
         },
@@ -39,22 +38,6 @@
                 }
               ],
               "combine": "AND"
-            },
-            "$.description": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            }
-          }
-        },
-        "generators": {
-          "body": {
-            "$.description": {
-              "type": "RandomString",
-              "size": 20
             }
           }
         }

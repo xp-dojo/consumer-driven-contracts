@@ -11,16 +11,13 @@ public class TransferRequest {
     private Long fromAccount;
     private Long toAccount;
     private Money amount;
-    private String description;
 
     public TransferRequest(@JsonProperty("fromAccount") Long fromAccount,
                            @JsonProperty("toAccount") Long toAccount,
-                           @JsonProperty("amount") Money amount,
-                           @JsonProperty("description") String description) {
+                           @JsonProperty("amount") Money amount) {
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.amount = amount;
-        this.description = description;
     }
 
     public Long getFromAccount() {
@@ -35,10 +32,6 @@ public class TransferRequest {
         return amount;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,13 +39,12 @@ public class TransferRequest {
         TransferRequest that = (TransferRequest) o;
         return Objects.equals(fromAccount, that.fromAccount) &&
                 Objects.equals(toAccount, that.toAccount) &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(description, that.description);
+                Objects.equals(amount, that.amount) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fromAccount, toAccount, amount, description);
+        return Objects.hash(fromAccount, toAccount, amount);
     }
 
     @Override
@@ -61,7 +53,6 @@ public class TransferRequest {
                 "fromAccount=" + fromAccount +
                 ", toAccount=" + toAccount +
                 ", amount=" + amount +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

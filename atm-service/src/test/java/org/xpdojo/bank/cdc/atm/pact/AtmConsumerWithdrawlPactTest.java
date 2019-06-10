@@ -54,7 +54,6 @@ public class AtmConsumerWithdrawlPactTest {
                 .id("accountNumber", 30002468L)
                 .object("amount", expectAmountValue(100.0D))
                 .stringValue("direction", "DEBIT")
-                .stringType("description")
                 .asBody();
     }
 
