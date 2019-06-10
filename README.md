@@ -109,6 +109,11 @@ __A great place for a commit!!__
 
 ## Part 3: Driving the addition of a new attribute from the data provider using a contract test
 
+For this part of the session we are going to drive an end to end change into the services.  We will __drive__ the addition of a description to transactions.  You can see the current set of transactions if you view the transactions for account number 30001234 [here](http://localhost:8901/accounts/30001234/transactions).
+
+
+Now you are experienced with :
+1. In the ATM service find the pact contract to `POST` a withdrawl to the account-service in `AtmConsumerWithdrawlPactTest`.  You sho
 
 
 ----
