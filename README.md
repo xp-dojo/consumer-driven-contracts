@@ -82,7 +82,7 @@ You now have a good idea about what the application architecture does, we can no
 
    Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
  
-   > This is simulating the server sending back an additional JSON field. Have a think how you could test if it actually is already.
+   > This is simulating the server sending back an additional JSON field. Have a think how you could test, if it is returning it already.
  
 1. Try preventing the server from sending the `description` field back in JSON. Does anything break for the mobile app?
 
