@@ -119,9 +119,10 @@ Now you are experienced with contract testing we would like you to:
 1. Now lets do the same thing for the Mobile service.
 Use the same URL above to see the additional attrribute in the accounts repository.
 
+
 ## Part 4: Something to take away
 
-You will notice in that the mobile-service 
+You will notice in the mobile-service that you can view an account summary ... it would be nice to see the transactions, don't you think?
 
 ----
 # Background
