@@ -1,0 +1,85 @@
+{
+  "provider": {
+    "name": "account_provider"
+  },
+  "consumer": {
+    "name": "mobile_consumer"
+  },
+  "interactions": [
+    {
+      "description": "Request for all accounts",
+      "request": {
+        "method": "GET",
+        "path": "/accounts/30002468/balance"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "balance": {
+            "value": 100
+          },
+          "overdraftFacility": {
+            "value": 100
+          },
+          "accountNumber": 1234567890
+        },
+        "matchingRules": {
+          "body": {
+            "$.accountNumber": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.overdraftFacility.value": {
+              "matchers": [
+                {
+                  "match": "decimal"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.balance.value": {
+              "matchers": [
+                {
+                  "match": "decimal"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.accountNumber": {
+              "type": "RandomInt",
+              "min": 0,
+              "max": 2147483647
+            },
+            "$.overdraftFacility.value": {
+              "type": "RandomDecimal",
+              "digits": 10
+            },
+            "$.balance.value": {
+              "type": "RandomDecimal",
+              "digits": 10
+            }
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.7"
+    }
+  }
+}

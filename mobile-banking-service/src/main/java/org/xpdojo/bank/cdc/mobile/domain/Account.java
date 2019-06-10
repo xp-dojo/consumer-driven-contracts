@@ -8,26 +8,19 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
     private final Long accountNumber;
-    private final String description;
     private final Double overdraftFacility;
     private final Double balance;
 
     public Account(@JsonProperty("accountNumber") final Long accountNumber,
-                   @JsonProperty("description") final String description,
                    @JsonProperty("overdraftFacility") final Money overdraftFacility,
                    @JsonProperty("balance") final Money balance) {
         this.accountNumber = accountNumber;
-        this.description = description;
         this.overdraftFacility = overdraftFacility.getValue();
         this.balance = balance.getValue();
     }
 
     public Long getAccountNumber() {
         return accountNumber;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public Double getOverdraftFacility() {
@@ -39,7 +32,7 @@ public class Account {
     }
 
     public String getAccountDisplay() {
-        return accountNumber + " - " + description;
+        return accountNumber + " - ";
     }
 
     @Override
@@ -48,21 +41,19 @@ public class Account {
         if (o == null || getClass() != o.getClass()) return false;
         Account that = (Account) o;
         return Objects.equals(accountNumber, that.accountNumber) &&
-                Objects.equals(description, that.description) &&
                 Objects.equals(overdraftFacility, that.overdraftFacility) &&
                 Objects.equals(balance, that.balance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, description, overdraftFacility, balance);
+        return Objects.hash(accountNumber, overdraftFacility, balance);
     }
 
     @Override
     public String toString() {
         return "Account{" +
                 "accountNumber=" + accountNumber +
-                ", description='" + description + '\'' +
                 ", overdraftFacility=" + overdraftFacility +
                 ", balance=" + balance +
                 '}';
