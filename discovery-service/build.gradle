@@ -1,7 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    archiveBaseName = 'discovery-service'
+    baseName = 'discovery-service'
     version = '0.0.1'
 }
 

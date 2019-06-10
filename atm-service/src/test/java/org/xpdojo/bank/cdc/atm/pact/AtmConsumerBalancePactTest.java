@@ -60,8 +60,8 @@ public class AtmConsumerBalancePactTest {
     }
 
     @Test
-    void checkWeCanProcessTheAccountData(MockServer mockProvider) throws IOException {
-        ResponseEntity<String> response = retrieveAccountData(mockProvider);
+    void checkWeCanProcessTheAccountData(MockServer server) throws IOException {
+        ResponseEntity<String> response = makeHttpRequestTo("/accounts/30002468/balance", server);
 
         assertThat(response.getStatusCode().value()).isEqualTo(200);
         assertThat(response.getHeaders().get("Content-Type")).contains("application/json");
@@ -74,8 +74,8 @@ public class AtmConsumerBalancePactTest {
         assertThat(accountData.getBalance()).isEqualTo(1000.0D);
     }
 
-    private ResponseEntity<String> retrieveAccountData(MockServer mockProvider) {
-        return new RestTemplate().getForEntity(mockProvider.getUrl() + "/accounts/30002468/balance", String.class);
+    private ResponseEntity<String> makeHttpRequestTo(String endPoint, MockServer server) {
+        return new RestTemplate().getForEntity(server.getUrl() + endPoint, String.class);
     }
 
 }

@@ -1,7 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    archiveBaseName = 'mobile-banking-service'
+    baseName = 'mobile-banking-service'
     version = '0.0.1'
 }
 

@@ -62,8 +62,8 @@ public class MobileConsumerAccountSummaryPactTest {
     }
 
     @Test
-    void checkWeCanProcessTheAccountData(MockServer mockProvider) throws IOException {
-        ResponseEntity<String> response = retrieveAccountData(mockProvider);
+    void checkWeCanProcessTheAccountData(MockServer server) throws IOException {
+        ResponseEntity<String> response = makeHttpRequestTo("/accounts/30002468/balance", server);
 
         assertThat(response.getStatusCode().value()).isEqualTo(200);
         assertThat(response.getHeaders().get("Content-Type")).contains("application/json");
@@ -71,15 +71,15 @@ public class MobileConsumerAccountSummaryPactTest {
 
         LOG.info(response.getBody());
 
-        Account accountData = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), Account.class);
-        assertThat(accountData.getAccountNumber()).isNotZero();
-        assertThat(accountData.getDescription()).isNotEmpty();
-        assertThat(accountData.getOverdraftFacility()).isNotZero();
-        assertThat(accountData.getBalance()).isNotZero();
+        Account account = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), Account.class);
+        assertThat(account.getAccountNumber()).isNotZero();
+        assertThat(account.getDescription()).isNotEmpty();
+        assertThat(account.getOverdraftFacility()).isNotZero();
+        assertThat(account.getBalance()).isNotZero();
     }
 
-    private ResponseEntity<String> retrieveAccountData(MockServer mockProvider) {
-        return new RestTemplate().getForEntity(mockProvider.getUrl() + "/accounts/30002468/balance", String.class);
+    private ResponseEntity<String> makeHttpRequestTo(String endPoint, MockServer mockProvider) {
+        return new RestTemplate().getForEntity(mockProvider.getUrl() + endPoint, String.class);
     }
 
 }

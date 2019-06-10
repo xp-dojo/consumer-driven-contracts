@@ -1,7 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    archiveBaseName = 'account-service'
+    baseName = 'account-service'
     version = '0.0.1'
 }
 

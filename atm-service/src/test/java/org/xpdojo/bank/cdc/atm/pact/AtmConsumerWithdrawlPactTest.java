@@ -72,19 +72,22 @@ public class AtmConsumerWithdrawlPactTest {
     }
 
     @Test
-    void checkWeCanPostToTheServer(MockServer mockProvider) {
+    void checkWeCanPostToTheServer(MockServer server) {
         WithdrawalRequest request = new WithdrawalRequest(30002468L, new Amount(100D));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(request, headers);
-        ResponseEntity<WithdrawalResponse> postResponse =
-                new RestTemplate().postForEntity(mockProvider.getUrl() + "/accounts/30002468/transactions", entity, WithdrawalResponse.class);
+        ResponseEntity<WithdrawalResponse> postResponse = makeHttpPostTo("/accounts/30002468/transactions", entity, server);
 
         assertThat(postResponse.getStatusCode().value()).isEqualTo(201);
 
         assertThat(postResponse.getBody().getAccountNumber()).isEqualTo(30002468L);
         assertThat(postResponse.getBody().getResponse()).isNotEmpty();
         assertThat(postResponse.getBody().getBalance()).isEqualTo(new Amount(900.0D));
+    }
+
+    private ResponseEntity<WithdrawalResponse> makeHttpPostTo(String endPoint, HttpEntity entity, MockServer server) {
+        return new RestTemplate().postForEntity(server.getUrl() + endPoint, entity, WithdrawalResponse.class);
     }
 
 }

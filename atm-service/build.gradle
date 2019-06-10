@@ -1,7 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    archiveBaseName = 'atm-service'
+    baseName = 'atm-service'
     version = '0.0.1'
 }
 
