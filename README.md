@@ -10,7 +10,7 @@ In this workshop you'll be using [contract testing](http://pact.io) to explore:
 
 Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs).
 
-
+----
 # Prerequisites
 
 You will need Java and an IDE (we prefer Intellij IDEA). 
@@ -38,7 +38,7 @@ As we use Gradle, performing the steps below before the session will save time d
 
    You should see a green run icon to the left of the class declaration. If you don't or can't run it, speak to an instructor.
 
-
+----
 # Instructions
 
 This session is broken down into three core parts:
@@ -46,7 +46,8 @@ This session is broken down into three core parts:
 1. Using a contract test to define consumption of an existing attribute
 1. Driving the addition of a new attribute from the data provider using a contract test
 
-## Getting to know the system
+
+## Part 1: Getting to know the system
 
 The project is split up into the following folders.
 
@@ -70,8 +71,9 @@ Now have a look at the account-service swagger API as it will tell you a lot abo
 You now have a good idea about what the application architecture does, we can now change it a little.
 
 
-## Using a contract test to define consumption of an existing attribute
+## Part 2: Using a contract test to define consumption of an existing attribute
 
+### First we update the consumer contract
 1. We want to include an account's description along with the account summary information in mobile app.  Currently the Mobile app does not use this data attribute.
 
    There is a `description` attribute in `Account` and `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application's contract and use the value when getting account information.
@@ -86,29 +88,30 @@ You now have a good idea about what the application architecture does, we can no
  
 1. Try preventing the server from sending the `description` field back in JSON. Does anything break for the mobile app?
 
-   Remove or comment out the `account-service` code that returns the description. What happens?
+   Remove or comment out the `account-service` code that returns the description. What happens in the mobilre application when you restart the service?
 
 1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
 
-1. You have now re-defined what you expect from the producer.  Run the pact test and see the contract in the build/pact 
-directory.  
-> Now we need to ensure the producer aligns to our contract ...   
+1. You have now re-defined what you expect from the producer.  See the logs from running the consumer test.  You should see `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`.  This is the contract!!!!!
+
+> If we give the contract (json) to the producer they will know how we are using their API ... this is the contract exchange.
 
 
-## Build out the Producer
+### Then we give the contract to the Producer
+We now need to give the new pact contract to the producer. 
 
-Safeguarding against accidentally breaking other peoples applications that rely on your APIs.
+1. First lets just check that the existing version of the pact works OK: run the `AccountServiceContractTest`. 
+1. Copy the json pact file from the consumer into the `src/test/resources/pact` directory of the account service.  If you use `git diff` you can see the changes you have introduced.  Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
+1. Now run the `AccountServiceContractTest`.  You can see from the annotations that it starts  an instance of the accounts-service and runs the pact against it.
 
-1. Having collected the contracts (as Pact JSON files) that are generated when running the tests (look in the `target` folder), ensure the `account-service` is using them in a test.
-
-   Run the `account-service` contract tests.
-   
-1. Modify the `account-service` somehow so that the format, URLs or verbs have altered and re-run the tests.
-
-   You should see a failure indicating that _known_ clients are relying on a _contract_ you no longer respect.
+__A great place for a commit!!__
 
 
+## Part 3: Driving the addition of a new attribute from the data provider using a contract test
 
+
+
+----
 # Background
 
 ## Consumer Driven Contracts
@@ -125,14 +128,11 @@ We will be continuing the Bank Account theme and have provided **three applicati
  * The **central banking platform** uses the **bank account library** to manage a single user's accounts
  * The **Mobile application** allows user's to interact with thier accounts from their mobile device
  * The **ATM application** is installed on ATM branches and allows users to physically withdraw money and perform basic banking tasks
- 
- 
 
-
-
-
-
+----
 # Additional Reading
 
 [Pack.io](https://docs.pact.io/) has lots of interesting background and useful information  
 [Roy Fielding's orginal discussion of the RESTful architecture](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)  
+
+----
