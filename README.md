@@ -5,6 +5,7 @@ In this workshop you'll be using [contract testing](http://pact.io) to explore:
  * how to ensure the APIs you depend on don't change and accidentally break your applications
  * how to safeguard against accidentally breaking other peoples applications that rely on your APIs
  * how contract testing and other techniques can work together to give you confidence when working with external APIs
+ * how contract testing allows you to develop your application confidently without the explicit need for continual integration testing
  * when contract testing can't be employed and when alternative techniques over other advantages
 
 Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs).
