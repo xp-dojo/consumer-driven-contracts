@@ -69,7 +69,7 @@ In this part of the session, we would like you to start all of the services, sta
 Have a play with them withdrawing money from the ATM and transfering monies in the mobile application.  If you have any problems ask one of us in the room to help you.
 > Top tip: to start a service find the service main class in src/main/java and right click to find the runner.
 
-Now have a look at the account-service swagger API as it will tell you a lot about what you can do in that service.  The swagger UI can be found here: http://localhost:8901/swagger-ui.html#/bank-account-endpoint.  Use the Swagger UI to `GET` all the accounts.
+Now have a look at the `account-service` swagger API as it will tell you a lot about what you can do in that service. The swagger UI can be found at http://localhost:8901/swagger-ui.html#/bank-account-endpoint. Use the Swagger UI to `GET` all the accounts.
 
 You now have a good idea about what the application architecture does, we can now change it a little.
 
@@ -95,7 +95,7 @@ You now have a good idea about what the application architecture does, we can no
 
 1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
 
-1. You have now re-defined what you expect from the producer.  See the logs from running the consumer test.  You should see `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`.  This is the contract!!!!!
+1. You have now re-defined what you expect from the producer. See the logs from running the consumer test. You should see `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`. This is the contract!!!!!
 
 > If we give the contract (json) to the producer they will know how we are using their API ... this is the contract exchange.
 
@@ -104,23 +104,23 @@ You now have a good idea about what the application architecture does, we can no
 We now need to give the new pact contract to the producer. 
 
 1. First lets just check that the existing version of the pact works OK: run the `AccountServiceContractTest`. 
-1. Copy the json pact file from the consumer into the `src/test/resources/pact` directory of the account service.  If you use `git diff` you can see the changes you have introduced.  Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
-1. Now run the `AccountServiceContractTest`.  You can see from the annotations that it starts  an instance of the accounts-service and runs the pact against it.
+1. Copy the json pact file from the consumer into the `src/test/resources/pact` directory of the account service. If you use `git diff` you can see the changes you have introduced. Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
+1. Now run the `AccountServiceContractTest`. You can see from the annotations that it starts an instance of the accounts-service and runs the pact against it.
 
 __A great place for a commit!!__
 
 
 ## Part 3: Driving the addition of a new attribute from the data provider using a contract test
 
-For this part of the session we are going to drive an end to end change into the services.  We will __drive__ the addition of a description to transactions.  You can see the current set of transactions if you view the transactions for account number 30001234 [here](http://localhost:8901/accounts/30001234/transactions).
+For this part of the session we are going to drive an end to end change into the services. We will __drive__ the addition of a description to transactions. You can see the current set of transactions if you view the transactions for account number 30001234 [here](http://localhost:8901/accounts/30001234/transactions).
 
 
 Now you are experienced with contract testing we would like you to:
-1. Update the ATM contract (see `AtmConsumerWithdrawlPactTest`) so it expects to see the additional description attribute in the `WithdrawlRequest` domain object.  You should update the domain object too.  Remember in this instance it's the `POST` body that we are defining. Generate the new ATM pact contract.
+1. Update the ATM contract (see `AtmConsumerWithdrawlPactTest`) so it expects to see the additional description attribute in the `WithdrawlRequest` domain object. You should update the domain object too. Remember in this instance it's the `POST` body that we are defining. Generate the new ATM pact contract.
 > you may wish to hardcode a description rather than reconstructing the ATM machine
 1. Replace the ATM pact contract in the `account-service` and make the pact provider test pass by implementing the additional attribute.
 1. Now lets do the same thing for the Mobile service.
-Use the same URL above to see the additional attrribute in the accounts repository.
+Use the same URL above to see the additional attribute in the accounts repository.
 
 
 ## Part 4: Something to take away
