@@ -13,7 +13,7 @@ Things to draw out in the presentation:
 constantly failing.
 1. We need a way to decouple the consumer tests from the provider implementation.  We use a Pact test for this.
 1. The Pact tests will do a few things for us.
-    1. They create a mock provider service that gives us back the minimum set of attributes that we need.  We make the 
+    1. They create a mock provider service that supplies us with the minimum set of attributes that we need.  We make the 
     assumption that as long as the minimum set of things is there, then we do not care if additional attributes exist.
     1. Pact does this behind the scenes and injects the server into the test 
     `@Test void checkWeCanProcessTheAccountData(MockServer mockProvider)`
@@ -24,3 +24,11 @@ constantly failing.
 1. As a consumer, you now give this Pact to the data provider.  This is the Consumer Driven Contract that the provider 
 should adhere to.  The provider should continuously test these pacts, opening up a conversation with any consumer where 
 provider test fail.
+
+## As a service provider
+1. We want to know who our consumer are and what data attributes they need.
+1. We want to know that if we have to change the contract who we need to work with to change the APIs.
+
+## How to do it incorrectly
+1. We need to remember that the contract tests are just that, they are not about the actual data ... they are about the shape of the data
+1. These tests are as solid as their use.  What we mean by this is if only a proportion of consumers use the contract tests then the end to end 

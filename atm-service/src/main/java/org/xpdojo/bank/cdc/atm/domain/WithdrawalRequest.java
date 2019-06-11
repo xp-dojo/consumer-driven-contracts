@@ -38,6 +38,10 @@ public class WithdrawalRequest {
         this.amount = amount;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
