@@ -2,12 +2,15 @@ package org.xpdojo.bank.cdc.mobile.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 public class TransferResponseMapperTest {
 
@@ -22,8 +25,8 @@ public class TransferResponseMapperTest {
     }
 
     @Test
-    void canWriteToJson() throws JsonProcessingException {
+    void canWriteToJson() throws JsonProcessingException, JSONException {
         String writtenJson = mapper.writeValueAsString(RESPONSE);
-        assertThat(writtenJson).isEqualTo(JSON);
+        assertEquals(writtenJson, JSON, JSONCompareMode.STRICT);
     }
 }
