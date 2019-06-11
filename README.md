@@ -97,14 +97,14 @@ You now have a good idea about what the application architecture does, we can no
 
 1. You have now re-defined what you expect from the producer. See the logs from running the consumer test. You should see `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`. This is the contract!!!!!
 
-> If we give the contract (json) to the producer they will know how we are using their API ... this is the contract exchange.
+> If we give the contract (JSON) to the producer they will know how we are using their API ... this is the contract exchange.
 
 
 ### Then we give the contract to the Producer
 We now need to give the new pact contract to the producer. 
 
 1. First lets just check that the existing version of the pact works OK: run the `AccountServiceContractTest`. 
-1. Copy the json pact file from the consumer into the `src/test/resources/pact` directory of the account service. If you use `git diff` you can see the changes you have introduced. Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
+1. Copy the JSON pact file from the consumer into the `src/test/resources/pact` directory of the account service. If you use `git diff` you can see the changes you have introduced. Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
 1. Now run the `AccountServiceContractTest`. You can see from the annotations that it starts an instance of the accounts-service and runs the pact against it.
 
 __A great place for a commit!!__
