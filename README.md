@@ -79,7 +79,7 @@ You now have a good idea about what the application architecture does, we can no
 ### First we update the consumer contract
 1. We want to include an account's description along with the account summary information in mobile app.  Currently the Mobile app does not use this data attribute.
 
-   There is a `description` attribute in `Account` and `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application's contract and use the value when getting account information.
+   There is a `description` attribute on the `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application's contract and use the value when getting account information.
    
    Add an **assertion** in the mobile app's _contract_ to verify the description field is valid. Run the test. **Hint:** look in `MobileConsumerAccountSummaryPactTest.java`. Ensure you have as assertion along the lines of `assertThat(account.getDescription()).isNotEmpty()`. **Don't add the description to the mock server yet.**
       
