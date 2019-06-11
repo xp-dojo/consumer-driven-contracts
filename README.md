@@ -125,7 +125,7 @@ Use the same URL above to see the additional attribute in the accounts repositor
 
 ## Part 4: Something to take away
 
-You will notice in the mobile-service that you can view an account summary ... it would be nice to see the transactions, don't you think?
+You will notice in the `mobile-service` that you can view an account summary ... it would be nice to see the transactions, don't you think?
 
 ----
 # Background
