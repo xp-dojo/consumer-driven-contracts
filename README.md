@@ -41,29 +41,32 @@ As we use Gradle, performing the steps below before the session will save time d
 ----
 # Instructions
 
-This session is broken down into three core parts:
+This session is broken down into four core parts:
 1. Getting to know the system
 1. Using a contract test to define consumption of an existing attribute
 1. Driving the addition of a new attribute from the data provider using a contract test
+1. Something to take away
 
 
 ## Part 1: Getting to know the system
 
 The project is split up into the following folders.
 
-| Folder                   | Description              |
-|--------------------------|--------------------------|
-| `account-service`        | Central banking platform |
-| `atm-service`            | ATM application          |
-| `mobile-banking-service` | Mobile application       |
-| `bank-account`           | Banking library          |
-| `discovery-service`      | Discovery services       |
+| Folder                   | Description              | Location |
+|--------------------------|--------------------------|-----------|
+| `account-service`        | Central banking platform | http://localhost:8901 |
+| `atm-service`            | ATM application          | http://localhost:8902 |
+| `mobile-banking-service` | Mobile application       | http://localhost:8903 |
+| `bank-account`           | Banking library          | - |
+| `discovery-service`      | Discovery services       | http://localhost:8761 |
 
 The components and their interactions are shown below.
 
 ![](architecture.png)
 
-In this part of the session, we would like you to start all of the services, starting with the discovery-service, then the account-service then the atm and mobile services.  Have a play with them withdrawing money from the ATM and transfering monies in the mobile application.  If you have any problems ask one of us in the room to help you.
+In this part of the session, we would like you to start all of the services, starting with the discovery-service, then the account-service then the atm and mobile services.
+
+Have a play with them withdrawing money from the ATM and transfering monies in the mobile application.  If you have any problems ask one of us in the room to help you.
 > Top tip: to start a service find the service main class in src/main/java and right click to find the runner.
 
 Now have a look at the account-service swagger API as it will tell you a lot about what you can do in that service.  The swagger UI can be found here: http://localhost:8901/swagger-ui.html#/bank-account-endpoint.  Use the Swagger UI to `GET` all the accounts.
