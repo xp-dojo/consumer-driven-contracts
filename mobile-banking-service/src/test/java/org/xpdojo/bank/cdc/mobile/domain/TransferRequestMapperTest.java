@@ -27,6 +27,6 @@ public class TransferRequestMapperTest {
     @Test
     void canWriteToJson() throws JsonProcessingException, JSONException {
         String writtenJson = mapper.writeValueAsString(REQUEST);
-        assertEquals(writtenJson, JSON, JSONCompareMode.STRICT);
+        assertEquals(JSON, writtenJson, JSONCompareMode.STRICT);
     }
 }
