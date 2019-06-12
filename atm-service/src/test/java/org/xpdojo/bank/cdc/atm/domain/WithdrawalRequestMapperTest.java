@@ -14,8 +14,8 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 class WithdrawalRequestMapperTest {
 
-    private static final String JSON = "{\"accountNumber\":30001234,\"amount\":{\"value\":100.0},\"direction\":\"DEBIT\", \"description\":\"withdrew some money\"}";
-    private static final WithdrawalRequest REQUEST = new WithdrawalRequest(30001234L, new Amount(100.0D), "withdrew some money");
+    private static final String JSON = "{\"accountNumber\":30001234,\"amount\":{\"value\":100.0},\"direction\":\"DEBIT\"}";
+    private static final WithdrawalRequest REQUEST = new WithdrawalRequest(30001234L, new Amount(100.0D));
     private ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     @Test
