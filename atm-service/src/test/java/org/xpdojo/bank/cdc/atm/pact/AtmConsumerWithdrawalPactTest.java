@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "account_provider")
-public class AtmConsumerWithdrawlPactTest {
+public class AtmConsumerWithdrawalPactTest {
 
     @Pact(provider = "account_provider", consumer = "atm_consumer")
     public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
@@ -34,7 +34,7 @@ public class AtmConsumerWithdrawlPactTest {
                 .given("Account with AccountNumber 30002468 exists")
                 .uponReceiving("POST REQUEST with a transaction")
                 .method("POST")
-                .body(expectedWithdrawlBody())
+                .body(expectedWithdrawalBody())
                 .path("/accounts/30002468/transactions")
                 .willRespondWith()
                 .status(201)
@@ -49,7 +49,7 @@ public class AtmConsumerWithdrawlPactTest {
         return headers;
     }
 
-    private PactDslJsonBody expectedWithdrawlBody() {
+    private PactDslJsonBody expectedWithdrawalBody() {
         return new PactDslJsonBody()
                 .id("accountNumber", 30002468L)
                 .object("amount", expectAmountValue(100.0D))

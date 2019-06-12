@@ -39,6 +39,7 @@ subprojects {
 
         testImplementation libs.test.junitApi,
                 libs.test.assertj,
+                libs.test.jsonAssert,
                 libs.test.mockito,
                 libs.test.springBootStarterTest
 

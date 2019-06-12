@@ -61,7 +61,7 @@ class AccountServiceEndpointTest {
                 .then().log().all()
                 .extract().body()
                 .jsonPath().getList(".", Transaction.class);
-        assertThat(transactions.size()).isEqualTo(2);
+        assertThat(transactions.size()).isEqualTo(5);
     }
 
     @Test
@@ -80,7 +80,7 @@ class AccountServiceEndpointTest {
     void transfersBetweenAccounts(){
         TransferResponse response = given()
                 .header("Content-Type", "application/json")
-                .body(new TransferRequest(30009876L, 30008765L, anAmountOf(100.0D), "drained my account"))
+                .body(new TransferRequest(30009876L, 30008765L, anAmountOf(100.0D), "A description"))
                 .when().log().all()
                 .post("/accounts/transfers")
                 .then().log().all()
