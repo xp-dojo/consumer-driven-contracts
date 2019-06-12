@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Consumer Driven Contracts</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h3>Driving loosely coupled APIs using Consumer Contracts</h3>
+				</section>
+
+				<section>
+					<h3>Learning objectives:</h3>
+					<p class="fragment roll-in>">1. how to defend against changing APIs</p>
+					<p class="fragment roll-in>">2. how to protect your consumers from your changes</p>
+					<p class="fragment roll-in>">3. how contract testing gives you confidence</p>
+					<p class="fragment roll-in>">4. developing without expensive integration testing</p>
+					<p class="fragment roll-in>">5. when contract testing should not be used</p>
+				</section>
+
+				<section>
+					<h3>Conceptually this is how a contract works</h3>
+					<img src="mocks.jpg"/>
+				</section>
+
+				<section>
+					<h3>This is what it really looks like</h3>
+					<img src="pact.png"/>
+				</section>
+
+				<section>
+					<h3>Today this is your architecture ...</h3>
+					<img src="../architecture.png"/>
+				</section>
+
+				<section>
+					<h3>The ask for today</h3>
+					<p class="fragment roll-in>">1. Get to know the architecture</p>
+					<p class="fragment roll-in>">2. Update the Mobile app to consume an attribute</p>
+					<p class="fragment roll-in>">3. Implement a new data attribute across the services</p>
+					<p class="fragment roll-in>">4. Something to take away</p>
+					<h3 class="fragment roll-in>">It's all in the README.md ... Over to you ...</h3>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
