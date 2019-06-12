@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -16,7 +15,7 @@ public class WithdrawalRequest {
     private Long accountNumber;
     private Amount amount;
     private final String direction = "DEBIT";
-    private final String description = "Withdrawal from ATM on " + LocalDateTime.now();
+    private final String description = "Withdrawal from ATM";
 
     public WithdrawalRequest(@JsonProperty("accountNumber") final Long accountNumber,
                              @JsonProperty("amount") final Amount amount) {
@@ -38,6 +37,14 @@ public class WithdrawalRequest {
 
     public void setAmount(Amount amount) {
         this.amount = amount;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

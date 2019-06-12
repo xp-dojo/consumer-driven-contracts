@@ -14,8 +14,8 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 public class TransferRequestMapperTest {
 
-    private static final String JSON = "{\"fromAccount\":30005432,\"toAccount\":30005678,\"amount\":{\"value\":10.0}}";
-    private static final TransferRequest REQUEST = new TransferRequest(30005432L, 30005678L, new Money(10.0D));
+    private static final String JSON = "{\"fromAccount\":30005432,\"toAccount\":30005678,\"amount\":{\"value\":10.0}, \"description\":\"A description\"}";
+    private static final TransferRequest REQUEST = new TransferRequest(30005432L, 30005678L, new Money(10.0D), "A description");
     private ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     @Test
