@@ -8,10 +8,10 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TransferRequest {
 
-    private Long fromAccount;
-    private Long toAccount;
-    private Money amount;
-    private String description;
+    private final Long fromAccount;
+    private final Long toAccount;
+    private final Money amount;
+    private final String description;
 
     public TransferRequest(@JsonProperty("fromAccount") Long fromAccount,
                            @JsonProperty("toAccount") Long toAccount,

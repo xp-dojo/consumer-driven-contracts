@@ -15,9 +15,8 @@ public class AccountMapperTest {
     private ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     @Test
-    void canBeCreatedFromJson() throws IOException {
+    void canBeCreatedFromJsonUsingJackson() throws IOException {
         Account readAccount = mapper.readValue(JSON, Account.class);
         assertThat(readAccount).isEqualTo(ACCOUNT);
     }
-
 }

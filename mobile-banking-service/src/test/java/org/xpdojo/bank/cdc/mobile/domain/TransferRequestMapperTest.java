@@ -19,14 +19,15 @@ public class TransferRequestMapperTest {
     private ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     @Test
-    void canBeCreatedFromJson() throws IOException {
+    void canBeCreatedFromJsonUsingJackson() throws IOException {
         TransferRequest readRequest = mapper.readValue(JSON, TransferRequest.class);
         assertThat(readRequest).isEqualTo(REQUEST);
     }
 
     @Test
-    void canWriteToJson() throws JsonProcessingException, JSONException {
+    void canWriteToJsonWithJackson() throws JsonProcessingException, JSONException {
         String writtenJson = mapper.writeValueAsString(REQUEST);
-        assertEquals(writtenJson, JSON, JSONCompareMode.STRICT);
+        assertEquals(JSON, writtenJson, JSONCompareMode.STRICT);
     }
+
 }
