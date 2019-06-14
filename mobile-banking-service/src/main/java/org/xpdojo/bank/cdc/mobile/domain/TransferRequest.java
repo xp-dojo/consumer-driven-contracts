@@ -8,9 +8,9 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TransferRequest {
 
-    private Long fromAccount;
-    private Long toAccount;
-    private Money amount;
+    private final Long fromAccount;
+    private final Long toAccount;
+    private final Money amount;
 
     public TransferRequest(@JsonProperty("fromAccount") Long fromAccount,
                            @JsonProperty("toAccount") Long toAccount,
@@ -39,7 +39,7 @@ public class TransferRequest {
         TransferRequest that = (TransferRequest) o;
         return Objects.equals(fromAccount, that.fromAccount) &&
                 Objects.equals(toAccount, that.toAccount) &&
-                Objects.equals(amount, that.amount) ;
+                Objects.equals(amount, that.amount);
     }
 
     @Override

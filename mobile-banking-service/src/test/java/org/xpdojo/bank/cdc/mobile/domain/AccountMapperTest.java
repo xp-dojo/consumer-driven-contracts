@@ -1,6 +1,5 @@
 package org.xpdojo.bank.cdc.mobile.domain;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -16,9 +15,8 @@ public class AccountMapperTest {
     private ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     @Test
-    void canBeCreatedFromJson() throws IOException {
+    void canBeCreatedFromJsonUsingJackson() throws IOException {
         Account readAccount = mapper.readValue(JSON, Account.class);
         assertThat(readAccount).isEqualTo(ACCOUNT);
     }
-
 }

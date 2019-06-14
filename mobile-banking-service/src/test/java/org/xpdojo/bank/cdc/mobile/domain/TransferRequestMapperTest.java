@@ -14,19 +14,20 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 public class TransferRequestMapperTest {
 
-    private static final String JSON = "{\"fromAccount\":30005432,\"toAccount\":30005678,\"amount\":{\"value\":10.0}}";
+    private static final String JSON = "{\"fromAccount\":30005432,\"toAccount\":30005678,\"amount\":{\"value\":10}}";
     private static final TransferRequest REQUEST = new TransferRequest(30005432L, 30005678L, new Money(10.0D));
     private ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     @Test
-    void canBeCreatedFromJson() throws IOException {
+    void canBeCreatedFromJsonUsingJackson() throws IOException {
         TransferRequest readRequest = mapper.readValue(JSON, TransferRequest.class);
         assertThat(readRequest).isEqualTo(REQUEST);
     }
 
     @Test
-    void canWriteToJson() throws JsonProcessingException, JSONException {
+    void canWriteToJsonWithJackson() throws JsonProcessingException, JSONException {
         String writtenJson = mapper.writeValueAsString(REQUEST);
         assertEquals(JSON, writtenJson, JSONCompareMode.STRICT);
     }
+
 }
