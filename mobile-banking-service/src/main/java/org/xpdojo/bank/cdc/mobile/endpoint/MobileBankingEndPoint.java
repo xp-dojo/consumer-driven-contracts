@@ -1,7 +1,5 @@
 package org.xpdojo.bank.cdc.mobile.endpoint;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +24,6 @@ public class MobileBankingEndPoint {
     @Autowired
     private RestTemplate restTemplate;
     private static final String ACCOUNT_SERVICE = "account-service";
-    private static final Logger LOG = LoggerFactory.getLogger(MobileBankingEndPoint.class);
 
     @GetMapping(value = "/mobile/accounts")
     public String getAccounts(Model model) {
@@ -41,8 +38,8 @@ public class MobileBankingEndPoint {
         return "accountSummaryView";
     }
 
-    @GetMapping(value="/mobile/accounts/transfers")
-    public String getTransfer(@ModelAttribute TransferRequest transferRequest, Model model){
+    @GetMapping(value = "/mobile/accounts/transfers")
+    public String getTransfer(@ModelAttribute TransferRequest transferRequest, Model model) {
         model.addAttribute("accounts", getAllAccounts());
         return "transferRequestView";
     }
@@ -67,6 +64,7 @@ public class MobileBankingEndPoint {
     private Account getAccountDataFor(Long accountNumber) {
         return restTemplate.getForObject(buildBalanceUrl(accountNumber), Account.class);
     }
+
 
     private String buildBalanceUrl(Long accountNumber) {
         return "http://" + ACCOUNT_SERVICE + "/accounts/" + accountNumber + "/balance";

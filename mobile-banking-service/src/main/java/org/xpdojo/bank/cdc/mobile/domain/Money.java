@@ -4,18 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static java.lang.Double.valueOf;
-
 public class Money {
 
-    private final double value;
+    private final Double value;
 
-    public Money(@JsonProperty("value") final Double value) {
-        this.value = value;
-    }
-
-    public Money(final String value) {
-        this.value = valueOf(value);
+    public Money(@JsonProperty("value") final String value) {
+        this.value = Double.valueOf(value);
     }
 
     public Double getValue() {
