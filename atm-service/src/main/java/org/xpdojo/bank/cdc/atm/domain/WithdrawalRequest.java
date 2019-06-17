@@ -1,19 +1,15 @@
 package org.xpdojo.bank.cdc.atm.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-
-@JsonAutoDetect(fieldVisibility = ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WithdrawalRequest {
 
-    private Long accountNumber;
-    private Amount amount;
+    private final Long accountNumber;
+    private final Amount amount;
     private final String direction = "DEBIT";
 
     public WithdrawalRequest(@JsonProperty("accountNumber") final Long accountNumber,
@@ -28,14 +24,6 @@ public class WithdrawalRequest {
 
     public Long getAccountNumber() {
         return accountNumber;
-    }
-
-    public void setAccountNumber(Long accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public void setAmount(Amount amount) {
-        this.amount = amount;
     }
 
     public String getDirection() {
