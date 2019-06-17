@@ -23,6 +23,7 @@
         <form class="mt-2" id="amount-form" action="#" th:action="@{/atm/accounts/{id}/withdraw(id=${accountNumber})}"
               th:object="${withdrawalRequest}" method="post">
             <div class="input-container">
+                <input type="hidden" id="accountNumber" th:field="*{accountNumber}"/>
                 <span>Amount to withdraw:</span>
                 <input autocomplete="off" class="input-field" id="amount-field" type="number" th:field="*{amount}">
             </div>

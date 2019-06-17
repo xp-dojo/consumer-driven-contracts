@@ -1,14 +1,20 @@
 package org.xpdojo.bank.cdc.mobile.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Money {
 
     private final Double value;
 
-    public Money(@JsonProperty("value") final String value) {
+    public Money(@JsonProperty("value") final Double value) {
+        this.value = value;
+    }
+
+    public Money(final String value) {
         this.value = Double.valueOf(value);
     }
 
