@@ -9,9 +9,8 @@ bootJar {
 dependencies {
 
     implementation libs.eurekaClient,
-            libs.springBootThymeLeafStarter
-
-    runtime libs.jacksonDatatypeJsr310
+            libs.springBootThymeLeafStarter,
+            libs.jacksonDatatypeJsr310
 
     testImplementation libs.test.pactJvmConsumer
 

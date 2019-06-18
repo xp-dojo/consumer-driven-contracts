@@ -30,17 +30,19 @@ public class Transaction {
         return new Transaction(anAmount, DEBIT, date);
     }
 
-    public Transaction(@JsonProperty("amount") Money amount, @JsonProperty("direction") Direction direction, @JsonProperty("date") LocalDateTime date) {
+    public Transaction(@JsonProperty(value = "amount", required = true) Money amount,
+                       @JsonProperty(value = "direction", required = true) Direction direction,
+                       @JsonProperty(value = "date", required = true) LocalDateTime date) {
         this.amount = amount;
         this.direction = direction;
         this.date = date;
     }
 
-    Direction direction(){
+    Direction direction() {
         return direction;
     }
 
-    Money amount(){
+    Money amount() {
         return amount;
     }
 

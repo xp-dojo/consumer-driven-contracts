@@ -8,6 +8,7 @@ import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.model.RequestResponsePact;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpEntity;
@@ -19,9 +20,12 @@ import org.xpdojo.bank.cdc.atm.domain.Amount;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalRequest;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalResponse;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.commons.lang.time.DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
@@ -54,6 +58,7 @@ public class AtmConsumerWithdrawalPactTest {
                 .id("accountNumber", 30002468L)
                 .object("amount", expectAmountValue(100.0D))
                 .stringValue("direction", "DEBIT")
+                .date("date", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
                 .asBody();
     }
 
@@ -72,7 +77,7 @@ public class AtmConsumerWithdrawalPactTest {
 
     @Test
     void checkWeCanPostToTheServer(MockServer server) {
-        WithdrawalRequest request = new WithdrawalRequest(30002468L, new Amount(100D));
+        WithdrawalRequest request = new WithdrawalRequest(30002468L, new Amount(100D), LocalDateTime.now());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(request, headers);

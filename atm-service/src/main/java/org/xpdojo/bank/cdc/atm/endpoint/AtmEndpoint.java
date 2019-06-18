@@ -15,6 +15,8 @@ import org.xpdojo.bank.cdc.atm.domain.Amount;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalRequest;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalResponse;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -35,13 +37,14 @@ public class AtmEndpoint {
 
     @GetMapping(value = "/atm/accounts/{accountNumber}/withdraw")
     public String getWithdraw(@PathVariable Long accountNumber, Model model) {
-        model.addAttribute("withdrawalRequest", new WithdrawalRequest(accountNumber, new Amount(0D)));
+        model.addAttribute("withdrawalRequest", new WithdrawalRequest(accountNumber, new Amount(0D), LocalDateTime.now()));
         model.addAttribute("data", getAccountDataFor(accountNumber));
         return "accountWithdrawalView";
     }
 
     @PostMapping(value = "/atm/accounts/{accountNumber}/withdraw")
     public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model) {
+        withdrawalRequest.setDate(LocalDateTime.now());
         model.addAttribute("response", withdrawFromAccounts(accountNumber, withdrawalRequest));
         return "withdrawalResponse";
     }

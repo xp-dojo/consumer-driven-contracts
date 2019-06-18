@@ -9,9 +9,8 @@ dependencies {
 
     implementation project(':bank-account')
 
-    implementation libs.eurekaClient
-
-    runtime libs.jacksonDatatypeJsr310
+    implementation libs.eurekaClient,
+            libs.jacksonDatatypeJsr310
 
     testImplementation libs.test.pactJvmProvider,
             libs.test.pactSpring,
