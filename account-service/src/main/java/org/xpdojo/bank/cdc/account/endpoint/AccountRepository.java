@@ -39,8 +39,11 @@ public class AccountRepository {
         accounts.put(pactAccount.getAccountNumber(), pactAccount);
 
         Account transferTestFromAccount = anAccountWith(30009876L, anAmountOf(100.0D));
+        transferTestFromAccount.setDescription("Test account for transfers from");
         accounts.put(transferTestFromAccount.getAccountNumber(), transferTestFromAccount);
+
         Account transferTestToAccount = anAccountWith(30005432L, anAmountOf(100.0D));
+        transferTestToAccount.setDescription("Test account for transfers into");
         accounts.put(transferTestToAccount.getAccountNumber(), transferTestToAccount);
     }
 
