@@ -15,10 +15,11 @@
           "Content-Type": "application/json; charset\u003dUTF-8"
         },
         "body": {
+          "date": "2000-01-31T13:00:00.000000000",
           "amount": {
             "value": 100
           },
-          "description": "string",
+          "description": "Withdrawal from ATM",
           "accountNumber": 30002468,
           "direction": "DEBIT"
         },
@@ -40,10 +41,11 @@
               ],
               "combine": "AND"
             },
-            "$.description": {
+            "$.date": {
               "matchers": [
                 {
-                  "match": "type"
+                  "match": "date",
+                  "date": "yyyy-MM-dd\u0027T\u0027HH:mm:ss.SSSSSSSSS"
                 }
               ],
               "combine": "AND"
@@ -52,9 +54,9 @@
         },
         "generators": {
           "body": {
-            "$.description": {
-              "type": "RandomString",
-              "size": 20
+            "$.date": {
+              "type": "Date",
+              "format": "yyyy-MM-dd\u0027T\u0027HH:mm:ss.SSSSSSSSS"
             }
           }
         }

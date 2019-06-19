@@ -13,10 +13,10 @@ public class TransferRequest {
     private final Money amount;
     private final String description;
 
-    public TransferRequest(@JsonProperty("fromAccount") Long fromAccount,
-                           @JsonProperty("toAccount") Long toAccount,
-                           @JsonProperty("amount") Money amount,
-                           @JsonProperty("description") String description) {
+    public TransferRequest(@JsonProperty("fromAccount") final Long fromAccount,
+                           @JsonProperty("toAccount") final Long toAccount,
+                           @JsonProperty("amount") final Money amount,
+                           @JsonProperty("description") final String description) {
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.amount = amount;

@@ -1,8 +1,10 @@
 package org.xpdojo.bank.cdc.atm.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,11 +14,15 @@ public class WithdrawalRequest {
     private final Amount amount;
     private final String direction = "DEBIT";
     private final String description = "Withdrawal from ATM";
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private LocalDateTime date;
 
     public WithdrawalRequest(@JsonProperty("accountNumber") final Long accountNumber,
-                             @JsonProperty("amount") final Amount amount) {
+                             @JsonProperty("amount") final Amount amount,
+                             @JsonProperty("date") final LocalDateTime date) {
         this.accountNumber = accountNumber;
         this.amount = amount;
+        this.date = date;
     }
 
     public Amount getAmount() {
@@ -35,6 +41,14 @@ public class WithdrawalRequest {
         return description;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,12 +57,13 @@ public class WithdrawalRequest {
         return Objects.equals(accountNumber, that.accountNumber) &&
                 Objects.equals(amount, that.amount) &&
                 Objects.equals(direction, that.direction) &&
-                Objects.equals(description, that.description);
+                Objects.equals(description, that.description) &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, amount, direction, description);
+        return Objects.hash(accountNumber, amount, direction, description, date);
     }
 
     @Override
@@ -58,6 +73,7 @@ public class WithdrawalRequest {
                 ", amount=" + amount +
                 ", direction='" + direction + '\'' +
                 ", description='" + description + '\'' +
+                ", date=" + date +
                 '}';
     }
 }

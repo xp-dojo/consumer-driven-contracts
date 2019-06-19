@@ -1,13 +1,11 @@
 package org.xpdojo.bank.cdc.account.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-
-@JsonAutoDetect(fieldVisibility = ANY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountSummary {
 
     private final Long accountNumber;
