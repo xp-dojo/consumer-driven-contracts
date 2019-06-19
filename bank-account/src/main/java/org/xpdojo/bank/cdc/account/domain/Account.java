@@ -72,27 +72,23 @@ public class Account {
     }
 
     public void applyTransaction(final Transaction transaction) {
-        if (transaction.direction() == Direction.DEBIT) {
-            withdraw(transaction.amount());
-        } else {
-            deposit(transaction.amount());
-        }
+        transactions.add(transaction);
     }
 
-    public void deposit(final Money anAmount) {
-        transactions.add(aDepositOf(anAmount, LocalDateTime.now()));
+    public void deposit(final Money anAmount, LocalDateTime transactionTime) {
+        transactions.add(aDepositOf(anAmount, transactionTime));
     }
 
-    public void withdraw(final Money anAmount) {
+    public void withdraw(final Money anAmount, LocalDateTime transactionTime) {
         if (balance().add(overdraftFacility).isLessThan(anAmount)) {
             throw new IllegalStateException("You cannot withdraw more than your overdraft will allow");
         }
-        transactions.add(aWithDrawlOf(anAmount, LocalDateTime.now()));
+        transactions.add(aWithDrawlOf(anAmount, transactionTime));
     }
 
-    public void transferTo(final Account destinationAccount, final Money money) {
-        destinationAccount.deposit(money);
-        this.withdraw(money);
+    public void transferTo(final Account destinationAccount, final Money money, LocalDateTime transactionTime) {
+        destinationAccount.deposit(money, transactionTime);
+        this.withdraw(money, transactionTime);
     }
 
     public void printBalanceStatementWith(StatementWriter writer) {

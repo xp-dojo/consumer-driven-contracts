@@ -12,6 +12,7 @@ import org.xpdojo.bank.cdc.mobile.domain.Account;
 import org.xpdojo.bank.cdc.mobile.domain.TransferRequest;
 import org.xpdojo.bank.cdc.mobile.domain.TransferResponse;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -46,6 +47,7 @@ public class MobileBankingEndPoint {
 
     @PostMapping(value = "/mobile/accounts/transfers")
     public String postWithdraw(@ModelAttribute TransferRequest transferRequest, Model model) {
+        transferRequest.setDateTime(LocalDateTime.now());
         model.addAttribute("response", transferAcrossAccounts(transferRequest));
         return "transferResponseView";
     }

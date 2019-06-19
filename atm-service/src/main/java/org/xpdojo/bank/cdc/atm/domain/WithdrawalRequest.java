@@ -15,14 +15,14 @@ public class WithdrawalRequest {
     private final String direction = "DEBIT";
     private final String description = "Withdrawal from ATM";
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
 
     public WithdrawalRequest(@JsonProperty("accountNumber") final Long accountNumber,
                              @JsonProperty("amount") final Amount amount,
-                             @JsonProperty("date") final LocalDateTime date) {
+                             @JsonProperty("dateTime") final LocalDateTime dateTime) {
         this.accountNumber = accountNumber;
         this.amount = amount;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     public Amount getAmount() {
@@ -41,12 +41,12 @@ public class WithdrawalRequest {
         return description;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -58,12 +58,12 @@ public class WithdrawalRequest {
                 Objects.equals(amount, that.amount) &&
                 Objects.equals(direction, that.direction) &&
                 Objects.equals(description, that.description) &&
-                Objects.equals(date, that.date);
+                Objects.equals(dateTime, that.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, amount, direction, description, date);
+        return Objects.hash(accountNumber, amount, direction, description, dateTime);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class WithdrawalRequest {
                 ", amount=" + amount +
                 ", direction='" + direction + '\'' +
                 ", description='" + description + '\'' +
-                ", date=" + date +
+                ", dateTime=" + dateTime +
                 '}';
     }
 }

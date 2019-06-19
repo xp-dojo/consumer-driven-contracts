@@ -33,6 +33,6 @@ public class ConsoleStatementWriter implements StatementWriter {
     }
 
     private void printStatementLineTo(PrintStream printStream, Transaction t, Money balance) {
-        printStream.println("| " + t.getDate() + " | " + t.balanceImpact() + " | " + balance + " |");
+        printStream.println("| " + t.getDateTime() + " | " + t.balanceImpact() + " | " + balance + " |");
     }
 }

@@ -1,9 +1,8 @@
 package org.xpdojo.bank.cdc.account.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TransferRequest {
@@ -11,15 +10,18 @@ public class TransferRequest {
     private final Long fromAccount;
     private final Long toAccount;
     private final Money amount;
+    private final LocalDateTime dateTime;
     private final String description;
 
     public TransferRequest(@JsonProperty("fromAccount") final Long fromAccount,
-                           @JsonProperty("tomAccount") final Long toAccount,
+                           @JsonProperty("toAccount") final Long toAccount,
                            @JsonProperty("amount") final Money amount,
+                           @JsonProperty("dateTime") final LocalDateTime dateTime,
                            @JsonProperty("description") final String description) {
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.amount = amount;
+        this.dateTime = dateTime;
         this.description = description;
     }
 
@@ -39,6 +41,10 @@ public class TransferRequest {
         return description;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,12 +53,13 @@ public class TransferRequest {
         return Objects.equals(fromAccount, that.fromAccount) &&
                 Objects.equals(toAccount, that.toAccount) &&
                 Objects.equals(amount, that.amount) &&
+                Objects.equals(dateTime, that.dateTime) &&
                 Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fromAccount, toAccount, amount, description);
+        return Objects.hash(fromAccount, toAccount, amount, dateTime, description);
     }
 
     @Override
@@ -61,6 +68,7 @@ public class TransferRequest {
                 "fromAccount=" + fromAccount +
                 ", toAccount=" + toAccount +
                 ", amount=" + amount +
+                ", dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -8,7 +8,7 @@ public class TransferResponse {
 
     private final String response;
 
-    public TransferResponse(@JsonProperty("response") String response) {
+    public TransferResponse(@JsonProperty("response") final String response) {
         this.response = response;
     }
 

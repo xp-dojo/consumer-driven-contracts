@@ -44,7 +44,7 @@ public class AtmEndpoint {
 
     @PostMapping(value = "/atm/accounts/{accountNumber}/withdraw")
     public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model) {
-        withdrawalRequest.setDate(LocalDateTime.now());
+        withdrawalRequest.setDateTime(LocalDateTime.now());
         model.addAttribute("response", withdrawFromAccounts(accountNumber, withdrawalRequest));
         return "withdrawalResponse";
     }
