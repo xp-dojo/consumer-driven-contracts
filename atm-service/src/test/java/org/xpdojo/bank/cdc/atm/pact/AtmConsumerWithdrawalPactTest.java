@@ -8,7 +8,6 @@ import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.model.RequestResponsePact;
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.HttpEntity;
@@ -21,11 +20,9 @@ import org.xpdojo.bank.cdc.atm.domain.WithdrawalRequest;
 import org.xpdojo.bank.cdc.atm.domain.WithdrawalResponse;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.apache.commons.lang.time.DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
@@ -58,11 +55,11 @@ public class AtmConsumerWithdrawalPactTest {
                 .id("accountNumber", 30002468L)
                 .object("amount", expectAmountValue(100.0D))
                 .stringValue("direction", "DEBIT")
-                .date("date", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
+                .date("dateTime", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
                 .asBody();
     }
 
-    private PactDslJsonBody dummyResponse(){
+    private PactDslJsonBody dummyResponse() {
         return new PactDslJsonBody()
                 .id("accountNumber", 30002468L)
                 .stringType("response")

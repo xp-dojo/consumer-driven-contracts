@@ -15,7 +15,7 @@
           "Content-Type": "application/json; charset\u003dUTF-8"
         },
         "body": {
-          "date": "2000-01-31T13:00:00.000000000",
+          "dateTime": "2000-01-31T13:00:00.000000000",
           "amount": {
             "value": 100
           },
@@ -40,7 +40,7 @@
               ],
               "combine": "AND"
             },
-            "$.date": {
+            "$.dateTime": {
               "matchers": [
                 {
                   "match": "date",
@@ -53,7 +53,7 @@
         },
         "generators": {
           "body": {
-            "$.date": {
+            "$.dateTime": {
               "type": "Date",
               "format": "yyyy-MM-dd\u0027T\u0027HH:mm:ss.SSSSSSSSS"
             }

@@ -9,6 +9,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.xpdojo.bank.cdc.account.domain.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -80,7 +81,7 @@ class AccountServiceEndpointTest {
     void transfersBetweenAccounts(){
         TransferResponse response = given()
                 .header("Content-Type", "application/json")
-                .body(new TransferRequest(30009876L, 30008765L, anAmountOf(100.0D)))
+                .body(new TransferRequest(30009876L, 30008765L, anAmountOf(100.0D), LocalDateTime.now()))
                 .when().log().all()
                 .post("/accounts/transfers")
                 .then().log().all()

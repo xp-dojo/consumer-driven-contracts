@@ -16,7 +16,7 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.DEBIT;
 public class Transaction {
     private final Money amount;
     private final Direction direction;
-    private final LocalDateTime date;
+    private final LocalDateTime dateTime;
 
     public static Transaction anOpeningBalanceOf(Money anAmount, LocalDateTime date) {
         return new Transaction(anAmount, CREDIT, date);
@@ -32,10 +32,10 @@ public class Transaction {
 
     public Transaction(@JsonProperty(value = "amount", required = true) Money amount,
                        @JsonProperty(value = "direction", required = true) Direction direction,
-                       @JsonProperty(value = "date", required = true) LocalDateTime date) {
+                       @JsonProperty(value = "dateTime", required = true) LocalDateTime dateTime) {
         this.amount = amount;
         this.direction = direction;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     Direction direction() {
@@ -46,8 +46,8 @@ public class Transaction {
         return amount;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     Money balanceImpact() {
@@ -68,12 +68,12 @@ public class Transaction {
         Transaction that = (Transaction) o;
         return Objects.equals(amount, that.amount) &&
                 direction == that.direction &&
-                Objects.equals(date, that.date);
+                Objects.equals(dateTime, that.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, direction, date);
+        return Objects.hash(amount, direction, dateTime);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Transaction {
         return "Transaction{" +
                 "amount=" + amount +
                 ", direction=" + direction +
-                ", date=" + date +
+                ", dateTime=" + dateTime +
                 '}';
     }
 }

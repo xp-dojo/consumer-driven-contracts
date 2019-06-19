@@ -61,7 +61,7 @@ public class BankAccountEndpoint {
     public TransferResponse processTransfer(@RequestBody TransferRequest request) {
         Account fromAccount = repository.getById(request.getFromAccount());
         Account toAccount = repository.getById(request.getToAccount());
-        fromAccount.transferTo(toAccount, request.getAmount());
+        fromAccount.transferTo(toAccount, request.getAmount(), request.getDateTime());
         repository.update(fromAccount);
         repository.update(toAccount);
         return new TransferResponse(request.getAmount().value() + " transferred from " + fromAccount.getAccountNumber() + " to " + toAccount.getAccountNumber() + ", thank you for using Dojo Bank");
