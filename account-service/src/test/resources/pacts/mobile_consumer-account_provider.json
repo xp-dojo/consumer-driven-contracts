@@ -24,11 +24,20 @@
           "overdraftFacility": {
             "value": 100
           },
+          "description": "string",
           "accountNumber": 1234567890
         },
         "matchingRules": {
           "body": {
             "$.accountNumber": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.description": {
               "matchers": [
                 {
                   "match": "type"
@@ -60,6 +69,10 @@
               "type": "RandomInt",
               "min": 0,
               "max": 2147483647
+            },
+            "$.description": {
+              "type": "RandomString",
+              "size": 20
             },
             "$.overdraftFacility.value": {
               "type": "RandomDecimal",
