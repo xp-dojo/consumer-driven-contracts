@@ -77,11 +77,11 @@ class AccountServiceEndpointTest {
         assertThat(response.getBalance()).isEqualTo(anAmountOf(220.0D));
     }
 
-    //    @Test
+    @Test
     void transfersBetweenAccounts() {
         TransferResponse response = given()
                 .header("Content-Type", "application/json")
-                .body(new TransferRequest(30009876L, 30008765L, anAmountOf(100.0D), LocalDateTime.now(), "A description"))
+                .body(new TransferRequest(30009876L, 30005432L, anAmountOf(100.0D), LocalDateTime.now(), "A description"))
                 .when().log().all()
                 .post("/accounts/transfers")
                 .then().log().all()

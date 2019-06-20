@@ -8,7 +8,7 @@ public class AccountCollection {
 
     private final List<AccountSummary> accounts = new ArrayList<>();
 
-    public AccountCollection(List<AccountSummary> accounts){
+    public AccountCollection(final List<AccountSummary> accounts){
         this.accounts.addAll(accounts);
     }
 

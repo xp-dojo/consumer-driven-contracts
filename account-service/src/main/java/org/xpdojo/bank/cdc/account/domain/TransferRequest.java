@@ -1,5 +1,6 @@
 package org.xpdojo.bank.cdc.account.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -10,14 +11,15 @@ public class TransferRequest {
     private final Long fromAccount;
     private final Long toAccount;
     private final Money amount;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private final LocalDateTime dateTime;
     private final String description;
 
-    public TransferRequest(@JsonProperty("fromAccount") final Long fromAccount,
-                           @JsonProperty("toAccount") final Long toAccount,
-                           @JsonProperty("amount") final Money amount,
-                           @JsonProperty("dateTime") final LocalDateTime dateTime,
-                           @JsonProperty("description") final String description) {
+    public TransferRequest(@JsonProperty(value = "fromAccount", required = true) final Long fromAccount,
+                           @JsonProperty(value = "toAccount", required = true) final Long toAccount,
+                           @JsonProperty(value = "amount", required = true) final Money amount,
+                           @JsonProperty(value = "dateTime", required = true) final LocalDateTime dateTime,
+                           @JsonProperty(value = "description", required = true) final String description) {
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.amount = amount;
