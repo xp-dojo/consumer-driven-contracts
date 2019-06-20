@@ -107,6 +107,11 @@ We now need to give the new pact contract to the producer.
 1. Copy the JSON pact file from the consumer into the `src/test/resources/pact` directory of the account service. If you use `git diff` you can see the changes you have introduced. Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
 1. Now run the `AccountServiceContractTest`. You can see from the annotations that it starts an instance of the accounts-service and runs the pact against it.
 
+### Finish off
+We now need to make sure it all hangs together
+1. Restart the Mobile service and check that you can see the account description in the mobile app
+1. Did any other tests fail?  Run `gradle` from the command line and check we are __done__
+
 __A great place for a commit!!__
 
 
