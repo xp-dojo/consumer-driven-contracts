@@ -1,11 +1,9 @@
 package org.xpdojo.bank.cdc.mobile.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
     private final Long accountNumber;
     private final Double overdraftFacility;

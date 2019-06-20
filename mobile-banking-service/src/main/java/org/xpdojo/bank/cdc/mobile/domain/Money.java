@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Money {
 
     private final Double value;

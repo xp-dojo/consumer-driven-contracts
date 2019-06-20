@@ -1,12 +1,10 @@
 package org.xpdojo.bank.cdc.atm.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountData {
 
     private final Long accountNumber;

@@ -10,3 +10,6 @@ spring:
   http:
     converters:
       preferred-json-mapper: jackson
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true

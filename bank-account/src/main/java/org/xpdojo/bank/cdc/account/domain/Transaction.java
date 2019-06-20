@@ -12,11 +12,18 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.CREDIT;
 import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.DEBIT;
 
 @JsonAutoDetect(fieldVisibility = ANY)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Transaction {
     private final Money amount;
     private final Direction direction;
     private final LocalDateTime dateTime;
+
+    public Transaction(@JsonProperty(value = "amount", required = true) Money amount,
+                       @JsonProperty(value = "direction", required = true) Direction direction,
+                       @JsonProperty(value = "dateTime", required = true) LocalDateTime dateTime) {
+        this.amount = amount;
+        this.direction = direction;
+        this.dateTime = dateTime;
+    }
 
     public static Transaction anOpeningBalanceOf(Money anAmount, LocalDateTime date) {
         return new Transaction(anAmount, CREDIT, date);
@@ -28,14 +35,6 @@ public class Transaction {
 
     public static Transaction aWithDrawlOf(Money anAmount, LocalDateTime date) {
         return new Transaction(anAmount, DEBIT, date);
-    }
-
-    public Transaction(@JsonProperty(value = "amount", required = true) Money amount,
-                       @JsonProperty(value = "direction", required = true) Direction direction,
-                       @JsonProperty(value = "dateTime", required = true) LocalDateTime dateTime) {
-        this.amount = amount;
-        this.direction = direction;
-        this.dateTime = dateTime;
     }
 
     Direction direction() {

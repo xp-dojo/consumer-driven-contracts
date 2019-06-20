@@ -1,15 +1,14 @@
 package org.xpdojo.bank.cdc.atm.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class WithdrawalRequest {
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final Long accountNumber;
     private final Amount amount;
     private final String direction = "DEBIT";

@@ -19,19 +19,10 @@
           "amount": {
             "value": 100
           },
-          "accountNumber": 30002468,
           "direction": "DEBIT"
         },
         "matchingRules": {
           "body": {
-            "$.accountNumber": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
             "$.amount.value": {
               "matchers": [
                 {
