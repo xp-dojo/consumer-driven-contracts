@@ -1,7 +1,6 @@
 package org.xpdojo.bank.cdc.account.domain;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -12,30 +11,32 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.CREDIT;
 import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.DEBIT;
 
 @JsonAutoDetect(fieldVisibility = ANY)
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Transaction {
     private final Money amount;
     private final Direction direction;
     private final LocalDateTime dateTime;
+    private final String description;
 
-    public static Transaction anOpeningBalanceOf(Money anAmount, LocalDateTime date) {
-        return new Transaction(anAmount, CREDIT, date);
-    }
-
-    public static Transaction aDepositOf(Money anAmount, LocalDateTime date) {
-        return new Transaction(anAmount, CREDIT, date);
-    }
-
-    public static Transaction aWithDrawlOf(Money anAmount, LocalDateTime date) {
-        return new Transaction(anAmount, DEBIT, date);
-    }
-
-    public Transaction(@JsonProperty(value = "amount", required = true) Money amount,
-                       @JsonProperty(value = "direction", required = true) Direction direction,
-                       @JsonProperty(value = "dateTime", required = true) LocalDateTime dateTime) {
+    public Transaction(@JsonProperty(value = "amount", required = true) final Money amount,
+                       @JsonProperty(value = "direction", required = true) final Direction direction,
+                       @JsonProperty(value = "dateTime", required = true) final LocalDateTime dateTime,
+                       @JsonProperty(value = "description", required = true) final String description) {
         this.amount = amount;
         this.direction = direction;
         this.dateTime = dateTime;
+        this.description = description;
+    }
+
+    public static Transaction anOpeningBalanceOf(Money anAmount, LocalDateTime date) {
+        return new Transaction(anAmount, CREDIT, date, "Opening balance");
+    }
+
+    public static Transaction aDepositOf(Money anAmount, LocalDateTime date, String description) {
+        return new Transaction(anAmount, CREDIT, date, description);
+    }
+
+    public static Transaction aWithDrawlOf(Money anAmount, LocalDateTime date, String description) {
+        return new Transaction(anAmount, DEBIT, date, description);
     }
 
     Direction direction() {
@@ -68,12 +69,13 @@ public class Transaction {
         Transaction that = (Transaction) o;
         return Objects.equals(amount, that.amount) &&
                 direction == that.direction &&
-                Objects.equals(dateTime, that.dateTime);
+                Objects.equals(dateTime, that.dateTime) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, direction, dateTime);
+        return Objects.hash(amount, direction, dateTime, description);
     }
 
     @Override
@@ -82,6 +84,7 @@ public class Transaction {
                 "amount=" + amount +
                 ", direction=" + direction +
                 ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

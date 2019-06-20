@@ -69,7 +69,7 @@ class AccountServiceEndpointTest {
     void updatesAccountsWithTransactions() {
         TransactionResponse response = given()
                 .header("Content-Type", "application/json")
-                .body(new Transaction(anAmountOf(100.0d), CREDIT, now()))
+                .body(new Transaction(anAmountOf(100.0d), CREDIT, now(), "deposit"))
                 .when().log().all()
                 .post("/accounts/30005678/transactions")
                 .then().log().all()

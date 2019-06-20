@@ -20,19 +20,10 @@
             "value": 100
           },
           "description": "Withdrawal from ATM",
-          "accountNumber": 30002468,
           "direction": "DEBIT"
         },
         "matchingRules": {
           "body": {
-            "$.accountNumber": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
             "$.amount.value": {
               "matchers": [
                 {

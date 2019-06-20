@@ -52,7 +52,6 @@ public class AtmConsumerWithdrawalPactTest {
 
     private PactDslJsonBody expectedWithdrawalBody() {
         return new PactDslJsonBody()
-                .id("accountNumber", 30002468L)
                 .object("amount", expectAmountValue(100.0D))
                 .stringValue("direction", "DEBIT")
                 .stringValue("description", "Withdrawal from ATM")

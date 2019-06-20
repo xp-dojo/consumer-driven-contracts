@@ -31,7 +31,7 @@ public class Account {
         return new Account(accountNumber, amount);
     }
 
-    private Account( final Long accountNumber) {
+    private Account(final Long accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -75,20 +75,20 @@ public class Account {
         transactions.add(transaction);
     }
 
-    public void deposit(final Money anAmount, LocalDateTime transactionTime) {
-        transactions.add(aDepositOf(anAmount, transactionTime));
+    public void deposit(final Money anAmount, LocalDateTime transactionTime, String description) {
+        transactions.add(aDepositOf(anAmount, transactionTime, description));
     }
 
-    public void withdraw(final Money anAmount, LocalDateTime transactionTime) {
+    public void withdraw(final Money anAmount, LocalDateTime transactionTime, String description) {
         if (balance().add(overdraftFacility).isLessThan(anAmount)) {
             throw new IllegalStateException("You cannot withdraw more than your overdraft will allow");
         }
-        transactions.add(aWithDrawlOf(anAmount, transactionTime));
+        transactions.add(aWithDrawlOf(anAmount, transactionTime, description));
     }
 
-    public void transferTo(final Account destinationAccount, final Money money, LocalDateTime transactionTime) {
-        destinationAccount.deposit(money, transactionTime);
-        this.withdraw(money, transactionTime);
+    public void transferTo(final Account destinationAccount, final Money money, final LocalDateTime transactionTime, final String description) {
+        destinationAccount.deposit(money, transactionTime, description);
+        this.withdraw(money, transactionTime, description);
     }
 
     public void printBalanceStatementWith(StatementWriter writer) {
