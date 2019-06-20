@@ -10,9 +10,9 @@ public class WithdrawalResponse {
     private final String response;
     private final Amount balance;
 
-    public WithdrawalResponse(@JsonProperty("accountNumber") Long accountNumber,
-                              @JsonProperty("response") String response,
-                              @JsonProperty("balance") Amount balance) {
+    public WithdrawalResponse(@JsonProperty("accountNumber") final Long accountNumber,
+                              @JsonProperty("response") final String response,
+                              @JsonProperty("balance") final Amount balance) {
         this.accountNumber = accountNumber;
         this.response = response;
         this.balance = balance;
