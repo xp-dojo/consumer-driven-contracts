@@ -121,6 +121,7 @@ For this part of the session we are going to drive an end to end change into the
 
 
 Now you are experienced with contract testing we would like you to:
+
 1. Update the ATM contract (see `AtmConsumerWithdrawlPactTest`) so it expects to see the additional description attribute in the `WithdrawlRequest` domain object. You should update the domain object too. Remember in this instance it's the `POST` body that we are defining. Generate the new ATM pact contract.
 > you may wish to hardcode a description rather than reconstructing the ATM machine
 1. Replace the ATM pact contract in the `account-service` and make the pact provider test pass by implementing the additional attribute.
