@@ -10,7 +10,7 @@ In this workshop you'll be using [contract testing](http://pact.io) to explore:
 
 Although we'll work mainly with RESTful style APIs, the principles apply whenever some kind of API dependency exists (for example, depending on a distributed binary, a wire protocol or traditional RPC style APIs).
 
-----
+
 # Prerequisites
 
 You will need Java and an IDE (we prefer Intellij IDEA). 
@@ -38,10 +38,11 @@ As we use Gradle, performing the steps below before the session will save time d
 
    You should see a green run icon to the left of the class declaration. If you don't or can't run it, speak to an instructor.
 
-----
+
 # Instructions
 
 This session is broken down into four core parts:
+
 1. Getting to know the system
 1. Using a contract test to define consumption of an existing attribute
 1. Driving the addition of a new attribute from the data provider using a contract test
@@ -64,10 +65,16 @@ The components and their interactions are shown below.
 
 ![](architecture.png)
 
-In this part of the session, we would like you to start all of the services, starting with the _discovery-service_, then the account-service then the atm and mobile services.
+In this part of the session, we would like you to **start all of the services** in the follow sequence (right click on the Java file, select `Run ...main()`):
 
-Have a play with them withdrawing money from the ATM and transfering monies in the mobile application.  If you have any problems ask one of us in the room to help you.
-> Top tip: to start a service find the service main class in src/main/java and right click to find the runner.
+1. The [discovery-service](http://localhost:8761) (`DiscoveryService.java`)
+1. The [account-service](http://localhost:8902) (`AccountService.java`)
+1. The [atm-service](http://localhost:8902) (`AtmService.java`)
+1. The [mobile-service](http://localhost:8903) (`MobileBankingService.java`)
+
+> For that authentic "mobile" experience, when viewing the mobile app, [change the viewport of your browser](https://superuser.com/questions/1214829/how-can-i-view-the-mobile-version-of-a-webpage-in-google-chrome-for-desktop) to a mobile device.
+
+Have a play with them withdrawing money from the ATM and transferring monies in the mobile application. If you have any problems ask one of us in the room to help you.
 
 Now have a look at the `account-service` swagger API as it will tell you a lot about what you can do in that service. The swagger UI can be found at http://localhost:8901/swagger-ui.html#/bank-account-endpoint. Use the Swagger UI to `GET` all the accounts.
 
@@ -77,12 +84,13 @@ You now have a good idea about what the application architecture does, we can no
 ## Part 2: Using a contract test to define consumption of an existing attribute
 
 ### First we update the consumer contract
-1. We want to include an account's description along with the account summary information in mobile app.  Currently the Mobile app does not use this data attribute.
+
+1. We want to include an account's description along with the account summary information in mobile app. Currently the Mobile app does not use this data attribute.
 
    There is a `description` attribute on the `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application's contract and use the value when getting account information.
-   
+
    Add an **assertion** in the mobile app's _contract_ to verify the description field is valid. Run the test. **Hint:** look in `MobileConsumerAccountSummaryPactTest.java`. Ensure you have as assertion along the lines of `assertThat(account.getDescription()).isNotEmpty()`, then use the IDE to create the method and attribute in the domain object. **Don't add the description to the mock server yet.**
-      
+
 1. You should see the test fail until you simulate the server sending back the description.
 
    Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
@@ -102,6 +110,7 @@ Open it up and have a look at the contents.
 
 
 ### Then we give the contract to the Producer
+
 We now need to give the new pact contract to the producer. 
 
 1. First lets just check that the existing version of the pact works OK in the account-service: run the `AccountServiceContractTest`. 
@@ -115,6 +124,7 @@ We now need to make sure it all hangs together
 
 __A great place for a commit!!__
 
+  You should see a failure indicating that _known_ clients are relying on a _contract_ you no longer respect.
 
 ## Part 3: Driving the addition of a new attribute from the data provider using a contract test
 
@@ -133,7 +143,7 @@ Use the same URL above to see the additional attribute in the accounts repositor
 
 You will notice in the `mobile-service` that you can view an account summary ... it would be nice to see the transactions, don't you think?
 
-----
+
 # Background
 
 ## Consumer Driven Contracts
@@ -151,10 +161,10 @@ We will be continuing the Bank Account theme and have provided **three applicati
  * The **Mobile application** allows user's to interact with thier accounts from their mobile device
  * The **ATM application** is installed on ATM branches and allows users to physically withdraw money and perform basic banking tasks
 
-----
+
 # Additional Reading
 
 [Pack.io](https://docs.pact.io/) has lots of interesting background and useful information  
-[Roy Fielding's orginal discussion of the RESTful architecture](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)  
+[Roy Fielding's orginal discussion of the RESTful architecture](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)   
 
-----
+
