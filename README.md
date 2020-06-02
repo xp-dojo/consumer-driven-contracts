@@ -99,8 +99,6 @@ You now have a good idea about what the application architecture does, we can no
  
    > This is simulating the server sending back an additional JSON field. Have a think how you could test, if it is returning it already.
  
-1. In the mock server, try preventing the server from sending the `description` field back in JSON. Does anything break for the mobile app?
-
 1. Remove or comment out the `account-service` code that returns the description. What happens in the mobile application when you restart the service?
 
 1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
