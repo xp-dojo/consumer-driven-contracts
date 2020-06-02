@@ -87,9 +87,7 @@ You now have a good idea about what the application architecture does, we can no
 
 1. We want to include an account's description along with the account summary information in mobile app. Currently the Mobile app does not use this data attribute.
 
-   There is a `description` attribute on the `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application and ensure it's use is formalised in a "contract". 
-
-   Add the `description` attribute to the domain and ensure that it's used when displaying the account summary (`getAccountDisplay`).
+   There is a `description` attribute on the `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application and ensure it's use is formalised in a "contract". Add the `description` attribute to the domain object.
 
    Add an **assertion** in the mobile app's _contract_ to verify the description field is valid. Run the test. **Hint:** look in `MobileConsumerAccountSummaryPactTest.java`. Ensure you have as assertion along the lines of `assertThat(account.getDescription()).isNotEmpty()`, then use the IDE to create the method and attribute in the domain object. **Don't add the description to the mock server yet.**
 
