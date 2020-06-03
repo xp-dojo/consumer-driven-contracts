@@ -1,3 +1,5 @@
+![](https://travis-ci.org/xp-dojo/consumer-driven-contracts.svg?branch=master)
+
 # Working with Consumer Driven Contracts
 
 In this workshop you'll be using [contract testing](http://pact.io) to explore:
