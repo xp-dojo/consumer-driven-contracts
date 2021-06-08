@@ -55,13 +55,13 @@ This session is broken down into four core parts:
 
 The project is split up into the following folders.
 
-| Folder                   | Description              | Location |
-|--------------------------|--------------------------|-----------|
-| `account-service`        | Central banking platform | http://localhost:8901 |
-| `atm-service`            | ATM application          | http://localhost:8902 |
-| `mobile-banking-service` | Mobile application       | http://localhost:8903 |
-| `bank-account`           | Banking library          | - |
-| `discovery-service`      | Discovery services       | http://localhost:8761 |
+| Folder                   | Description              | Location              | API Docs |
+|--------------------------|--------------------------|-----------------------|------------------------------|
+| `account-service`        | Central banking platform | http://localhost:8901 | [Swagger](http://localhost:8901/swagger-ui.html#/bank-account-endpoint) |
+| `atm-service`            | ATM application          | http://localhost:8902 | [Swagger](http://localhost:8902/swagger-ui.html#/atm-endpoint) |
+| `mobile-banking-service` | Mobile application       | http://localhost:8903 | [Swagger](http://localhost:8903/swagger-ui.html#/mobile-banking-end-point)
+| `bank-account`           | Banking library          | - | - |
+| `discovery-service`      | Discovery services       | http://localhost:8761 | [Swagger](http://localhost:8761/swagger-ui.html#/eureka-controller) |
 
 The components and their interactions are shown below.
 
@@ -119,6 +119,7 @@ We now need to give the new pact contract to the producer.
 1. Now run the `AccountServiceContractTest`. You can see from the annotations that it starts an instance of the accounts-service and tests the pact against it.
 
 ### Finish off
+
 We now need to make sure it all hangs together
 1. Restart the Mobile service and check that you can see the account description in the mobile app
 1. Did any other tests fail (there will be a few)?  Run `gradle` from the command line and check we are __done__
