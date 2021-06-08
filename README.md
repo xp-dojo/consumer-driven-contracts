@@ -124,8 +124,6 @@ We now need to make sure it all hangs together
 1. Restart the Mobile service and check that you can see the account description in the mobile app
 1. Did any other tests fail (there will be a few)?  Run `gradle` from the command line and check we are __done__
 
-__A great place for a commit!__
-
   You should see a failure indicating that _known_ clients are relying on a _contract_ you no longer respect.
 
 ## Part 3: Driving the addition of a new attribute from the data provider using a contract test
