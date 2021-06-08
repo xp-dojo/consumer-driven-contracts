@@ -1,6 +1,6 @@
 @startuml
 
-package "Accounts Services - producer" as ass{
+package "Account Services - producer" as ass{
     (Discovery Service) as disc
     [Banking Library] as lib
     [Bank Account Service] as acc

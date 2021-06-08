@@ -33,7 +33,7 @@ subprojects {
 
     dependencies {
 
-        compile libs.springBootStarterWeb,
+        implementation libs.springBootStarterWeb,
                 libs.swagger,
                 libs.swaggerUI
 
