@@ -5,9 +5,7 @@ Using the [Pact](https://docs.pact.io/) framework.
 
 Take the group up to the point of a change in the contract (adding a `description`) for the mobile app then exchange the contract with `account-service` and remove/rename the `description` field on the server and see a test fail.
 
-#### Part 1
-
-Getting to know the apps.
+#### Part 1 - Getting to know the apps.
 
 1. Understand the three (plus discovery service) apps, plus library.
     1. `bank-account` library
@@ -19,9 +17,7 @@ Getting to know the apps.
     1. F12 and change viewport for the [mobile app](http://localhost:8903/)
     1. Show how a withdraw from the [ATM](http://localhost:8902) changes the balance in the mobile app and a transfer in the mobile app affects the ATM.
 
-#### Part 2
-
-Make a change to the *mobile app*
+#### Part 2/3 - Make a change to the *mobile app*
 
 A `description` field is supplied by the producer by unused in the mobile app. See [INSTRUCTORS branch](https://github.com/xp-dojo/consumer-driven-contracts/commit/e62aba0dab08073b045ef9ae0d09d70196914e35)
 
@@ -33,9 +29,9 @@ A `description` field is supplied by the producer by unused in the mobile app. S
 1. Run tests, they fail. Why? Because the mock response is still missing the description
     1. updated the `expectedAccountsBody` method
     1. Show the [contract](./mobile-banking-service/build/pacts/mobile_consumer-account_provider.json)
-1. Remove `account-service` code that returns the `description`?
 1. Uncomment [L15](./mobile-banking-service/src/main/resources/templates/accountSummaryView.html), show in UI (think you need a restart)
-
+1. Do the contract exchange and demo 
+1. Remove `account-service` code that returns the `description`, to demonstrate a dependency now 
 
 ### Notes
 

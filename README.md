@@ -85,9 +85,9 @@ You now have a good idea about what the application architecture does, we can no
 
 ## Part 2: Using a contract test to define consumption of an existing data attribute
 
-### First we update the consumer contract
+### Update the consumer contract
 
-1. We want to include an account's description along with the account summary information in mobile app. Currently the Mobile app does not use this data attribute.
+1. We want to include an account's description along with the account summary information in mobile app. Currently, the Mobile app does not use this data attribute.
 
    There is a `description` attribute on the `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application and ensure it's use is formalised in a "contract". Add the `description` attribute to the domain object.
 
@@ -97,34 +97,37 @@ You now have a good idea about what the application architecture does, we can no
 
    Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
  
-   > This is simulating the server sending back an additional JSON field. Have a think how you could test, if it is returning it already.
- 
-1. Remove or comment out the `account-service` code that returns the description. What happens in the mobile application when you restart the service?
+   > This is simulating the server sending back an additional JSON field. Our consumer (mobile app) is now simulating a dependency on this new field. It depends on it and we want to make that relationship explicit to the producer (so if the producer accidentally were to change the field, they would get an early warning). As a side effect of running the test, a new contract formalising this relationship is produced.
 
-1. Display the description in the mobile app. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
+1. Start using this field in the mobile app. Add the description in the mobile app in for example account summary page. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
 
-1. You have now re-defined what you expect from the producer. See the logs from running the consumer test. You should see `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`. This is the contract.
+    ![](mobile_app_change.png)
+
+1. We are formalising the dependencies, let's go find the contract that does so. 
+   
+   Look in the logs from running the consumer test. You should see something like `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`. This is the contract.
 
    Open it up and have a look at the contents.
 
 > If we were to give the contract (JSON) to the producer they will know how we are using their API - this is the _contract exchange_.
 
 
-### Then we give the contract to the Producer
+### Give the contract to the Producer
 
 We now need to give the new pact contract to the producer. 
 
 1. First lets just check that the existing version of the pact works OK in the account-service: run the `AccountServiceContractTest`. 
-1. Copy the newly created JSON pact file from the consumer (_mobile_consumer-account_provider.json_) into the `src/test/resources/pact` directory of the account service (there is already an older version there so you are copying over the top of the old one). If you use `git diff` you can see the changes you have introduced. Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
-1. Now run the `AccountServiceContractTest`. You can see from the annotations that it starts an instance of the accounts-service and tests the pact against it.
+   
+1. Copy the newly created JSON pact file from the consumer (`mobile_consumer-account_provider.json`) into the `src/test/resources/pact` directory of the **account service** (there is already an older version there, so you are copying over the top of the old one). 
+   
+   If you use `git diff` you can see the changes you have introduced. Its worth noting that the addition of one attribute adds both the attribute and the matching rules.
+   
+1. Remove, rename or stop sending the `description` field to consumers.
 
-### Finish off
+   For example, in `AccountSummary.java` modify the constructor to rename the JSON field from `description` to `fullDescription`. It might look like an innocent change but, as a Developer, you may or may not understand the impact to external clients. The newly placed contract does.
 
-We now need to make sure it all hangs together
-1. Restart the Mobile service and check that you can see the account description in the mobile app
-1. Did any other tests fail (there will be a few)?  Run `gradle` from the command line and check we are __done__
+1. Run the `AccountServiceContractTest`. It uses the contract and will be able to tell you've changed the API (in our example, the JSON field name) and fail the test. This is telling you that clients are depending on `description` and you shouldn't be changing it without talking to those clients.
 
-  You should see a failure indicating that _known_ clients are relying on a _contract_ you no longer respect.
 
 ## Part 3: Driving the addition of a new attribute from the data provider using a contract test
 
