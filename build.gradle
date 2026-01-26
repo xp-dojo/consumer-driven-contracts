@@ -1,14 +1,13 @@
 buildscript {
-    ext {
-        springBootVersion = '2.4.0'
-        pactVersion = '3.5.25'
-    }
+    apply from: "${project.rootDir}/dependencies.gradle"
+
     repositories {
         mavenCentral()
     }
+
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
-                "au.com.dius:pact-jvm-provider-gradle_2.12:${pactVersion}"
+        classpath gradlePlugins.springBoot,
+                gradlePlugins.pact
     }
 }
 

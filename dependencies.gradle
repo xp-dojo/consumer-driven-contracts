@@ -1,6 +1,6 @@
 ext {
 
-    springBootVersion = '2.4.0'
+    springBootVersion = "2.4.0"
 
     libs = [
             eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.0.0',
@@ -32,5 +32,10 @@ ext {
                     pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.7',
                     pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.7'
             ]
+    ]
+
+    gradlePlugins = [
+            springBoot: "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+            pact      : "au.com.dius:pact-jvm-provider-gradle_2.12:3.5.25"
     ]
 }
