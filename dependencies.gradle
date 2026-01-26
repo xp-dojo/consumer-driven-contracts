@@ -1,6 +1,6 @@
 ext {
 
-    springBootVersion = "2.4.0"
+    springBootVersion = "2.4.13"
 
     libs = [
             eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.0.0',
