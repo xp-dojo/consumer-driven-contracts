@@ -4,7 +4,6 @@ buildscript {
         pactVersion = '3.5.25'
     }
     repositories {
-        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -24,7 +23,6 @@ subprojects {
     group = 'org.xpdojo.bank.cdc'
 
     repositories {
-        jcenter()
         mavenCentral()
     }
 
@@ -47,8 +45,8 @@ subprojects {
     }
 
     ext {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 1.11
+        targetCompatibility = 1.11
     }
 
     test {
