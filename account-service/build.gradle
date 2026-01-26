@@ -16,5 +16,5 @@ dependencies {
             libs.test.pactSpring,
             libs.test.restAssured
 
-    runtime project(':discovery-service')
+    runtimeOnly project(':discovery-service')
 }

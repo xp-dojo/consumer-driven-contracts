@@ -6,7 +6,7 @@ bootJar {
 }
 
 dependencies {
-    compile libs.eurekaServer,
+    implementation libs.eurekaServer,
             libs.gson,
             libs.jaxb,
             libs.jaxbruntime

@@ -14,5 +14,5 @@ dependencies {
 
     testImplementation libs.test.pactJvmConsumer
 
-    runtime project(':discovery-service')
+    runtimeOnly project(':discovery-service')
 }
