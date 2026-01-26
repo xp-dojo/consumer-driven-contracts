@@ -1,16 +1,16 @@
 ext {
 
-    springBootVersion = '2.3.12.RELEASE'
+    springBootVersion = '2.4.0'
 
     libs = [
-            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.2.10.RELEASE',
-            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.10.RELEASE',
+            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.0.0',
+            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.0',
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
             jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
 
-            swagger                   : 'io.springfox:springfox-swagger2:2.9.2',
-            swaggerUI                 : 'io.springfox:springfox-swagger-ui:2.9.2',
+            swagger                   : 'io.springfox:springfox-swagger2:3.0.0',
+            swaggerUI                 : 'io.springfox:springfox-swagger-ui:3.0.0',
 
             gson                      : 'com.google.code.gson:gson:2.8.2', // this is to avoid a NoSuchMethodException
             guava                     : 'com.google.guava:guava:25.1-jre',

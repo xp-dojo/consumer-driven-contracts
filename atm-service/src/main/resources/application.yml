@@ -8,6 +8,8 @@ server:
   port: 8902
 
 spring:
+  application:
+    name: atm-service
   http:
     converters:
       preferred-json-mapper: jackson

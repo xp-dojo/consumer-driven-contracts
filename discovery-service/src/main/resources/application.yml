@@ -11,6 +11,8 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
 spring:
+  application:
+    name: discovery-service
   http:
     converters:
       preferred-json-mapper: jackson
