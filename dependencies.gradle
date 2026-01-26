@@ -1,10 +1,10 @@
 ext {
 
-    springBootVersion = '2.1.5.RELEASE'
+    springBootVersion = '2.3.12.RELEASE'
 
     libs = [
-            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.1.1.RELEASE',
-            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.1.1.RELEASE',
+            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.2.10.RELEASE',
+            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.10.RELEASE',
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
             jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
@@ -18,10 +18,10 @@ ext {
             jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
 
             test                      : [
-                    junitApi             : 'org.junit.jupiter:junit-jupiter-api:5.4.2',
-                    junitEngine          : 'org.junit.jupiter:junit-jupiter-engine:5.4.2',
-                    mockito              : 'org.mockito:mockito-core:2.27.0',
-                    assertj              : 'org.assertj:assertj-core:3.12.2',
+                    junitApi             : 'org.junit.jupiter:junit-jupiter-api:5.7.2',
+                    junitEngine          : 'org.junit.jupiter:junit-jupiter-engine:5.7.2',
+                    mockito              : 'org.mockito:mockito-core:5.21.0',
+                    assertj              : 'org.assertj:assertj-core:3.27.7',
                     jsonAssert           : 'org.skyscreamer:jsonassert:1.5.0',
 
                     restAssured          : 'io.rest-assured:rest-assured:3.3.0',
