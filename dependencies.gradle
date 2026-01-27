@@ -12,30 +12,30 @@ ext {
 
             springDoc                 : "org.springdoc:springdoc-openapi-ui:1.6.15",
 
-            gson                      : 'com.google.code.gson:gson:2.13.2', // this is to avoid a NoSuchMethodException
-            guava                     : 'com.google.guava:guava:33.5-jre',
-            jaxb                      : 'javax.xml.bind:jaxb-api:2.3.1',
-            jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
+            gson                      : "com.google.code.gson:gson:2.13.2", // this is to avoid a NoSuchMethodException
+            guava                     : "com.google.guava:guava:33.5-jre",
+            jaxb                      : "javax.xml.bind:jaxb-api:2.3.1",
+            jaxbruntime               : "org.glassfish.jaxb:jaxb-runtime:2.3.2",
 
             test                      : [
-                    junitApi             : 'org.junit.jupiter:junit-jupiter-api:5.8.2',
-                    junitEngine          : 'org.junit.jupiter:junit-jupiter-engine:5.8.2',
-                    mockito              : 'org.mockito:mockito-core:5.21.0',
-                    assertj              : 'org.assertj:assertj-core:3.27.7',
-                    jsonAssert           : 'org.skyscreamer:jsonassert:1.5.3',
+                    junitApi             : "org.junit.jupiter:junit-jupiter-api:5.8.2",
+                    junitEngine          : "org.junit.jupiter:junit-jupiter-engine:5.8.2",
+                    mockito              : "org.mockito:mockito-core:5.21.0",
+                    assertj              : "org.assertj:assertj-core:3.27.7",
+                    jsonAssert           : "org.skyscreamer:jsonassert:1.5.3",
 
-                    restAssured          : 'io.rest-assured:rest-assured:4.5.1',
+                    restAssured          : "io.rest-assured:rest-assured:4.5.1",
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit5:4.0.8',
-                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit5:4.0.8',
-                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring:4.0.8'
+                    pactJvmConsumer      : "au.com.dius:pact-jvm-consumer-junit5:4.0.10",
+                    pactJvmProvider      : "au.com.dius:pact-jvm-provider-junit5:4.0.10",
+                    pactSpring           : "au.com.dius:pact-jvm-provider-spring:4.0.10"
             ]
     ]
 
     gradlePlugins = [
             springBoot: "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
-            pact      : "au.com.dius:pact-jvm-provider-gradle:4.0.8"
+            pact      : "au.com.dius:pact-jvm-provider-gradle:4.0.10"
     ]
 }
