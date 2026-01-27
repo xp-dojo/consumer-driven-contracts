@@ -1,15 +1,15 @@
 ext {
 
-    springBootVersion = "2.5.15"
+    springBootVersion = "2.6.15"
 
     libs = [
-            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.0.3',
-            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.3',
+            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.1.0',
+            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.0',
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
             jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
 
-            springDoc                 : "org.springdoc:springdoc-openapi-ui:1.5.9",
+            springDoc                 : "org.springdoc:springdoc-openapi-ui:1.6.0",
 
             gson                      : 'com.google.code.gson:gson:2.13.2', // this is to avoid a NoSuchMethodException
             guava                     : 'com.google.guava:guava:33.5-jre',
