@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "account_provider", pactVersion = PactSpecVersion.V3)
@@ -76,7 +77,7 @@ public class AtmConsumerWithdrawalPactTest {
     void checkWeCanPostToTheServer(MockServer server) {
         WithdrawalRequest request = new WithdrawalRequest(30002468L, new Amount(100D), LocalDateTime.now());
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.setContentType(APPLICATION_JSON_UTF8);
         HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(request, headers);
         ResponseEntity<WithdrawalResponse> postResponse = makeHttpPostTo("/accounts/30002468/transactions", entity, server);
 

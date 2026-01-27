@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -54,7 +55,7 @@ public class MobileBankingEndPoint {
 
     private TransferResponse transferAcrossAccounts(TransferRequest transferRequest) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.setContentType(APPLICATION_JSON);
         HttpEntity<TransferRequest> entity = new HttpEntity<>(transferRequest, headers);
         return restTemplate.postForObject(buildTransferUrl(), entity, TransferResponse.class);
     }

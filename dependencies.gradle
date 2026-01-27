@@ -2,6 +2,7 @@ ext {
 
     springBootVersion = "2.7.18"
     springEurekaVersion = "3.1.7"
+    pactVersion = "4.3.19"
 
     libs = [
             eurekaServer              : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${springEurekaVersion}",
@@ -28,9 +29,9 @@ ext {
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer      : "au.com.dius.pact.consumer:junit5:4.3.19",
-                    pactJvmProvider      : "au.com.dius.pact.provider:junit5:4.3.19",
-                    pactSpring           : "au.com.dius.pact.provider:junit5spring:4.3.19"
+                    pactJvmConsumer      : "au.com.dius.pact.consumer:junit5:${pactVersion}",
+                    pactJvmProvider      : "au.com.dius.pact.provider:junit5:${pactVersion}",
+                    pactSpring           : "au.com.dius.pact.provider:junit5spring:${pactVersion}"
             ]
     ]
 
