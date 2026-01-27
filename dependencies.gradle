@@ -1,15 +1,16 @@
 ext {
 
-    springBootVersion = "2.6.15"
+    springBootVersion = "2.7.18"
+    springEurekaVersion = "3.1.7"
 
     libs = [
-            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:3.1.0',
-            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.1.0',
+            eurekaServer              : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${springEurekaVersion}",
+            eurekaClient              : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springEurekaVersion}",
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
-            jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
+            jacksonDatatypeJsr310     : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.5",
 
-            springDoc                 : "org.springdoc:springdoc-openapi-ui:1.6.0",
+            springDoc                 : "org.springdoc:springdoc-openapi-ui:1.6.15",
 
             gson                      : 'com.google.code.gson:gson:2.13.2', // this is to avoid a NoSuchMethodException
             guava                     : 'com.google.guava:guava:33.5-jre',
@@ -17,8 +18,8 @@ ext {
             jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
 
             test                      : [
-                    junitApi             : 'org.junit.jupiter:junit-jupiter-api:5.7.2',
-                    junitEngine          : 'org.junit.jupiter:junit-jupiter-engine:5.7.2',
+                    junitApi             : 'org.junit.jupiter:junit-jupiter-api:5.8.2',
+                    junitEngine          : 'org.junit.jupiter:junit-jupiter-engine:5.8.2',
                     mockito              : 'org.mockito:mockito-core:5.21.0',
                     assertj              : 'org.assertj:assertj-core:3.27.7',
                     jsonAssert           : 'org.skyscreamer:jsonassert:1.5.3',
