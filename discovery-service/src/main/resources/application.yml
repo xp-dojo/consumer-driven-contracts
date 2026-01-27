@@ -16,3 +16,11 @@ spring:
   http:
     converters:
       preferred-json-mapper: jackson
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+  show-actuator: true

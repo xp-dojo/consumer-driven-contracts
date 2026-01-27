@@ -45,8 +45,7 @@ subprojects {
     dependencies {
 
         implementation libs.springBootStarterWeb,
-                libs.swagger,
-                libs.swaggerUI
+                libs.springDoc
 
         testImplementation libs.test.junitApi,
                 libs.test.assertj,

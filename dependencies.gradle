@@ -9,8 +9,7 @@ ext {
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
             jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
 
-            swagger                   : 'io.springfox:springfox-swagger2:3.0.0',
-            swaggerUI                 : 'io.springfox:springfox-swagger-ui:3.0.0',
+            springDoc                 : "org.springdoc:springdoc-openapi-ui:1.5.9",
 
             gson                      : 'com.google.code.gson:gson:2.13.2', // this is to avoid a NoSuchMethodException
             guava                     : 'com.google.guava:guava:33.5-jre',
