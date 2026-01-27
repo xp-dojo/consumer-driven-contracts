@@ -2,7 +2,7 @@ ext {
 
     springBootVersion = "3.0.13"
     springEurekaVersion = "4.0.1"
-    pactVersion = "4.6.5"
+    pactVersion = "4.6.19"
 
     libs = [
             eurekaServer              : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${springEurekaVersion}",
