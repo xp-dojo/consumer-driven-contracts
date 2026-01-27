@@ -12,8 +12,8 @@ ext {
             swagger                   : 'io.springfox:springfox-swagger2:3.0.0',
             swaggerUI                 : 'io.springfox:springfox-swagger-ui:3.0.0',
 
-            gson                      : 'com.google.code.gson:gson:2.8.2', // this is to avoid a NoSuchMethodException
-            guava                     : 'com.google.guava:guava:25.1-jre',
+            gson                      : 'com.google.code.gson:gson:2.13.2', // this is to avoid a NoSuchMethodException
+            guava                     : 'com.google.guava:guava:33.5-jre',
             jaxb                      : 'javax.xml.bind:jaxb-api:2.3.1',
             jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
 
