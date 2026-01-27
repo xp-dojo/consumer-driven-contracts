@@ -45,6 +45,7 @@ subprojects {
     dependencies {
 
         implementation libs.springBootStarterWeb,
+                libs.springBootStarterWebFlux,
                 libs.springDoc
 
         testImplementation libs.test.junitApi,
