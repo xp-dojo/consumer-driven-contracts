@@ -28,14 +28,14 @@ ext {
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer      : "au.com.dius:pact-jvm-consumer-junit5:4.0.10",
-                    pactJvmProvider      : "au.com.dius:pact-jvm-provider-junit5:4.0.10",
-                    pactSpring           : "au.com.dius:pact-jvm-provider-spring:4.0.10"
+                    pactJvmConsumer      : "au.com.dius.pact.consumer:junit5:4.3.19",
+                    pactJvmProvider      : "au.com.dius.pact.provider:junit5:4.3.19",
+                    pactSpring           : "au.com.dius.pact.provider:junit5spring:4.3.19"
             ]
     ]
 
     gradlePlugins = [
             springBoot: "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
-            pact      : "au.com.dius:pact-jvm-provider-gradle:4.0.10"
+            pact      : "au.com.dius.pact.provider:gradle:4.3.19"
     ]
 }

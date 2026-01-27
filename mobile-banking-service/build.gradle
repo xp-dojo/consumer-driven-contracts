@@ -10,7 +10,8 @@ dependencies {
 
     implementation libs.eurekaClient,
             libs.springBootThymeLeafStarter,
-            libs.jacksonDatatypeJsr310
+            libs.jacksonDatatypeJsr310,
+            libs.gson
 
     testImplementation libs.test.pactJvmConsumer
 
