@@ -2,7 +2,7 @@ apply plugin: 'org.springframework.boot'
 
 bootJar {
     archiveBaseName = 'discovery-service'
-    archiveVersion = '0.0.1'
+    archiveVersion = "${buildTimeStamp()}-${gitSha()}"
 }
 
 dependencies {

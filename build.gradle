@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 buildscript {
     apply from: "${project.rootDir}/dependencies.gradle"
 
@@ -8,6 +10,18 @@ buildscript {
     dependencies {
         classpath gradlePlugins.springBoot,
                 gradlePlugins.pact
+    }
+}
+
+static def buildTimeStamp() {
+    return new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date())
+}
+
+static def gitSha() {
+    try {
+        return "git rev-parse --short HEAD".execute().text.trim()
+    } catch (ignored) {
+        return "unknown"
     }
 }
 
