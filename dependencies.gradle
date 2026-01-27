@@ -10,14 +10,14 @@ ext {
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
             springBootStarterWebFlux  : "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}",
-            jacksonDatatypeJsr310     : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2",
+            jacksonDatatypeJsr310     : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0",
 
             springDoc                 : "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0",
 
             gson                      : "com.google.code.gson:gson:2.13.2", // this is to avoid a NoSuchMethodException
             guava                     : "com.google.guava:guava:33.5-jre",
-            jaxb                      : "jakarta.xml.bind:jakarta.xml.bind-api:4.0.2",
-            jaxbruntime               : "org.glassfish.jaxb:jaxb-runtime:4.0.5",
+            jaxb                      : "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4",
+            jaxbruntime               : "org.glassfish.jaxb:jaxb-runtime:4.0.6",
 
             test                      : [
                     junitApi             : "org.junit.jupiter:junit-jupiter-api:5.10.2",
