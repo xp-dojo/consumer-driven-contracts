@@ -11,8 +11,8 @@
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
     <logger name="com.netflix" level="WARN"/>
-    <logger name="org.xpdojo.bank.cdc.account" level="DEBUG"/>
     <logger name="au.com.dius.pact" level="DEBUG"/>
+    <logger name="org.xpdojo.bank.cdc.account" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
