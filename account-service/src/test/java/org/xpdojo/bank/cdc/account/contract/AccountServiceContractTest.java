@@ -19,8 +19,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@PactFolder("pacts")
 @Provider("account_provider")
+@PactFolder("pacts")
 public class AccountServiceContractTest {
 
     private static final Logger LOG = getLogger(AccountServiceContractTest.class);
