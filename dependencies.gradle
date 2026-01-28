@@ -1,6 +1,6 @@
 ext {
 
-    springBootVersion = "3.1.0"
+    springBootVersion = "3.1.11"
     springEurekaVersion = "4.0.1"
     pactVersion = "4.6.19"
 
