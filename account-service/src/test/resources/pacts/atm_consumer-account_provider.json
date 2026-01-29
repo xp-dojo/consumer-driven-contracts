@@ -1,190 +1,134 @@
 {
-  "provider": {
-    "name": "account_provider"
-  },
   "consumer": {
     "name": "atm_consumer"
   },
   "interactions": [
     {
       "description": "POST REQUEST with a transaction",
+      "key": "8ffb63d8",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "Account with AccountNumber 30002468 exists"
+        }
+      ],
       "request": {
-        "method": "POST",
-        "path": "/accounts/30002468/transactions",
-        "headers": {
-          "Content-Type": "application/json; charset\u003dUTF-8"
-        },
         "body": {
-          "dateTime": "2000-01-31T13:00:00.000000000",
-          "amount": {
-            "value": 100
+          "content": {
+            "amount": {
+              "value": 100.0
+            },
+            "dateTime": "2000-01-31T13:00:00.000000000",
+            "direction": "DEBIT"
           },
-          "direction": "DEBIT"
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "generators": {
+          "body": {
+            "$.dateTime": {
+              "format": "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS",
+              "type": "Date"
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ]
         },
         "matchingRules": {
           "body": {
             "$.amount.value": {
+              "combine": "AND",
               "matchers": [
                 {
                   "match": "decimal"
                 }
-              ],
-              "combine": "AND"
+              ]
             },
             "$.dateTime": {
+              "combine": "AND",
               "matchers": [
                 {
-                  "match": "date",
-                  "date": "yyyy-MM-dd\u0027T\u0027HH:mm:ss.SSSSSSSSS"
+                  "format": "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS",
+                  "match": "date"
                 }
-              ],
-              "combine": "AND"
+              ]
             }
           }
         },
-        "generators": {
-          "body": {
-            "$.dateTime": {
-              "type": "Date",
-              "format": "yyyy-MM-dd\u0027T\u0027HH:mm:ss.SSSSSSSSS"
-            }
-          }
-        }
+        "method": "POST",
+        "path": "/accounts/30002468/transactions"
       },
       "response": {
-        "status": 201,
-        "headers": {
-          "Content-Type": "application/json"
-        },
         "body": {
-          "balance": {
-            "value": 900
+          "content": {
+            "accountNumber": 30002468,
+            "balance": {
+              "value": 900.0
+            },
+            "response": "string"
           },
-          "response": "string",
-          "accountNumber": 30002468
-        },
-        "matchingRules": {
-          "body": {
-            "$.accountNumber": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.response": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.balance.value": {
-              "matchers": [
-                {
-                  "match": "decimal"
-                }
-              ],
-              "combine": "AND"
-            }
-          }
+          "contentType": "application/json",
+          "encoded": false
         },
         "generators": {
           "body": {
             "$.response": {
-              "type": "RandomString",
-              "size": 20
+              "size": 20,
+              "type": "RandomString"
             }
           }
-        }
-      },
-      "providerStates": [
-        {
-          "name": "Account with AccountNumber 30002468 exists"
-        }
-      ]
-    },
-    {
-      "description": "Request for account information with an ID of 30002468",
-      "request": {
-        "method": "GET",
-        "path": "/accounts/30002468/balance"
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
         },
-        "body": {
-          "balance": {
-            "value": 1000
-          },
-          "overdraftFacility": {
-            "value": 23
-          },
-          "description": "string",
-          "accountNumber": 30002468
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
         },
         "matchingRules": {
           "body": {
             "$.accountNumber": {
+              "combine": "AND",
               "matchers": [
                 {
                   "match": "type"
                 }
-              ],
-              "combine": "AND"
-            },
-            "$.description": {
-              "matchers": [
-                {
-                  "match": "type"
-                }
-              ],
-              "combine": "AND"
-            },
-            "$.overdraftFacility.value": {
-              "matchers": [
-                {
-                  "match": "decimal"
-                }
-              ],
-              "combine": "AND"
+              ]
             },
             "$.balance.value": {
+              "combine": "AND",
               "matchers": [
                 {
                   "match": "decimal"
                 }
-              ],
-              "combine": "AND"
+              ]
+            },
+            "$.response": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
             }
           }
         },
-        "generators": {
-          "body": {
-            "$.description": {
-              "type": "RandomString",
-              "size": 20
-            }
-          }
-        }
+        "status": 201
       },
-      "providerStates": [
-        {
-          "name": "Account with AccountNumber 30002468 exists"
-        }
-      ]
+      "transport": "http",
+      "type": "Synchronous/HTTP"
     }
   ],
   "metadata": {
-    "pactSpecification": {
-      "version": "3.0.0"
-    },
     "pact-jvm": {
-      "version": "3.6.7"
+      "version": "4.6.19"
+    },
+    "pactSpecification": {
+      "version": "4.0"
     }
+  },
+  "provider": {
+    "name": "account_provider"
   }
 }

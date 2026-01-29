@@ -8,6 +8,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.V4Pact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,13 +26,13 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "account_provider", pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = "account_provider")
 public class MobileConsumerAccountSummaryPactTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(MobileConsumerAccountSummaryPactTest.class);
 
     @Pact(provider = "account_provider", consumer = "mobile_consumer")
-    public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
+    public V4Pact configureMockServer(PactDslWithProvider builder) {
         return builder
                 .uponReceiving("Request for all accounts")
                 .path("/accounts/30002468/balance")
@@ -40,7 +41,7 @@ public class MobileConsumerAccountSummaryPactTest {
                 .status(200)
                 .headers(expectedHeaders())
                 .body(expectedAccountsBody())
-                .toPact();
+                .toPact(V4Pact. class);
     }
 
     private Map<String, String> expectedHeaders() {

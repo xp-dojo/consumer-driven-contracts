@@ -8,6 +8,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.V4Pact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,11 +24,11 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "account_provider", pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = "account_provider")
 public class AtmConsumerBalancePactTest {
 
     @Pact(provider = "account_provider", consumer = "atm_consumer")
-    public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
+    public V4Pact configureMockServer(PactDslWithProvider builder) {
         return builder
                 .given("Account with AccountNumber 30002468 exists")
                 .uponReceiving("Request for account information with an ID of 30002468")
@@ -37,7 +38,7 @@ public class AtmConsumerBalancePactTest {
                 .status(200)
                 .headers(expectedHeaders())
                 .body(expectedAccountBody())
-                .toPact();
+                .toPact(V4Pact.class);
     }
 
     private Map<String, String> expectedHeaders() {
