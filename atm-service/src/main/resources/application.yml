@@ -10,7 +10,7 @@ server:
 spring:
   application:
     name: atm-service
-  http:
+  mvc:
     converters:
       preferred-json-mapper: jackson
   jackson:
