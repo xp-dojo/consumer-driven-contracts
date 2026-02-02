@@ -4,6 +4,7 @@ server:
 eureka:
   instance:
     hostname: localhost
+    prefer-ip-address: true
   client:
     registerWithEureka: false
     fetchRegistry: false
@@ -13,7 +14,7 @@ eureka:
 spring:
   application:
     name: discovery-service
-  http:
+  mvc:
     converters:
       preferred-json-mapper: jackson
 

@@ -9,7 +9,7 @@ server:
 spring:
   application:
     name: mobile-banking-service
-  http:
+  mvc:
     converters:
       preferred-json-mapper: jackson
   jackson:
