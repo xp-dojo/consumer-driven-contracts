@@ -1,7 +1,8 @@
 ext {
 
-    springBootVersion = "3.1.11"
-    springEurekaVersion = "4.0.1"
+    springBootVersion = "3.4.12"
+    springEurekaVersion = "4.2.0"
+    springDocVersion = "2.6.0"
     pactVersion = "4.6.19"
 
     libs = [
@@ -14,7 +15,7 @@ ext {
             springBootStarterWebFlux  : "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}",
             jacksonDatatypeJsr310     : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0",
 
-            springDoc                 : "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0",
+            springDoc                 : "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}",
 
             gson                      : "com.google.code.gson:gson:2.13.2", // this is to avoid a NoSuchMethodException
             guava                     : "com.google.guava:guava:33.5-jre",

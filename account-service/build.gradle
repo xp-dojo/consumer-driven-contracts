@@ -10,6 +10,7 @@ dependencies {
     implementation project(':bank-account')
 
     implementation libs.eurekaClient,
+            libs.eurekaClientJersey3,
             libs.jacksonDatatypeJsr310
 
     testImplementation libs.test.pactJvmProvider,
