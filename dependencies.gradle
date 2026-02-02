@@ -1,8 +1,8 @@
 ext {
 
-    springBootVersion = "3.4.12"
-    springEurekaVersion = "4.2.0"
-    springDocVersion = "2.6.0"
+    springBootVersion = "3.5.10"
+    springEurekaVersion = "4.3.1"
+    springDocVersion = "2.7.0"
     pactVersion = "4.6.19"
 
     libs = [
@@ -23,8 +23,9 @@ ext {
             jaxbruntime               : "org.glassfish.jaxb:jaxb-runtime:4.0.6",
 
             test                      : [
-                    junitApi             : "org.junit.jupiter:junit-jupiter-api:5.11.4",
-                    junitEngine          : "org.junit.jupiter:junit-jupiter-engine:5.11.4",
+                    junitApi             : "org.junit.jupiter:junit-jupiter-api:5.12.2",
+                    junitEngine          : "org.junit.jupiter:junit-jupiter-engine:5.12.2",
+                    junitPlatform        : "org.junit.platform:junit-platform-launcher:1.12.2",
                     mockito              : "org.mockito:mockito-core:5.21.0",
                     assertj              : "org.assertj:assertj-core:3.27.7",
                     jsonAssert           : "org.skyscreamer:jsonassert:1.5.3",

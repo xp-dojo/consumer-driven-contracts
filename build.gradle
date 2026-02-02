@@ -54,7 +54,8 @@ subprojects {
                 libs.test.mockito,
                 libs.test.springBootStarterTest
 
-        testRuntimeOnly libs.test.junitEngine
+        testRuntimeOnly libs.test.junitEngine,
+                libs.test.junitPlatform
     }
 
     ext {
