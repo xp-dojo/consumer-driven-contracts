@@ -85,29 +85,35 @@ You now have a good idea about what the application architecture does, we can no
 
 ## Part 2: Using a contract test to define consumption of an existing data attribute
 
-### Update the consumer contract
+### Update the Mobile App consumer contract
 
-1. We want to include an account's description along with the account summary information in mobile app. Currently, the Mobile app does not use this data attribute.
+* We want to include an account's description along with the account summary information in mobile app. Currently, the Mobile app does not use this data attribute.
 
-   There is a `description` attribute on the `AccountSummary`; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application and ensure it's use is formalised in a "contract". Add the `description` attribute to the domain object.
+* There is a `description` attribute on the `AccountSummary` data; it's returned by the `account-service` (producer) but is not currently used by any client (consumer). We'd like to include it in mobile application and ensure it's use is formalised in a "contract". Add the `description` attribute to the domain object.
 
-   Add an **assertion** in the mobile app's _contract_ to verify the description field is valid. Run the test. **Hint:** look in `MobileConsumerAccountSummaryPactTest.java`. Ensure you have as assertion along the lines of `assertThat(account.getDescription()).isNotEmpty()`, then use the IDE to create the method and attribute in the domain object. **Don't add the description to the mock server yet.**
+* Start by adding an **assertion** in the mobile app's _contract test_ to verify the description field is valid. Run the test. **Hint:** look in `MobileConsumerAccountSummaryPactTest.java`. Ensure you have an assertion along the lines of `assertThat(account.getDescription()).isNotEmpty()`, then use the IDE to create the method and attribute in the domain object. **Don't add the description to the mock server yet.**
 
-1. You should see the test fails until you simulate the server sending back the description.
+* Work backwards from the assertion, follow the compiler errors. 
 
-   Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
+* You should see the test fails until you simulate the server sending back the description.
+
+* Add the description field to the expected response in the contract (`MobileConsumerAccountSummaryPactTest`). Re-run the test and see it pass.
  
    > This is simulating the server sending back an additional JSON field. Our consumer (mobile app) is now simulating a dependency on this new field. It depends on it and we want to make that relationship explicit to the producer (so if the producer accidentally were to change the field, they would get an early warning). As a side effect of running the test, a new contract formalising this relationship is produced.
 
-1. Start using this field in the mobile app. Add the description in the mobile app in for example account summary page. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
+* **HINT** look for the `expectedAccountBody()` method and add `.stringType("description")`
+
+* The description attribute is now configured in your domain object but you are bot using it yet.
+
+* Using this field in the mobile app. Add the description in the mobile app in for example account summary page. **Hint:** look in `accountSummaryView.html` and `accountListView.html`.
 
     ![](mobile_app_change.png)
 
-1. We are formalising the dependencies, let's go find the contract that does so. 
+* We are formalising the dependencies, let's go find the contract that does so. 
    
-   Look in the logs from running the consumer test. You should see something like `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`. This is the contract.
+* Look in the logs from running the consumer test. You should see something like `Writing pact mobile_consumer -> account_provider to file target/pacts/mobile_consumer-account_provider.json`. This is the contract.
 
-   Open it up and have a look at the contents.
+* Open it up and have a look at the contents.
 
 > If we were to give the contract (JSON) to the producer they will know how we are using their API - this is the _contract exchange_.
 
