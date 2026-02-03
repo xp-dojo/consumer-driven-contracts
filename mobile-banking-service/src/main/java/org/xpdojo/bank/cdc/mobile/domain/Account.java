@@ -8,13 +8,16 @@ public class Account {
     private final Long accountNumber;
     private final Double overdraftFacility;
     private final Double balance;
+    private final String description;
 
     public Account(@JsonProperty("accountNumber") final Long accountNumber,
                    @JsonProperty("overdraftFacility") final Money overdraftFacility,
-                   @JsonProperty("balance") final Money balance) {
+                   @JsonProperty("balance") final Money balance,
+                   @JsonProperty("description") final String description) {
         this.accountNumber = accountNumber;
         this.overdraftFacility = overdraftFacility.getValue();
         this.balance = balance.getValue();
+        this.description = description;
     }
 
     public Long getAccountNumber() {
@@ -31,6 +34,10 @@ public class Account {
 
     public String getAccountDisplay() {
         return accountNumber + " - ";
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
