@@ -71,7 +71,7 @@ class AccountServiceEndpointTest {
     void updatesAccountsWithTransactions() {
         TransactionResponse response = given()
                 .header("Content-Type", "application/json")
-                .body(new Transaction(anAmountOf(100.0d), CREDIT, now()))
+                .body(new Transaction(anAmountOf(100.0d), CREDIT, "random description", now()))
                 .when().log().all()
                 .post("/accounts/30005678/transactions")
                 .then().log().all()
@@ -83,7 +83,7 @@ class AccountServiceEndpointTest {
     void transfersBetweenAccounts() {
         TransferResponse response = given()
                 .header("Content-Type", "application/json")
-                .body(new TransferRequest(30009876L, 30005432L, anAmountOf(100.0D), LocalDateTime.now()))
+                .body(new TransferRequest(30009876L, 30005432L, anAmountOf(100.0D), "description", LocalDateTime.now()))
                 .when().log().all()
                 .post("/accounts/transfers")
                 .then().log().all()

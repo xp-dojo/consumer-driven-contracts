@@ -12,15 +12,18 @@ public class TransferRequest {
     private final Long toAccount;
     private final Money amount;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String description;
     private LocalDateTime dateTime;
 
     public TransferRequest(@JsonProperty("fromAccount") final Long fromAccount,
                            @JsonProperty("toAccount") final Long toAccount,
                            @JsonProperty("amount") final Money amount,
+                           @JsonProperty("description") final String description,
                            @JsonProperty("dateTime") final LocalDateTime dateTime) {
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
         this.amount = amount;
+        this.description = description;
         this.dateTime = dateTime;
     }
 
@@ -40,24 +43,28 @@ public class TransferRequest {
         return dateTime;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TransferRequest that = (TransferRequest) o;
-        return Objects.equals(fromAccount, that.fromAccount) &&
-                Objects.equals(toAccount, that.toAccount) &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(dateTime, that.dateTime);
+        return Objects.equals(fromAccount, that.fromAccount) && Objects.equals(toAccount, that.toAccount) && Objects.equals(amount, that.amount) && Objects.equals(description, that.description) && Objects.equals(dateTime, that.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fromAccount, toAccount, amount, dateTime);
+        return Objects.hash(fromAccount, toAccount, amount, description, dateTime);
     }
 
     @Override
@@ -66,6 +73,7 @@ public class TransferRequest {
                 "fromAccount=" + fromAccount +
                 ", toAccount=" + toAccount +
                 ", amount=" + amount +
+                ", description='" + description + '\'' +
                 ", dateTime=" + dateTime +
                 '}';
     }

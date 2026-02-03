@@ -11,15 +11,18 @@ public class WithdrawalRequest {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final Long accountNumber;
     private final Amount amount;
+    private String description;
     private final String direction = "DEBIT";
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime dateTime;
 
     public WithdrawalRequest(@JsonProperty("accountNumber") final Long accountNumber,
                              @JsonProperty("amount") final Amount amount,
+                             @JsonProperty("description") final String description,
                              @JsonProperty("dateTime") final LocalDateTime dateTime) {
         this.accountNumber = accountNumber;
         this.amount = amount;
+        this.description = description;
         this.dateTime = dateTime;
     }
 
@@ -43,20 +46,24 @@ public class WithdrawalRequest {
         this.dateTime = dateTime;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WithdrawalRequest that = (WithdrawalRequest) o;
-        return Objects.equals(accountNumber, that.accountNumber) &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(direction, that.direction) &&
-                Objects.equals(dateTime, that.dateTime);
+        return Objects.equals(accountNumber, that.accountNumber) && Objects.equals(amount, that.amount) && Objects.equals(description, that.description) && Objects.equals(direction, that.direction) && Objects.equals(dateTime, that.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, amount, direction, dateTime);
+        return Objects.hash(accountNumber, amount, description, direction, dateTime);
     }
 
     @Override
@@ -64,6 +71,7 @@ public class WithdrawalRequest {
         return "WithdrawalRequest{" +
                 "accountNumber=" + accountNumber +
                 ", amount=" + amount +
+                ", description='" + description + '\'' +
                 ", direction='" + direction + '\'' +
                 ", dateTime=" + dateTime +
                 '}';
