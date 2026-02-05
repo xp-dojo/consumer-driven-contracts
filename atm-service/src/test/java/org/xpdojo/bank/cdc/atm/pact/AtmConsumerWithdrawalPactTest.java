@@ -54,6 +54,7 @@ public class AtmConsumerWithdrawalPactTest {
         return new PactDslJsonBody()
                 .object("amount", expectAmountValue(100.0D))
                 .stringValue("direction", "DEBIT")
+                .stringValue("description", "ATM withdrawl")
                 .date("dateTime", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
                 .asBody();
     }
@@ -73,7 +74,7 @@ public class AtmConsumerWithdrawalPactTest {
 
     @Test
     void checkWeCanPostToTheServer(MockServer server) {
-        WithdrawalRequest request = new WithdrawalRequest(30002468L, new Amount(100D), LocalDateTime.now());
+        WithdrawalRequest request = new WithdrawalRequest(30002468L, new Amount(100D), "ATM withdrawl", LocalDateTime.now());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(APPLICATION_JSON_UTF8);
         HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(request, headers);

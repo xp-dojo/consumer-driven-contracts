@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
 import static org.mockito.MockitoAnnotations.openMocks;
 import static org.xpdojo.bank.cdc.account.domain.Account.anAccountWith;
 import static org.xpdojo.bank.cdc.account.domain.Account.anEmptyAccount;
@@ -46,28 +45,28 @@ class WithAnAccountWeCan {
     @Test
     void depositAnAmountToIncreaseTheBalance() {
         Account account = anEmptyAccount(ACCOUNT_NUMBER);
-        account.deposit(anAmountOf(10.0d), LocalDateTime.now());
+        account.deposit(anAmountOf(10.0d), "deposit", LocalDateTime.now());
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(10.0d)));
     }
 
     @Test
     void withdrawAnAmountToDecreaseTheBalance() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
-        account.withdraw(anAmountOf(10.0d), LocalDateTime.now());
+        account.withdraw(anAmountOf(10.0d), "withdrawl", LocalDateTime.now());
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(10.0d)));
     }
 
     @Test
     void throwsExceptionIfYouTryToWithdrawMoreThanTheBalanceIfNoOverDraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
-        assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(30.0d), LocalDateTime.now()));
+        assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(30.0d), "withdrawl", LocalDateTime.now()));
     }
 
     @Test
     void withdrawAnAmountMoreThanBalanceIfWithinOverdraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(10.0d));
         account.setOverdraftFacility(anAmountOf(100.0d));
-        account.withdraw(anAmountOf(60.0d), LocalDateTime.now());
+        account.withdraw(anAmountOf(60.0d), "Withdrawl", LocalDateTime.now());
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(-50.0d)));
     }
 
@@ -75,7 +74,7 @@ class WithAnAccountWeCan {
     void throwsExceptionIfYouTryToWithdrawMoreThanYourOverdraft() {
         Account account = anAccountWith(ACCOUNT_NUMBER, anAmountOf(20.0d));
         account.setOverdraftFacility(anAmountOf(100.0d));
-        assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(130.0d), LocalDateTime.now()));
+        assertThrows(IllegalStateException.class, () -> account.withdraw(anAmountOf(130.0d), "withdrawl", LocalDateTime.now()));
     }
 
     @Test
@@ -98,11 +97,11 @@ class WithAnAccountWeCan {
     @Test
     void hasTheRightBalanceAfterANumberOfTransactions() {
         Account account = anEmptyAccount(ACCOUNT_NUMBER);
-        account.deposit(anAmountOf(10.0d), LocalDateTime.now());
-        account.deposit(anAmountOf(80.0d), LocalDateTime.now());
-        account.deposit(anAmountOf(5.0d), LocalDateTime.now());
-        account.withdraw(anAmountOf(15.0d), LocalDateTime.now());
-        account.withdraw(anAmountOf(10.0d), LocalDateTime.now());
+        account.deposit(anAmountOf(10.0d), "deposit", LocalDateTime.now());
+        account.deposit(anAmountOf(80.0d), "deposit", LocalDateTime.now());
+        account.deposit(anAmountOf(5.0d), "deposit", LocalDateTime.now());
+        account.withdraw(anAmountOf(15.0d), "withdrawl", LocalDateTime.now());
+        account.withdraw(anAmountOf(10.0d), "withdrawl", LocalDateTime.now());
         assertThat(account).usingComparator(ofBalances()).isEqualTo(anAccountWith(ANOTHER_ACCOUNT_NUMBER, anAmountOf(70.0d)));
     }
 

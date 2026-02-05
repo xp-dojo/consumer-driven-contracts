@@ -15,30 +15,37 @@ import static org.xpdojo.bank.cdc.account.domain.Transaction.Direction.DEBIT;
 public class Transaction {
     private final Money amount;
     private final Direction direction;
+    private final String description;
     private final LocalDateTime dateTime;
 
     public Transaction(@JsonProperty(value = "amount", required = true) Money amount,
                        @JsonProperty(value = "direction", required = true) Direction direction,
+                       @JsonProperty(value = "description", required = true) String description,
                        @JsonProperty(value = "dateTime", required = true) LocalDateTime dateTime) {
         this.amount = amount;
         this.direction = direction;
+        this.description = description;
         this.dateTime = dateTime;
     }
 
     public static Transaction anOpeningBalanceOf(Money anAmount, LocalDateTime date) {
-        return new Transaction(anAmount, CREDIT, date);
+        return new Transaction(anAmount, CREDIT, "Opening Balance",date);
     }
 
-    public static Transaction aDepositOf(Money anAmount, LocalDateTime date) {
-        return new Transaction(anAmount, CREDIT, date);
+    public static Transaction aDepositOf(Money anAmount, String description, LocalDateTime date) {
+        return new Transaction(anAmount, CREDIT, description, date);
     }
 
-    public static Transaction aWithDrawlOf(Money anAmount, LocalDateTime date) {
-        return new Transaction(anAmount, DEBIT, date);
+    public static Transaction aWithDrawlOf(Money anAmount, String description,LocalDateTime date) {
+        return new Transaction(anAmount, DEBIT, description, date);
     }
 
     Direction direction() {
         return direction;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     Money amount() {
@@ -62,17 +69,14 @@ public class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Objects.equals(amount, that.amount) &&
-                direction == that.direction &&
-                Objects.equals(dateTime, that.dateTime);
+        return Objects.equals(amount, that.amount) && direction == that.direction && Objects.equals(description, that.description) && Objects.equals(dateTime, that.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, direction, dateTime);
+        return Objects.hash(amount, direction, description, dateTime);
     }
 
     @Override
@@ -80,6 +84,7 @@ public class Transaction {
         return "Transaction{" +
                 "amount=" + amount +
                 ", direction=" + direction +
+                ", description='" + description + '\'' +
                 ", dateTime=" + dateTime +
                 '}';
     }

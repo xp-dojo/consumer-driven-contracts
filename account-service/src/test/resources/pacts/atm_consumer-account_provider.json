@@ -19,6 +19,7 @@
               "value": 100.0
             },
             "dateTime": "2000-01-31T13:00:00.000000000",
+            "description": "ATM withdrawl",
             "direction": "DEBIT"
           },
           "contentType": "application/json",

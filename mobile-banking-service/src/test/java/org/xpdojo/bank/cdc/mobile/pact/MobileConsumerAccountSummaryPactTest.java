@@ -51,6 +51,7 @@ public class MobileConsumerAccountSummaryPactTest {
     private PactDslJsonBody expectedAccountsBody() {
         return new PactDslJsonBody()
                 .id("accountNumber")
+                .stringType("description")
                 .object("overdraftFacility", valueObject())
                 .object("balance", valueObject())
                 .asBody();
@@ -72,6 +73,7 @@ public class MobileConsumerAccountSummaryPactTest {
 
         Account account = Jackson2ObjectMapperBuilder.json().build().readValue(response.getBody(), Account.class);
         assertThat(account.getAccountNumber()).isNotZero();
+        assertThat(account.getDescription()).isNotEmpty();
         assertThat(account.getOverdraftFacility()).isNotZero();
         assertThat(account.getBalance()).isNotZero();
     }

@@ -1,5 +1,7 @@
 package org.xpdojo.bank.cdc.atm.endpoint;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +23,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(produces = APPLICATION_JSON_VALUE)
 public class AtmEndpoint {
 
+    private static final Logger LOG = LoggerFactory.getLogger(AtmEndpoint.class);
+
     @Autowired
     private RestTemplate restTemplate;
     private static final String ACCOUNT_SERVICE = "account-service";
@@ -34,14 +38,16 @@ public class AtmEndpoint {
 
     @GetMapping(value = "/atm/accounts/{accountNumber}/withdraw")
     public String getWithdraw(@PathVariable Long accountNumber, Model model) {
-        model.addAttribute("withdrawalRequest", new WithdrawalRequest(accountNumber, new Amount(0D), LocalDateTime.now()));
+        model.addAttribute("withdrawalRequest", new WithdrawalRequest(accountNumber, new Amount(0D),"ATM withdrawl", LocalDateTime.now()));
         model.addAttribute("data", getAccountDataFor(accountNumber));
         return "accountWithdrawalView";
     }
 
     @PostMapping(value = "/atm/accounts/{accountNumber}/withdraw")
     public String postWithdraw(@ModelAttribute WithdrawalRequest withdrawalRequest, @PathVariable Long accountNumber, Model model) {
+        LOG.error("------>>>>>> foo 2");
         withdrawalRequest.setDateTime(LocalDateTime.now());
+        withdrawalRequest.setDescription("ATM withdrawl");
         model.addAttribute("response", withdrawFromAccounts(accountNumber, withdrawalRequest));
         return "withdrawalResponse";
     }

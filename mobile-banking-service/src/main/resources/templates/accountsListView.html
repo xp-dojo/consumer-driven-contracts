@@ -15,7 +15,7 @@
 
         <a class="detail-line" th:each="acc: ${accounts}" th:href="@{/mobile/accounts/{id}(id=${acc.accountNumber})}">
             <div class="detail-line-left">
-<!--                <div class="detail-description" th:text="${acc.description}"></div>-->
+                <div class="detail-description" th:text="${acc.description}"></div>
                 <div class="mt-1 detail-account-number">
                     <span th:text="${acc.accountNumber}"></span>
                 </div>
