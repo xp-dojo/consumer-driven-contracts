@@ -1,36 +1,47 @@
 ext {
 
-    springBootVersion = '2.1.5.RELEASE'
+    springBootVersion = "3.5.10"
+    springEurekaVersion = "4.3.1"
+    springDocVersion = "2.7.0"
+    pactVersion = "4.6.19"
 
     libs = [
-            eurekaServer              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.1.1.RELEASE',
-            eurekaClient              : 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.1.1.RELEASE',
+            eurekaServer              : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${springEurekaVersion}",
+            eurekaClient              : "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:${springEurekaVersion}",
+            eurekaClientJersey3       : "com.netflix.eureka:eureka-client-jersey3:2.0.4",
+
             springBootStarterWeb      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
             springBootThymeLeafStarter: "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}",
-            jacksonDatatypeJsr310     : 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9',
+            springBootStarterWebFlux  : "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}",
+            jacksonDatatypeJsr310     : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.0",
 
-            swagger                   : 'io.springfox:springfox-swagger2:2.9.2',
-            swaggerUI                 : 'io.springfox:springfox-swagger-ui:2.9.2',
+            springDoc                 : "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}",
 
-            gson                      : 'com.google.code.gson:gson:2.8.2', // this is to avoid a NoSuchMethodException
-            guava                     : 'com.google.guava:guava:25.1-jre',
-            jaxb                      : 'javax.xml.bind:jaxb-api:2.3.1',
-            jaxbruntime               : 'org.glassfish.jaxb:jaxb-runtime:2.3.2',
+            gson                      : "com.google.code.gson:gson:2.13.2", // this is to avoid a NoSuchMethodException
+            guava                     : "com.google.guava:guava:33.5-jre",
+            jaxb                      : "jakarta.xml.bind:jakarta.xml.bind-api:4.0.4",
+            jaxbruntime               : "org.glassfish.jaxb:jaxb-runtime:4.0.6",
 
             test                      : [
-                    junitApi             : 'org.junit.jupiter:junit-jupiter-api:5.4.2',
-                    junitEngine          : 'org.junit.jupiter:junit-jupiter-engine:5.4.2',
-                    mockito              : 'org.mockito:mockito-core:2.27.0',
-                    assertj              : 'org.assertj:assertj-core:3.12.2',
-                    jsonAssert           : 'org.skyscreamer:jsonassert:1.5.0',
+                    junitApi             : "org.junit.jupiter:junit-jupiter-api:5.12.2",
+                    junitEngine          : "org.junit.jupiter:junit-jupiter-engine:5.12.2",
+                    junitPlatform        : "org.junit.platform:junit-platform-launcher:1.12.2",
+                    mockito              : "org.mockito:mockito-core:5.21.0",
+                    assertj              : "org.assertj:assertj-core:3.27.7",
+                    jsonAssert           : "org.skyscreamer:jsonassert:1.5.3",
 
-                    restAssured          : 'io.rest-assured:rest-assured:3.3.0',
+                    restAssured          : "io.rest-assured:rest-assured:5.5.0",
 
                     springBootStarterTest: "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
 
-                    pactJvmConsumer      : 'au.com.dius:pact-jvm-consumer-junit5_2.12:3.6.7',
-                    pactJvmProvider      : 'au.com.dius:pact-jvm-provider-junit5_2.12:3.6.7',
-                    pactSpring           : 'au.com.dius:pact-jvm-provider-spring_2.12:3.6.7'
+                    pactJvmConsumer      : "au.com.dius.pact.consumer:junit5:${pactVersion}",
+                    pactJvmProvider      : "au.com.dius.pact.provider:junit5:${pactVersion}",
+                    pactSpring           : "au.com.dius.pact.provider:junit5spring:${pactVersion}"
             ]
+    ]
+
+    gradlePlugins = [
+            springBoot: "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+            pact      : "au.com.dius.pact.provider:gradle:${pactVersion}"
     ]
 }

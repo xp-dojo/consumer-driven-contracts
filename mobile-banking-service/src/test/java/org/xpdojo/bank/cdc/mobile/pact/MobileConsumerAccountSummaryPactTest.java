@@ -1,13 +1,13 @@
 package org.xpdojo.bank.cdc.mobile.pact;
 
 import au.com.dius.pact.consumer.MockServer;
-import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.dsl.DslPart;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
-import au.com.dius.pact.model.RequestResponsePact;
+import au.com.dius.pact.core.model.V4Pact;
+import au.com.dius.pact.core.model.annotations.Pact;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class MobileConsumerAccountSummaryPactTest {
     private static final Logger LOG = LoggerFactory.getLogger(MobileConsumerAccountSummaryPactTest.class);
 
     @Pact(provider = "account_provider", consumer = "mobile_consumer")
-    public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
+    public V4Pact configureMockServer(PactDslWithProvider builder) {
         return builder
                 .uponReceiving("Request for all accounts")
                 .path("/accounts/30002468/balance")
@@ -39,7 +39,7 @@ public class MobileConsumerAccountSummaryPactTest {
                 .status(200)
                 .headers(expectedHeaders())
                 .body(expectedAccountsBody())
-                .toPact();
+                .toPact(V4Pact.class);
     }
 
     private Map<String, String> expectedHeaders() {

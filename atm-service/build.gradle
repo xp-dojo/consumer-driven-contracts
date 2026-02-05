@@ -1,18 +1,19 @@
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    baseName = 'atm-service'
-    version = '0.0.1'
+    archiveBaseName = 'atm-service'
+    archiveVersion = "${buildTimeStamp()}-${gitSha()}"
 }
 
 
 dependencies {
 
     implementation libs.eurekaClient,
+            libs.eurekaClientJersey3,
             libs.springBootThymeLeafStarter,
             libs.jacksonDatatypeJsr310
 
     testImplementation libs.test.pactJvmConsumer
 
-    runtime project(':discovery-service')
+    runtimeOnly project(':discovery-service')
 }

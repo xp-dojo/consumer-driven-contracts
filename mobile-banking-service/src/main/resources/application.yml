@@ -7,9 +7,19 @@ server:
   port: 8903
 
 spring:
-  http:
+  application:
+    name: mobile-banking-service
+  mvc:
     converters:
       preferred-json-mapper: jackson
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+  show-actuator: true

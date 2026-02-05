@@ -8,9 +8,19 @@ server:
   port: 8902
 
 spring:
-  http:
+  application:
+    name: atm-service
+  mvc:
     converters:
       preferred-json-mapper: jackson
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+  show-actuator: true

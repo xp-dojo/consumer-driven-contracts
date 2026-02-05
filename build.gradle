@@ -1,15 +1,27 @@
+import java.text.SimpleDateFormat
+
 buildscript {
-    ext {
-        springBootVersion = '2.1.5.RELEASE'
-        pactVersion = '3.5.25'
-    }
+    apply from: "${project.rootDir}/dependencies.gradle"
+
     repositories {
-        jcenter()
         mavenCentral()
     }
+
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
-                "au.com.dius:pact-jvm-provider-gradle_2.12:${pactVersion}"
+        classpath gradlePlugins.springBoot,
+                gradlePlugins.pact
+    }
+}
+
+static def buildTimeStamp() {
+    return new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date())
+}
+
+static def gitSha() {
+    try {
+        return "git rev-parse --short HEAD".execute().text.trim()
+    } catch (ignored) {
+        return "unknown"
     }
 }
 
@@ -24,7 +36,6 @@ subprojects {
     group = 'org.xpdojo.bank.cdc'
 
     repositories {
-        jcenter()
         mavenCentral()
     }
 
@@ -34,8 +45,8 @@ subprojects {
     dependencies {
 
         implementation libs.springBootStarterWeb,
-                libs.swagger,
-                libs.swaggerUI
+                libs.springBootStarterWebFlux,
+                libs.springDoc
 
         testImplementation libs.test.junitApi,
                 libs.test.assertj,
@@ -43,12 +54,13 @@ subprojects {
                 libs.test.mockito,
                 libs.test.springBootStarterTest
 
-        testRuntimeOnly libs.test.junitEngine
+        testRuntimeOnly libs.test.junitEngine,
+                libs.test.junitPlatform
     }
 
     ext {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     test {

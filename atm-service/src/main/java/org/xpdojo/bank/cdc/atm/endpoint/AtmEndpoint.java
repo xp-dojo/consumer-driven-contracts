@@ -1,11 +1,8 @@
 package org.xpdojo.bank.cdc.atm.endpoint;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +14,7 @@ import org.xpdojo.bank.cdc.atm.domain.WithdrawalResponse;
 
 import java.time.LocalDateTime;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -26,7 +24,6 @@ public class AtmEndpoint {
     @Autowired
     private RestTemplate restTemplate;
     private static final String ACCOUNT_SERVICE = "account-service";
-    private static final Logger LOG = LoggerFactory.getLogger(AtmEndpoint.class);
 
     @GetMapping(value = "/atm/accounts/{accountNumber}")
     public String getBalanceOfAccount(@PathVariable Long accountNumber, Model model) {
@@ -51,7 +48,7 @@ public class AtmEndpoint {
 
     private WithdrawalResponse withdrawFromAccounts(Long accountNumber, WithdrawalRequest withdrawalRequest) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.setContentType(APPLICATION_JSON);
         HttpEntity<WithdrawalRequest> entity = new HttpEntity<>(withdrawalRequest, headers);
         return restTemplate.postForObject(buildWithdrawalUrl(accountNumber), entity, WithdrawalResponse.class);
     }

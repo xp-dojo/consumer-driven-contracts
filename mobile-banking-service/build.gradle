@@ -1,18 +1,20 @@
 apply plugin: 'org.springframework.boot'
 
 bootJar {
-    baseName = 'mobile-banking-service'
-    version = '0.0.1'
+    archiveBaseName = 'mobile-banking-service'
+    archiveVersion = "${buildTimeStamp()}-${gitSha()}"
 }
 
 
 dependencies {
 
     implementation libs.eurekaClient,
+            libs.eurekaClientJersey3,
             libs.springBootThymeLeafStarter,
-            libs.jacksonDatatypeJsr310
+            libs.jacksonDatatypeJsr310,
+            libs.gson
 
     testImplementation libs.test.pactJvmConsumer
 
-    runtime project(':discovery-service')
+    runtimeOnly project(':discovery-service')
 }

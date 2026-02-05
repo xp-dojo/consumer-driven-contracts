@@ -12,6 +12,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.MockitoAnnotations.openMocks;
 import static org.xpdojo.bank.cdc.account.domain.Account.anAccountWith;
 import static org.xpdojo.bank.cdc.account.domain.Account.anEmptyAccount;
 import static org.xpdojo.bank.cdc.account.domain.AccountBalanceComparator.ofBalances;
@@ -27,7 +28,7 @@ class WithAnAccountWeCan {
 
     @BeforeEach
     void setUpMocks() {
-        initMocks(this);
+        openMocks(this);
     }
 
     @Test

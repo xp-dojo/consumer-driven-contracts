@@ -1,6 +1,6 @@
 package org.xpdojo.bank.cdc.account.endpoint;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class BankAccountEndpoint {
     private final AccountRepository repository = new AccountRepository();
     private static final Logger LOG = LoggerFactory.getLogger(BankAccountEndpoint.class);
 
-    @ApiOperation(value = "Get all accounts", notes = "gets all accounts in the repository.  If we had the notion of a customer we would limit to all accounts for a customer.", response = Account.class, responseContainer = "Collection")
+    @Operation(summary = "Get all accounts", description = "gets all accounts in the repository.  If we had the notion of a customer we would limit to all accounts for a customer.")
     @GetMapping("/accounts")
     public Collection<AccountSummary> getAccounts() {
         return repository
@@ -29,13 +29,13 @@ public class BankAccountEndpoint {
                 .collect(Collectors.toList());
     }
 
-    @ApiOperation(value = "Retrieve transactions for an account", notes = "retrieves all transactions for a given account", response = Transaction.class, responseContainer = "Collection")
+    @Operation(summary = "Retrieve transactions for an account", description = "retrieves all transactions for a given account")
     @GetMapping(value = "/accounts/{accountId}/transactions", produces = APPLICATION_JSON_VALUE)
     public Collection<Transaction> getTransactions(@PathVariable Long accountId) {
         return repository.getById(accountId).getTransactions();
     }
 
-    @ApiOperation(value = "Create transaction on an account", notes = "Creates a single transcation on an account", response = TransactionResponse.class)
+    @Operation(summary = "Create transaction on an account", description = "Creates a single transcation on an account")
     @PostMapping(value = "/accounts/{accountId}/transactions", consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public TransactionResponse addTransaction(@PathVariable Long accountId, @RequestBody Transaction transaction) {
@@ -45,7 +45,7 @@ public class BankAccountEndpoint {
         return new TransactionResponse(accountId, account.balance(), "Thank you for using Dojo Bank");
     }
 
-    @ApiOperation(value = "Retrieves the balance of an account", notes = "retrieves the balance of an account from the repository without the transactions", response = AccountSummary.class)
+    @Operation(summary = "Retrieves the balance of an account", description = "retrieves the balance of an account from the repository without the transactions")
     @GetMapping(value = "/accounts/{accountId}/balance", produces = APPLICATION_JSON_VALUE)
     public AccountSummary getBalance(@PathVariable Long accountId) {
         Account account = repository.getById(accountId);
@@ -55,7 +55,7 @@ public class BankAccountEndpoint {
         return new AccountSummary(account.getAccountNumber(), account.getDescription(), account.getOverdraftFacility(), account.balance());
     }
 
-    @ApiOperation(value = "creates a transfer between two accounts")
+    @Operation(summary = "creates a transfer between two accounts")
     @PostMapping(value = "/accounts/transfers", consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public TransferResponse processTransfer(@RequestBody TransferRequest request) {

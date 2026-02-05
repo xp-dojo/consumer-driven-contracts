@@ -1,13 +1,13 @@
 package org.xpdojo.bank.cdc.atm.pact;
 
 import au.com.dius.pact.consumer.MockServer;
-import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.dsl.DslPart;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
-import au.com.dius.pact.model.RequestResponsePact;
+import au.com.dius.pact.core.model.V4Pact;
+import au.com.dius.pact.core.model.annotations.Pact;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AtmConsumerBalancePactTest {
 
     @Pact(provider = "account_provider", consumer = "atm_consumer")
-    public RequestResponsePact configureMockServer(PactDslWithProvider builder) {
+    public V4Pact configureMockServer(PactDslWithProvider builder) {
         return builder
                 .given("Account with AccountNumber 30002468 exists")
                 .uponReceiving("Request for account information with an ID of 30002468")
@@ -36,7 +36,7 @@ public class AtmConsumerBalancePactTest {
                 .status(200)
                 .headers(expectedHeaders())
                 .body(expectedAccountBody())
-                .toPact();
+                .toPact(V4Pact.class);
     }
 
     private Map<String, String> expectedHeaders() {
